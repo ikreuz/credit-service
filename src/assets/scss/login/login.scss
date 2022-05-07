@@ -1,0 +1,71 @@
+.c-target {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    max-width: 100%;
+    position: relative;
+    justify-content: center;
+    padding: 1rem !important;
+}
+
+.c-target-bg {
+    background-color: $geist-login-background;
+    min-height: 100%;
+    max-width: 100%;
+    width: 100% !important;
+    height: 100% !important;
+    // background-size: cover;
+    // background-position: top right;
+    // background-repeat: no-repeat;
+    // overflow: hidden;
+}
+
+.custom-loader {
+    animation: loader 1s infinite;
+    display: flex;
+}
+
+.auth-lock-panel__header {
+    padding: 36px 20px 0 20px;
+}
+
+.auth-lock-panel {
+    align-self: center !important;
+    width: 25rem;
+}
+
+#auth-email-field,
+#auth-pssw-field {
+    max-height: 36px !important;
+    padding-top: 3px !important;
+}
+
+#auth-form {
+    padding: 0.8rem 0.331rem 0rem 0.331rem !important;
+}
+
+#auth-lock-submit-si {
+    width: 100%;
+
+    .auth-label-submit {
+        color: #fff !important;
+    }
+}
+
+.recaptcha {
+    display: block;
+    text-align: center;
+
+    a {
+        color: $geist-primary !important;
+    }
+}
+
+.wrapper-input-5 {
+    padding: 0px .8rem 0 .8rem !important;
+
+    .wrapper {
+        padding: 1.2rem 0 !important;
+    }
+}

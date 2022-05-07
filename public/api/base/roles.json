@@ -1,0 +1,12 @@
+{
+  "count": 7,
+  "entries": [
+    { "id": 1, "type": "Master" },
+    { "id": 2, "type": "Administrator" },
+    { "id": 3, "type": "Supervisor" },
+    { "id": 4, "type": "Typist" },
+    { "id": 5, "type": "Courier" },
+    { "id": 6, "type": "Customer" },
+    { "id": 7, "type": "Driver" }
+  ]
+}
