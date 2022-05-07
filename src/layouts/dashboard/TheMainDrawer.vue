@@ -87,12 +87,12 @@ export default {
         to: "/savingAccount",
         aria: "savingAccount",
       },
-      {
-        icon: "mdi-account-group",
-        title: "Cuenta Credito",
-        to: "/creditAccount",
-        aria: "creditAccount",
-      },
+      // {
+      //   icon: "mdi-account-group",
+      //   title: "Cuenta Credito",
+      //   to: "/creditAccount",
+      //   aria: "creditAccount",
+      // },
       {
         icon: "mdi-account-details",
         title: "History",

@@ -1,34 +1,39 @@
 <template>
-  <v-row class="mt-12 mx-4">
-    <v-col>
-      <v-subheader>Historial</v-subheader>
-    </v-col>
-  </v-row>
+    <v-row class="mt-12 mx-4">
+        <v-col>
+            <v-subheader>Historial</v-subheader>
+            <TableInvoiceBreakdown />
+        </v-col>
+    </v-row>
 </template>
 
 <script>
 export default {
-  name: "About",
-  metaInfo: {
-    title: "About",
-  },
-  props: {},
-  components: {},
-  data: () => ({}),
-  computed: {},
-  watch: {},
-  // Hooks
-  beforeCreate() {},
-  created() {},
-  beforeMount() {},
-  mounted() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
-  methods: {},
+    name: "About",
+    metaInfo: {
+        title: "About",
+    },
+    props: {},
+    components: {
+        TableInvoiceBreakdown: () => import('@/components/tables/TableInvoiceBreakdown.vue')
+    },
+    data: () => ({ balance: [] }),
+    computed: {},
+    watch: {},
+    // Hooks
+    beforeCreate() { },
+    created() { },
+    beforeMount() { },
+    async mounted() {
 
-  // end Hooks
+    },
+    beforeUpdate() { },
+    updated() { },
+    beforeDestroy() { },
+    destroyed() { },
+    methods: {},
+
+    // end Hooks
 };
 </script>
 

@@ -29,7 +29,7 @@
                   <div class="wrapper">
                     <div class="mpm-input-data">
                       <v-text-field v-model="contacto" id="" class="mpm-input" ref="contacto" solo dense label=""
-                        required value="contacto" type="text" prepend-icon="mdi-clipboard-account"
+                        required value="contacto" type="number" prepend-icon="mdi-clipboard-account"
                         @keydown="keyEvent($event)">
                       </v-text-field>
                     </div>
@@ -39,7 +39,7 @@
                   <div class="wrapper">
                     <div class="mpm-input-data">
                       <v-text-field v-model="clienteCount" id="" class="mpm-input" ref="clienteCount" solo dense
-                        label="" required value="clienteCount" type="text"
+                        label="" required value="clienteCount" type="number"
                         prepend-icon="mdi-card-account-details-outline">
                       </v-text-field>
                     </div>
@@ -48,7 +48,7 @@
               </v-card>
             </v-flex>
           </v-layout>
-          <v-btn color="primary" class="w-full " click="alta">Dar de alta</v-btn>
+          <v-btn color="primary" class="w-full " click="alta">Continuar</v-btn>
         </v-card>
       </v-flex>
     </v-layout>
@@ -58,6 +58,7 @@
 <script>
 import { v4 as uuidv4 } from 'uuid';
 import srvToasted from "@/services/srv_toasted.js";
+import srvAxios from "@/services/srv_axios";
 
 export default {
   name: "",
@@ -66,8 +67,8 @@ export default {
   },
   data: () => ({
     cards: [
-      { id: 1, title: "Nombre", content: "" },
-      { id: 2, title: "ID", content: "" },
+      { id: 1, title: "Deposito", content: "" },
+      { id: 2, title: "Retiro", content: "" },
 
     ],
     /** contact */
@@ -91,6 +92,7 @@ export default {
     contactoFechaPago: "",
     contactoFechaVencimiento: "",
     matchFromGuide: {},
+    balance: []
   }),
   computed: {
   },
@@ -101,7 +103,7 @@ export default {
   beforeCreate() { },
   created() { },
   beforeMount() { },
-  mounted() {
+  async mounted() {
     this.onResize();
     this.matchFromGuide = this.$store.state.matchUser;
     this.matchFromInvoice = this.$store.state.profile;
@@ -117,6 +119,11 @@ export default {
     console.log(
       "__[view] matchFromInvoice: " + JSON.stringify(this.matchFromInvoice)
     );
+
+
+
+    this.balance = await srvAxios("http://localhost:5000/api/TransactionCredit/getall");
+    console.log(this.balance);
   },
   beforeUpdate() { },
   updated() { },

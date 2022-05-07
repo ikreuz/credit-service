@@ -66,8 +66,8 @@ export default {
   },
   data: () => ({
     cards: [
-      { id: 1, title: "Nombre", content: "" },
-      { id: 2, title: "ID", content: "" },
+      { id: 1, title: "Numero cuenta", content: "" },
+      { id: 2, title: "Saldo actual", content: "" },
 
     ],
     /** contact */

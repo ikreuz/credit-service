@@ -64,12 +64,12 @@ export default {
         icon: "mdi-newspaper-plus",
         aria: "savingAccount",
       },
-      {
-        route: "/creditAccount",
-        name: "Cuenta Credito",
-        icon: "mdi-newspaper-plus",
-        aria: "creditAccount",
-      },
+      // {
+      //   route: "/creditAccount",
+      //   name: "Cuenta Credito",
+      //   icon: "mdi-newspaper-plus",
+      //   aria: "creditAccount",
+      // },
       {
         route: "/history",
         name: "History",
@@ -110,8 +110,8 @@ export default {
   mounted() {
     document.addEventListener("click", this.close);
     this.parcelCls.addClass(document.body, "page-the-mini-drawer");
-    this.$store.dispatch("axnJaegerAddTab", { route: "/home", name: "Home" });
-    this.$store.dispatch("axnJaegerActiveIndex", "/home");
+    // this.$store.dispatch("axnJaegerAddTab", { route: "/home", name: "Home" });
+    // this.$store.dispatch("axnJaegerActiveIndex", "/home");
     // if (compareRouter(this.$route, this.activeIndex))
     //   this.$router.push("/home");
   },

@@ -3,11 +3,13 @@
     <v-col>
       <v-subheader>Home</v-subheader>
       <CardOne />
+      <TableClient />
     </v-col>
   </v-row>
 </template>
 
 <script>
+import srvAxios from "../services/srv_axios";
 export default {
   name: "Home",
   metaInfo: {
@@ -15,20 +17,24 @@ export default {
   },
   props: {},
   components: {
-    CardOne: () => import('@/components/cards/CardOne.vue')
+    CardOne: () => import('@/components/cards/CardOne.vue'),
+    TableClient: () => import('@/components/tables/TableClient.vue'),
   },
-  data: () => ({}),
+  data: () => ({ clients: [] }),
   computed: {},
   watch: {},
   // Hooks
-  beforeCreate() {},
-  created() {},
-  beforeMount() {},
-  mounted() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
+  beforeCreate() { },
+  created() { },
+  beforeMount() { },
+  async mounted() {
+    this.clients = await srvAxios("http://localhost:5000/api/Customers/getall");
+    console.log(this.clients);
+  },
+  beforeUpdate() { },
+  updated() { },
+  beforeDestroy() { },
+  destroyed() { },
   methods: {},
 
   // end Hooks
