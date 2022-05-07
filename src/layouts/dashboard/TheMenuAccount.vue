@@ -30,7 +30,7 @@
             <v-list-item-avatar>
               <v-icon>mdi-account-settings</v-icon>
             </v-list-item-avatar>
-            {{ matchGuide.cliente_origen }}
+            <!-- {{ matchGuide.cliente_origen }} -->
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
@@ -43,14 +43,14 @@
         </v-list-item-icon>
         <v-list-item-title>
           Mich ID:
-          <v-tooltip left>
+          <!-- <v-tooltip left>
             <template v-slot:activator="{ on, attrs }">
               <span class="text-truncate ml-2" v-bind="attrs" v-on="on">{{
                 matchGuide.cliente_origen_rfc
               }}</span>
             </template>
             <span>{{ matchGuide.cliente_origen_rfc }}</span>
-          </v-tooltip>
+          </v-tooltip> -->
         </v-list-item-title>
       </v-list-item>
       <v-list-item link to="/setting" class="text-left">

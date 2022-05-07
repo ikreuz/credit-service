@@ -24,7 +24,7 @@
     <v-divider></v-divider>
     <v-list nav dense class="side-drawer__list" :default-active="$route.path" router>
       <v-list-item link class="side-drawer__list-item" v-for="menu in menuScopeSettings" :to="menu.route"
-        :index="menu.route" :key="menu.route" :aria-label="menu.aria" :color="activeIndex ? 'primary' : 'bunker'"
+        :index="menu.route" :key="menu.route" :aria-label="menu.aria" 
         @click="close">
         <v-list-item-icon class="side-drawer__list-item-icon">
           <v-icon class="sd-icon">{{ menu.icon }}</v-icon>

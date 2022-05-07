@@ -4,13 +4,8 @@
       <v-layout row wrap>
         <v-flex xs12 sm12 tag="div" id="card-section-x" v-resize="onResize">
           <!-- {{ windowSize }} -->
-          <v-data-table
-            :headers="headers"
-            :items="clientItems"
-            class="mpm-data-table pa-3"
-            loading="!loading"
-            loading-text="Buscando... Por favor espere"
-          >
+          <v-data-table :headers="headers" :items="clientItems" class="mpm-data-table pa-3" loading="!loading"
+            loading-text="Buscando... Por favor espere">
             <template v-slot:top>
               <v-toolbar flat>
                 <v-toolbar-title>Clientes</v-toolbar-title>
@@ -22,119 +17,58 @@
             </template>
             <template v-slot:[`item.actions`]="{ item }">
               <div class="relative d-flex justify-end">
-                <v-menu
-                  offset-x
-                  elevation="0"
-                  left
-                  nudge-top="2"
-                  nudge-right="-5"
-                  max-width="300"
-                  transition="slide-x-transition"
-                  :close-on-content-click="false"
-                  class="menu-action-control"
-                >
+                <v-menu offset-x elevation="0" left nudge-top="2" nudge-right="-5" max-width="300"
+                  transition="slide-x-transition" :close-on-content-click="false" class="menu-action-control">
                   <template v-slot:activator="{ on, attrs }">
-                    <v-btn
-                      v-bind="attrs"
-                      v-on="on"
-                      tile
-                      x-small
-                      elevation="0"
-                      class="
+                    <v-btn v-bind="attrs" v-on="on" tile x-small elevation="0" class="
                         actions-control actions-control__client
                         mpm-border-bottom
                         mpm-border-top
                         mpm-border-right
                         mpm-border-left
-                      "
-                      data-a-id="actions-control"
-                    >
+                      " data-a-id="actions-control">
                       <v-icon color="ember">mdi-dots-vertical</v-icon>
                     </v-btn>
                   </template>
-                  <v-list
-                    nav
-                    flat
-                    dense
-                    router
-                    class="menu-action-control-list overflow-hidden noshadow"
-                  >
+                  <v-list nav flat dense router class="menu-action-control-list overflow-hidden noshadow">
                     <v-list-item-group class="menu-action-control-list-group">
-                      <v-list-item
-                        link
-                        @click.prevent="viewItem(item)"
-                        class="menu-action-control-list-item"
-                      >
+                      <v-list-item link @click.prevent="viewItem(item)" class="menu-action-control-list-item">
                         <v-btn small text color="walkure" width="30">
-                          <v-list-item-icon
-                            class="menu-action-control-list-item-icon"
-                          >
+                          <v-list-item-icon class="menu-action-control-list-item-icon">
                             <v-icon small class="action-icon">mdi-eye</v-icon>
                           </v-list-item-icon>
                         </v-btn>
                       </v-list-item>
 
-                      <v-list-item
-                        link
-                        class="menu-action-control-list-item"
-                        @click.stop="editItem(item)"
-                        @click.prevent="actDetailUser(item)"
-                      >
+                      <v-list-item link class="menu-action-control-list-item" @click.stop="editItem(item)"
+                        @click.prevent="actDetailUser(item)">
                         <v-btn small text color="walkure" width="30">
-                          <v-list-item-icon
-                            class="menu-action-control-list-item-icon"
-                          >
-                            <v-icon small class="action-icon"
-                              >mdi-pencil</v-icon
-                            >
+                          <v-list-item-icon class="menu-action-control-list-item-icon">
+                            <v-icon small class="action-icon">mdi-pencil</v-icon>
                           </v-list-item-icon>
                         </v-btn>
                       </v-list-item>
 
-                      <v-list-item
-                        link
-                        class="menu-action-control-list-item"
-                        @click.stop="lockItem(item)"
-                      >
+                      <v-list-item link class="menu-action-control-list-item" @click.stop="lockItem(item)">
                         <v-btn small text color="walkure" width="30">
-                          <v-list-item-icon
-                            class="menu-action-control-list-item-icon"
-                          >
-                            <v-icon small class="action-icon"
-                              >mdi-lock-open-variant</v-icon
-                            >
+                          <v-list-item-icon class="menu-action-control-list-item-icon">
+                            <v-icon small class="action-icon">mdi-lock-open-variant</v-icon>
                           </v-list-item-icon>
                         </v-btn>
                       </v-list-item>
 
-                      <v-list-item
-                        link
-                        class="menu-action-control-list-item"
-                        @click.stop="cashItem(item)"
-                      >
+                      <v-list-item link class="menu-action-control-list-item" @click.stop="cashItem(item)">
                         <v-btn small text color="walkure" width="30">
-                          <v-list-item-icon
-                            class="menu-action-control-list-item-icon"
-                          >
-                            <v-icon smallclass="action-icon"
-                              >mdi-currency-usd</v-icon
-                            >
+                          <v-list-item-icon class="menu-action-control-list-item-icon">
+                            <v-icon smallclass="action-icon">mdi-currency-usd</v-icon>
                           </v-list-item-icon>
                         </v-btn>
                       </v-list-item>
 
-                      <v-list-item
-                        link
-                        class="menu-action-control-list-item"
-                        @click.stop="deleteItem(item)"
-                      >
+                      <v-list-item link class="menu-action-control-list-item" @click.stop="deleteItem(item)">
                         <v-btn small text color="walkure" width="30">
-                          <v-list-item-icon
-                            class="menu-action-control-list-item-icon"
-                          >
-                            <v-icon small class="action-icon"
-                              >mdi-trash-can</v-icon
-                            >
+                          <v-list-item-icon class="menu-action-control-list-item-icon">
+                            <v-icon small class="action-icon">mdi-trash-can</v-icon>
                           </v-list-item-icon>
                         </v-btn>
                       </v-list-item>
@@ -155,6 +89,7 @@
 
 <script>
 // import jsCookie from "js-cookie";
+import srvAxios from "@/services/srv_axios";
 
 export default {
   components: {},
@@ -162,14 +97,12 @@ export default {
     dialog: false,
     dialogDelete: false,
     headers: [
-      { text: "Id", align: "center", value: "id" },
-      { text: "Cliente", align: "center", value: "cliente" },
-      { text: "RFC", align: "center", value: "rfc" },
-      { text: "Nombre Comercial", align: "center", value: "nombre_comercial" },
-      { text: "Razon Social", align: "center", value: "razon_social" },
-      { text: "Email", align: "center", value: "email" },
-      { text: "C. Convenio", align: "center", value: "c_convenio" },
-      { text: "T. Cliente", align: "center", value: "tipo" },
+      { text: "Id", align: "center", value: "Cliente_Id" },
+      { text: "Nombre", align: "center", value: "Nombre" },
+      { text: "Apellidos", align: "center", value: "Apellidos" },
+      { text: "Con Credito", align: "center", value: "C_Credito" },
+      { text: "Con Ahorro", align: "center", value: "C_Ahorro" },
+      { text: "Email", align: "center", value: "Correo" },
       { text: "Acciones", align: "center", value: "actions", sortable: false },
     ],
     loading: false,
@@ -211,22 +144,22 @@ export default {
     },
   },
   // Hooks
-  beforeCreate() {},
+  beforeCreate() { },
   created() {
     this.initialize();
   },
-  beforeMount() {},
+  beforeMount() { },
   mounted() {
     this.onResize();
     console.log(
       "__[: tableInit/mounted :this.clientItems " +
-        JSON.stringify(this.clientItems)
+      JSON.stringify(this.clientItems)
     );
   },
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
+  beforeUpdate() { },
+  updated() { },
+  beforeDestroy() { },
+  destroyed() { },
   methods: {
     handleStories(ev) {
       // this.$router.push({ path: "/reception" });
@@ -261,7 +194,11 @@ export default {
       }
     },
     async initialize() {
-      this.clientItems = this.$store.state.ep.apiClientes.entries;
+      // this.clientItems = this.$store.state.ep.apiClientes.entries;
+
+      this.balance = await srvAxios("http://localhost:5000/api/Customers/getall");
+      this.clientItems = this.balance.Data
+      console.log(this.clientItems);
       /**
        * Codigo que requiere de una api datos, y para acceder se necesita autorizacion Bearer TOKEN
        * toma de una cookie el token, lo asigna a la configuracion de $axios, mediante el metodo $get
@@ -332,7 +269,7 @@ export default {
       //   this.editedItem = Object.assign({}, item);
       //   this.dialog = true;
     },
-    actDetailUser() {},
+    actDetailUser() { },
 
     deleteItem() {
       //   this.editedIndex = this.clientItems.indexOf(item);
@@ -380,9 +317,11 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/scss/common/variables.scss";
+
 #layout-client-si {
   box-shadow: var(--shadow-content-default) !important;
 }
+
 .actions-control {
   height: 30px !important;
   min-height: 30px !important;
@@ -429,9 +368,11 @@ export default {
     }
   }
 }
+
 .actions-control__client {
   &:hover {
     &:hover {
+
       [class*="mdi"],
       [class^="mdi"] {
         color: $colors__ui_primary !important;
@@ -454,6 +395,7 @@ export default {
   transition-duration: 200ms !important;
   transition: all 0.2s !important;
 }
+
 .menu-action-control .v-list-item--active .menu-action-control-list-item-icon {
   color: $colors__ui_primary !important;
 }
@@ -481,12 +423,15 @@ export default {
   transition: all 0.2s;
   z-index: 201;
 }
+
 .menu-action-control-list-item::hover {
   color: $colors__ui_primary !important;
 }
+
 .menu-action-control::focus .action-icon,
 .menu-action-control::hover .action-icon {
   color: $colors__ui_primary !important;
+
   [class*="mdi"],
   [class^="mdi"] {
     font-size: 18px !important;
@@ -523,9 +468,11 @@ export default {
 .menu-action-control--width-1 {
   width: 303px !important;
 }
+
 .sd-border-1 {
   border: 1px solid rgba(0, 0, 0, 0.12) !important;
 }
+
 .mpm-data-table {
   white-space: nowrap;
   overflow: hidden;

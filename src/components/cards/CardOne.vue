@@ -30,7 +30,7 @@
                     <div class="mpm-input-data">
                       <v-text-field v-model="contacto" id="" class="mpm-input" ref="contacto" solo dense label=""
                         required value="contacto" type="text" prepend-icon="mdi-clipboard-account"
-                        @keydown="keyEvent($event)">
+                        @keyup="keyEvent($event)">
                       </v-text-field>
                     </div>
                   </div>
@@ -48,23 +48,52 @@
               </v-card>
             </v-flex>
           </v-layout>
-          <v-btn color="primary" class="w-full " click="alta">Dar de alta</v-btn>
+          <v-btn color="primary" class="w-full " @click="alta">Dar de alta</v-btn>
+          <!-- <v-dialog v-model="dialog" max-width="290">
+            <v-card>
+              <v-card-title class="text-h5">
+                Nuevo cliente
+              </v-card-title>
+
+              <v-card-text>
+                Agregar el siguiente cliente al sistema
+              </v-card-text>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+
+                <v-btn color="green darken-1" text @click="dialog = false">
+                  Cancelar
+                </v-btn>
+
+                <v-btn color="green darken-1" text @click="dialog = false" click.stop="save">
+                  Continuar
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog> -->
         </v-card>
       </v-flex>
     </v-layout>
+    <!-- <DialogClient /> -->
+
   </v-container>
 </template>
 
 <script>
 import { v4 as uuidv4 } from 'uuid';
-import srvToasted from "@/services/srv_toasted.js";
+// import srvToasted from "@/services/srv_toasted.js";
+import {srvAxiosInsert} from "@/services/srv_axios";
 
 export default {
   name: "",
   props: {},
   components: {
+    // DialogClient: () => import('@/components/dialog/DialogClient.vue')
+
   },
   data: () => ({
+    dialog: false,
     cards: [
       { id: 1, title: "Nombre", content: "" },
       { id: 2, title: "ID", content: "" },
@@ -91,8 +120,34 @@ export default {
     contactoFechaPago: "",
     contactoFechaVencimiento: "",
     matchFromGuide: {},
+    txnItems: [], balance: [],
+    addCustomer: {
+      "cliente_Id": 10,
+      "user_Access_Id": 10,
+      "sucursal_Id": 10,
+      "nombre": "",
+      "apellidos": "",
+      "correo": "",
+      "tel_1": "",
+      "c_Credito": false,
+      "c_Ahorro": false,
+      "fh_Registro": "2022-05-07T07:20:14.880Z",
+      "fh_Modificacion": "2022-05-07T07:20:14.880Z",
+      "fh_Autorizacion": "2022-05-07T07:20:14.880Z",
+      "usr_Registra_Id": 10,
+      "usr_Modifica_Id": 10,
+      "usr_Autoriza_Id": 10
+    }
   }),
   computed: {
+    // dialogClient: {
+    //   get() {
+    //     return this.$store.getters["getDialogClient"];
+    //   },
+    //   set(params) {
+    //     this.$store.dispatch("axnDialogClient", params);
+    //   },
+    // },
   },
   watch: {
     windowSize() { },
@@ -130,11 +185,39 @@ export default {
       console.log('Key pressed:', event);
       console.log(this.contacto);
       this.clienteCount = uuidv4();
+      let arr = [];
+      arr = this.contacto.split(" ");
+      console.log(arr[0]);
+      console.log(arr[1]);
       console.log(this.clienteCount);
-    },
-    alta() {
+      this.addCustomer.nombre = arr[0];
+      this.addCustomer.apellidos = arr[1];
 
-      srvToasted("Test", this.toasted.CUSTOM, "mdi mdi-alert-box-outline");
+    },
+    async alta() {
+      let json = {
+        "cliente_Id": 0,
+        "user_Access_Id": 0,
+        "sucursal_Id": 1,
+        "nombre": this.addCustomer.nombre,
+        "apellidos": this.addCustomer.apellidos,
+        "correo": "string",
+        "tel_1": "string",
+        "c_Credito": false,
+        "c_Ahorro": false,
+        "fh_Registro": "2022-05-07T10:18:38.373Z",
+        "fh_Modificacion": "2022-05-07T10:18:38.373Z",
+        "fh_Autorizacion": "2022-05-07T10:18:38.373Z",
+        "usr_Registra_Id": 0,
+        "usr_Modifica_Id": 0,
+        "usr_Autoriza_Id": 0
+      }
+      this.balance = await srvAxiosInsert("http://localhost:5000/api/Customers/insert", json);
+      this.txnItems = this.balance.Data
+      console.log(this.txnItems);
+    },
+    async save() {
+
     }
   },
   /** end Hooks */

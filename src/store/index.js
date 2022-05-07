@@ -31,6 +31,8 @@ export default new Vuex.Store({
     guardianEmployees: [],
     guardianCustomers: [],
     guardianRoles: [],
+    //
+    dialogClient: false
   },
   mutations: {
     SET_MAIN_DRAWER(state, payload) {
@@ -63,6 +65,10 @@ export default new Vuex.Store({
     SET_GUARDIAN_ROLES(state, payload) {
       state.guardianRoles = payload;
     },
+    // 
+    SET_DIALOG_CLIENT(state,payload){
+      state.dialogClient = payload;
+    }
   },
   actions: {
     axnMainDrawer({ commit }, payload) {
@@ -113,6 +119,10 @@ export default new Vuex.Store({
     axnGuardianCustomers({ commit }, payload) {
       commit("SET_GUARDIAN_CUSTOMERS", payload);
     },
+    //
+    axnDialogClient({commit}, payload){
+      commit('SET_DIALOG_CLIENT', payload)
+    }
   },
   getters: {
     getDrawer(state) {
@@ -133,6 +143,10 @@ export default new Vuex.Store({
     getProfile(state) {
       return state.profile;
     },
+    //
+    getDialogClient(state){
+      return state.dialogClient
+    }
   },
   modules: { endpoints },
 });

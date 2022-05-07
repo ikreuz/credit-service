@@ -5,6 +5,7 @@
       <CardOne />
       <TableClient />
     </v-col>
+
   </v-row>
 </template>
 
@@ -21,7 +22,9 @@ export default {
     TableClient: () => import('@/components/tables/TableClient.vue'),
   },
   data: () => ({ clients: [] }),
-  computed: {},
+  computed: {
+
+  },
   watch: {},
   // Hooks
   beforeCreate() { },
