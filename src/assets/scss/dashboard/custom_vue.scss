@@ -1,0 +1,482 @@
+/** Vuetify drawer */
+/* ---------------- Customizacion del Drawer --------------- */
+// .v-navigation-drawer__content {
+//   @extend .skrull;
+// }
+
+/* ----------------------------------- // ----------------------------------- */
+/** Vuetify menu */
+/* ---------------- Customizacion del Menu --------------- */
+// .v-menu__content {
+//   @extend .skrull;
+// }
+
+/* ----------------------------------- // ----------------------------------- */
+/** Vueitfy virtual scroll */
+/* ---------------- Customizacion del Virtual Scroll --------------- */
+// .v-virtual-scroll {
+//   @extend .skrull;
+// }
+
+/* ----------------------------------- // ----------------------------------- */
+/** Vue-Toastefication */
+/* ---------------- Customizacion de las notificaciones Toast --------------- */
+.Vue-Toastification__toast.mpm-toast,
+.Vue-Toastification__toast--default.mpm-toast {
+  font-size: 24px !important;
+
+  &--custom,
+  &--default,
+  &--info,
+  &--error,
+  &--success,
+  &--warning {
+
+    [class*='mdi'],
+    [class^='mdi'] {
+      font-size: 24px;
+    }
+  }
+
+  &--custom {
+    background-color: var(--v-walkure-darken1);
+  }
+
+  &--default {
+    background-color: var(--v-walkure-base);
+  }
+
+  &--info {
+    background-color: var(--v-info-base);
+  }
+
+  &--error {
+    background-color: var(--v-error-base);
+  }
+
+  &--success {
+    background-color: var(--v-success-base);
+  }
+
+  &--warning {
+    background-color: var(--v-warning-base);
+  }
+}
+
+/* Applied to the toast body when using regular strings as content */
+.Vue-Toastification__toast-body.mpm-toast__body {
+  font-size: 14px;
+}
+
+/* Applied to a wrapper div when using a custom component as content */
+.Vue-Toastification__toast-component-body.mpm-toast__component-body {
+  width: 100%;
+}
+
+/* ----------------------------------- // ----------------------------------- */
+/** Vuetify */
+/* ---------------- Customizacion data-table --------------- */
+.v-tab:beffore {
+  background: transparent !important;
+}
+
+.v-data-table__wrapper {
+  tr:hover {
+    background-color: #f6f6f6 !important;
+  }
+}
+
+/* --------------- Cambios especificos para la seccion Portal --------------- */
+.v-application {
+  // font-family: $font__primary, sans-serif !important;
+  // line-height: 1.5;
+
+  // .headline {
+  //   font-family: $font__primary, sans-serif !important;
+  // }
+
+  // .pirmary{
+  //   color: $colors__ui_primary !important;
+  // }
+  .primary--text {
+    /** color predefinido por vuetify */
+    // color: #1976d2 !important;
+    // caret-color: #1976d2 !important;
+    color: $colors__ui_text !important;
+    caret-color: $colors__ui_text !important;
+  }
+}
+
+.v-overlay {
+  transition: 0.9s cubic-bezier(0.45, 0.05, 0.55, 0.95), z-index 1ms !important
+}
+
+.v-overlay--active {
+  z-index: 1099 !important;
+}
+
+.theme--light.v-footer,
+.theme--light.v-application {
+  // background: #f7f7f8;
+  // background-color: #f7f7f8;
+
+  .primary--text {
+    color: $colors__ui_text !important;
+    caret-color: $colors__ui_text !important;
+  }
+}
+
+.noshadow {
+  box-shadow: none !important;
+}
+
+
+
+.vueshadow-0 {
+  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
+    0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+}
+
+.vueshadow-1 {
+  box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.45);
+}
+
+.v-dialog {
+  overflow: hidden !important;
+}
+
+.v-dialog__content {
+  overflow: hidden !important;
+  z-index: $zindex__modal !important;
+}
+
+.v-navigation-drawer__content {
+  // @extend .skrull;
+}
+
+.v-application .error--text {
+  border-color: #ff5252 !important;
+}
+
+.v-menu__content {
+  // @extend .skrull;
+}
+
+/* ----------------------------- Sign in / login ---------------------------- */
+[data-layout="layout-item-input"] {
+
+  .v-autocomplete:not(.v-input--is-disabled).v-select.v-text-field input,
+  .v-text-field.v-input--dense:not(.v-text-field--outlined) input {
+    padding: 4px 5px !important;
+  }
+
+  .v-input__control {
+    display: flex !important;
+    flex-direction: row !important;
+  }
+
+  .v-text-field.v-text-field--solo .v-input__control input {
+    text-align: left !important;
+  }
+}
+
+[ data-input-type="text-select"] {
+
+  .v-input__control .v-select__selections,
+  .passp-content .v-input__control .v-select__selections,
+  .mpm-data-table .v-input__control .v-select__selections,
+  .card-search .v-input__control .v-select__selections,
+  .card-config .v-input__control .v-select__selections,
+  .card-invoice-aditional .v-input__control .v-select__selections,
+  .card-guide .v-input__control .v-select__selections,
+  .card-client .v-input__control .v-select__selections,
+  .card-invoice .v-input__control .v-select__selections {
+    margin-left: 4px !important;
+  }
+}
+
+/** */
+[ data-input-type="text-field"],
+.passp-content,
+.mpm-data-table,
+.card-search,
+.card-config,
+.card-invoice-aditional,
+.card-guide,
+.card-client,
+.card-invoice {
+
+  .devmpm-input,
+  .v-input {
+    border-style: solid;
+    border-width: 2px;
+    // border-color: transparent;
+    border-color: #CCCCCC;
+  }
+
+  .devmpm-input,
+  .v-input:focus {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+  }
+
+  .v-input__control {
+    height: 36px !important;
+    min-height: 36px !important;
+
+    .v-select__selections {
+      margin-left: 1rem;
+    }
+  }
+
+  .v-input__control:focus {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+  }
+
+  .v-text-field.v-text-field--solo .v-input__prepend-outer,
+  .v-text-field.v-text-field--solo .v-input__append-outer {
+    margin: 6px !important;
+  }
+
+  // .theme--light.v-text-field--solo {
+  //   background: #E5E5E5;
+  //   background-color: #E5E5E5;
+  // }
+
+  .theme--light.v-text-field--filled>.v-input__control>.v-input__slot {
+    // background: #ffffff;
+    // border-style: solid;
+    // border-width: 2px;
+    // border-color: transparent;
+    // border-bottom-left-radius: 4px;
+    // border-bottom-right-radius: 4px;  
+
+    &:before {
+      display: none;
+    }
+
+    // .auth0-lock-panel .devmpm-input:hover {
+    //   border-style: solid;
+    //   border-width: 2px;
+    //   border-color: transparent;
+    // }
+  }
+
+  .v-input--is-focused {
+    border: 2px solid $geist-primary !important;
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+
+  }
+
+  // .theme--light.v-text-field--solo>.v-input__control>.v-input__slot:hover {
+  //   border-color: #CCCCCC !important;
+  //   background: #E5E5E5 !important;
+  //   background-color: #E5E5E5 !important;
+  // }
+  .theme--light.v-text-field--solo>.v-input__control>.v-input__slot {
+    background: #E5E5E5;
+    background-color: #E5E5E5;
+    padding: 0 !important;
+  }
+
+  // .theme--light.v-text-field--solo>.v-input__control>.v-input__slot:hover,
+  .theme--light.v-text-field--solo>.v-input__control>.v-input__slot:focus {
+    background: #FFFFFF;
+    background-color: #FFFFFF;
+  }
+
+  .theme--light.v-text-field--solo {
+    color: $colors__ui_text !important;
+
+    // background: #E5E5E5 !important;
+    // background-color: #E5E5E5 !important;
+    &:hover {
+      border-style: solid;
+      border-width: 2px;
+      border-color: #CCCCCC;
+    }
+  }
+
+  .theme--light.v-text-field--solo>.v-input__control>.v-input__slot:focus {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+  }
+
+  .v-text-field.v-text-field--solo:not(.v-text-field--solo-flat)>.v-input__control>.v-input__slot {
+    box-shadow: none !important;
+    background: #E5E5E5;
+    background-color: #E5E5E5;
+
+    .v-input__append-inner {
+      padding-right: 8px !important;
+    }
+  }
+
+  .v-text-field.v-text-field--solo:not(.v-text-field--solo-flat)>.v-input__control>.v-input__slot:hover {
+    background: #E5E5E5;
+    background-color: #E5E5E5;
+  }
+
+  .v-text-field.v-text-field--solo:not(.v-text-field--solo-flat)>.v-input__control>.v-input__slot:focus {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+
+    .theme--light.v-text-field--solo {
+      background: #FFFFFF !important;
+      background-color: #FFFFFF !important;
+    }
+  }
+
+  .v-autocomplete:not(.v-input--is-disabled).v-select.v-text-field input,
+  .v-text-field.v-input--dense:not(.v-text-field--outlined) input {
+    padding: 18px 6px !important;
+  }
+
+  .v-text-field.v-text-field--solo .v-label {
+    padding-left: 18px !important;
+  }
+
+  .v-input--dense>.v-input__control>.v-input__slot {
+    margin-bottom: 10px !important;
+  }
+
+  .v-input__append-inner {
+    width: 33px;
+    // .v-progress-circular {
+    //   margin: 1rem;
+    // }
+  }
+}
+
+[ data-input-type="date-picker"] {
+
+  .devmpm-input,
+  .v-input {
+    border-style: solid !important;
+    border-width: 2px !important;
+    border-color: transparent !important;
+  }
+
+  .devmpm-input,
+  .v-input:focus {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+  }
+
+  .v-input__control {
+    min-height: 36px !important;
+
+    .v-select__selections {
+      margin-left: 1rem;
+    }
+  }
+
+  .v-input__control:focus {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+  }
+
+  .v-text-field.v-text-field--solo .v-input__prepend-outer,
+  .v-text-field.v-text-field--solo .v-input__append-outer {
+    margin: 6px !important;
+  }
+
+  // .theme--light.v-text-field--solo {
+  //   background: #E5E5E5;
+  //   background-color: #E5E5E5;
+  // }
+
+  .theme--light.v-text-field--filled>.v-input__control>.v-input__slot {
+    // background: #ffffff;
+    // border-style: solid;
+    // border-width: 2px;
+    // border-color: transparent;
+    // border-bottom-left-radius: 4px;
+    // border-bottom-right-radius: 4px;  
+
+    &:before {
+      display: none;
+    }
+
+    // .auth0-lock-panel .devmpm-input:hover {
+    //   border-style: solid;
+    //   border-width: 2px;
+    //   border-color: transparent;
+    // }
+  }
+
+  .v-input--is-focused {
+    border: 2px solid transparent !important;
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+
+  }
+
+  // .theme--light.v-text-field--solo>.v-input__control>.v-input__slot:hover {
+  //   border-color: #CCCCCC !important;
+  //   background: #E5E5E5 !important;
+  //   background-color: #E5E5E5 !important;
+  // }
+  .theme--light.v-text-field--solo>.v-input__control>.v-input__slot {
+    background: #E5E5E5;
+    background-color: #E5E5E5;
+    padding: 0 !important;
+  }
+
+  // .theme--light.v-text-field--solo>.v-input__control>.v-input__slot:hover,
+  .theme--light.v-text-field--solo>.v-input__control>.v-input__slot:focus {
+    background: #FFFFFF;
+    background-color: #FFFFFF;
+  }
+
+  .theme--light.v-text-field--solo {
+    color: $colors__ui_text !important;
+
+    // background: #E5E5E5 !important;
+    // background-color: #E5E5E5 !important;
+    &:hover {
+      border-style: solid;
+      border-width: 2px;
+      border-color: #CCCCCC;
+    }
+  }
+}
+
+/* --------------------- modificando las tabs de vuetify -------------------- */
+// .v-tab,
+// .v-tab:hover {
+//   background: transparent !important;
+// }
+
+.v-tab:beffore {
+  background: transparent !important;
+}
+
+.v-data-table__wrapper {
+  tr:hover {
+    background-color: #f6f6f6 !important;
+  }
+}
+
+/* ----------------------------------- -- ----------------------------------- */
+/* --------------------------------- toolbar -------------------------------- */
+.v-toolbar__content {
+  width: 100% !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+/* ------------------------------------ - ----------------------------------- */
+/* ------------------------------ badge counter ----------------------------- */
+#global-nav-si {
+
+  .v-badge__badge {
+    top: 7px !important;
+  }
+}
+
+.card-invoice .v-input--dense > .v-input__control > .v-input__slot {
+  margin-bottom: 0 !important;
+}

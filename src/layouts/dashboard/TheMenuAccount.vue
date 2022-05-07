@@ -104,31 +104,6 @@ export default {
   created() {},
   beforeMount() {},
   async mounted() {
-    // console.log(
-    //   "__[view] guias:user " + JSON.stringify(this.$store.state.user)
-    // );
-
-    // console.log(
-    //   "__[view] guias:auth " + JSON.stringify(this.$store.state.auth)
-    // );
-
-    // console.log(
-    //   "__[view] Dashboard/matchClient:: " +
-    //     JSON.stringify(this.$store.state.matchClient)
-    // );
-    // console.log(
-    //   "__[view] Dashboard/matchGuide:: " +
-    //     JSON.stringify(this.$store.state.matchGuide)
-    // );
-    // console.log(
-    //   "__[view] Dashboard/matchInvoice:: " +
-    //     JSON.stringify(this.$store.state.matchInvoice)
-    // );
-    // console.log(
-    //   "__[view] Dashboard/customerProfile:: " +
-    //     JSON.stringify(this.$store.state.customerProfile)
-    // );
-
     this.customerProfile = this.$store.state.customerProfile;
     this.matchClient = this.$store.state.matchClient;
     this.matchGuide = this.$store.state.matchGuide;

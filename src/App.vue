@@ -10,7 +10,6 @@ export default {
   metaInfo: {
     title: "Parcel Service",
   },
-  middleware: "auth",
   props: {},
   components: {},
   data: () => ({}),

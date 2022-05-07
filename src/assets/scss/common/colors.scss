@@ -12,3 +12,240 @@ $geist-grey: #94a8b6;
 $geist-scroll: $geist-grey-light;
 $geist-input: $geist-grey-light;
 $geist-border: $geist-grey-light;
+
+
+
+
+// https://material.io/design/color/the-color-system.html#tools-for-picking-colors
+/* Vuetify */
+$vondoom: #01B283;
+
+$ember: #232f3e !default;
+$ember_bg: #232f3ec5;
+// $ember_light: #eff2f6;
+$ember_light: #f5f8fa;
+$ember_900: #232f3e; // primary, complementary:#3e3223
+$ember_800: #354456;
+$ember_700: #44566c;
+$ember_600: #546a82;
+$ember_500: #627894;
+$ember_400: #798ca5;
+$ember_300: #8fa0b7;
+$ember_200: #aebcce;
+$ember_100: #cbd7e5;
+
+$shamrock_900: #00803e;
+$shamrock_800: #00a255;
+$shamrock_700: #00b461;
+$shamrock_600: #00c76f;
+$shamrock_500: #00d87b;
+$shamrock_400: #00e18f;
+$shamrock_300: #47e8a5; // primary, complementary:#e8478a
+$shamrock_200: #8ceec0;
+$shamrock_100: #bcf5d8;
+$shamrock_50: #e4fbf0;
+
+/** robins egg blue */
+$robin: #00C9B6;
+$robin_900: #006146;
+$robin_800: #007e64;
+$robin_700: #008e73;
+$robin_600: #009f84;
+$robin_500: #00ad92;
+$robin_400: #00bca4;
+$robin_300: #00c9b5; // primary, complementary:#e8478a
+$robin_200: #70d9cb;
+$robin_100: #ace8df;
+$robin_50: #def6f3;
+
+// https://www.htmlcsscolor.com/hex/71C9F8
+
+$gray-100: #f8f9fc !default;
+$gray-200: #eaecf4 !default;
+$gray-300: #dddfeb !default;
+$gray-400: #d1d3e2 !default;
+$gray-500: #b7b9cc !default;
+$gray-600: #858796 !default;
+$gray-700: #6e707e !default;
+$gray-800: #5a5c69 !default;
+$gray-900: #3a3b45 !default;
+
+$white: #fff !default;
+$black: #000 !default;
+$google: #ea4335 !default;
+$facebook: #3b5998 !default;
+
+$navy: #0048fe;
+$navy_light: #015eff;
+$navy_secondary: #feb600;
+$navy_900: #0000cb;
+$navy_800: #0025da;
+$navy_700: #0033e5;
+$navy_600: #003ff2;
+$navy_500: #0048fe; // primary, complementary: #feb600
+$navy_400: #4967ff;
+$navy_300: #7184ff;
+$navy_200: #9fa7ff;
+$navy_100: #c7caff;
+$navy_50: #e9eaff;
+
+$colors__ember: #232f3e;
+$colors__ember_900: #232f3e; // primary, complementary:#3e3223
+$colors__ember_800: #354456;
+$colors__ember_700: #44566c;
+$colors__ember_600: #546a82;
+$colors__ember_500: #627894;
+$colors__ember_400: #798ca5;
+$colors__ember_300: #8fa0b7;
+$colors__ember_200: #aebcce;
+$colors__ember_100: #cbd7e5;
+
+$colors__twitch: #772ce8;
+$colors__twitch_900: #2900cb;
+$colors__twitch_800: #4b15d3;
+$colors__twitch_700: #5c1dd9;
+$colors__twitch_600: #6c27e1;
+$colors__twitch_500: #772ce8; // primary, complementary: #9de82c
+$colors__twitch_400: #8e51ed;
+$colors__twitch_300: #a473f1;
+$colors__twitch_200: #bf9df4;
+$colors__twitch_100: #d8c5f8;
+$colors__twitch_50: #f0e7fc;
+// color kwetlashochitl
+$colors__alizarin: #FA2742;
+$colors__alizarin_900: #c2000a;
+$colors__alizarin_800: #d20017;
+$colors__alizarin_700: #df001f;
+$colors__alizarin_600: #f10025;
+$colors__alizarin_500: #ff0024;
+$colors__alizarin_400: #fa2743; // primary, complementary: #27fade
+$colors__alizarin_300: #ef5d69;
+$colors__alizarin_200: #f78d93;
+$colors__alizarin_100: #ffc6cf;
+$colors__alizarin_50: #ffe8ed;
+
+$colors__bzeus: #373833;
+$colors__bzeus_900: #171813;
+$colors__bzeus_800: #373833; // primary
+$colors__bzeus_700: #555651;
+$colors__bzeus_600: #696a64;
+$colors__bzeus_500: #90928c;
+$colors__bzeus_400: #b1b2ac;
+$colors__bzeus_300: #d5d6d0;
+$colors__bzeus_200: #e6e7e1;
+$colors__bzeus_100: #f0f1eb;
+$colors__bzeus_50: #f8f9f2;
+
+$colors__bunker: #292D33; // primary
+$colors__bunker_900: #292D33;
+$colors__bunker_800: #3b414a;
+$colors__bunker_700: #4b545f;
+$colors__bunker_600: #5c6776;
+$colors__bunker_500: #697587;
+$colors__bunker_400: #7f8998;
+$colors__bunker_300: #969eaa;
+$colors__bunker_200: #b5bac1;
+$colors__bunker_100: #d3d5d8;
+$colors__bunker_50: #eeeeee;
+
+$walkure: #06a180;
+$colors__walkure: #06a180;
+
+
+$colors__ui_primary:$colors__walkure;
+$colors__ui_secondary: $shamrock_600;
+$colors__ui_button: $colors__walkure;
+$colors__ui_navigation: $colors__walkure;
+$colors__ui_topbar: $colors__walkure;
+$colors__ui_icon_1: $colors__walkure;
+$colors__ui_icon_2: $colors__ui_secondary;
+$colors__ui_drawer: $colors__bunker;
+$colors__ui_border: #BFBFC0;
+$colors__ui_background_1: #E8EAE3;
+$colors__ui_background_2: #ebeef3;
+$colors__ui_background_3: $colors__bunker;
+$colors__ui_background_drawer: #EFEFF1;
+$colors__ui_background_footer: #D6D6D8;
+$colors__ui_primary_900: $colors__alizarin_900;
+$colors__ui_primary_800: $colors__alizarin_800;
+$colors__ui_primary_700: $colors__alizarin_700;
+$colors__ui_primary_600: $colors__alizarin_600;
+$colors__ui_primary_500: $colors__alizarin_500;
+$colors__ui_primary_400: $colors__alizarin_400;
+$colors__ui_primary_300: $colors__alizarin_300;
+$colors__ui_primary_200: $colors__alizarin_200;
+$colors__ui_primary_100: $colors__alizarin_100;
+$colors__ui_primary_50: $colors__alizarin_50;
+$colors__ui_text: $colors__ember;
+$colors__ui_text_light: $colors__ember_100;
+$colors__ui_text_heading: $colors__ember;
+
+// primary color navy_500
+// $primary: $colors__alizarin;
+// $colors__primary: $colors__alizarin; // #0b31ae
+// $colors__secondary: $shamrock_300; // #47e8a5
+// $colors__icon: $colors__ui_secondary;
+// $colors__heading: $colors__ember_900; //#dadfea;
+$colors__background: #f5f5f7;
+$colors__background_2: #ebeef3;
+$colors__grey-light: #e5e5e5 !default;
+$colors__grey: #94a8b6 !default;
+// $colors__font: #232f3e !default; //#131921
+// $colors__ember: $ember !default;
+// $colors__ember-light: $ember_100 !default; //#232f3ecf;
+
+/** */
+$colors__in: $shamrock_600;
+$colors__out: #e94334;
+
+$colors__scroll: #e5e5e5;
+$colors__input: #e5e5e5;
+$colors__border: #e5e5e5;
+$colors__desk: $colors__ui_background_1;
+// $colors__desk: #E9E9E9;
+$colors__aside: #f7f7f8;
+
+.bg-tabs {
+  background-color: #EFEFEF !important;
+  background: #EFEFEF !important;
+}
+
+.bg-desk {
+  background-color: #f7f7f8 !important;
+  background: #f7f7f8 !important;
+}
+
+.bg-desk-2 {
+  background-color: $colors__background_2 !important;
+  background: $colors__background_2 !important;
+}
+
+.bg-aside {
+  background-color: $colors__aside !important;
+  background: $colors__aside !important;
+}
+
+.bg-desk--white {
+  background-color: #FFFFFF !important;
+  background: #FFFFFF !important;
+}
+
+.text--white,
+.color--white {
+  color: #fff !important;
+}
+
+.text--navy-light,
+.color--navy-light {
+  color: $colors__ui_primary !important;
+}
+
+.text--ember,
+.color--ember {
+  color: $ember !important;
+}
+
+.text--navy,
+.color--navy {
+  color: $colors__ui_text_heading !important;
+}

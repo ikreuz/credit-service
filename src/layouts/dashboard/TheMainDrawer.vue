@@ -64,20 +64,11 @@
 
 <script>
 import { mapActions } from "vuex";
-// import {
-//   // jaegerTabClick,
-//   // jaegerTabRemove,
-//   // getUniqueValues,
-//   compareRouter,
-// } from "@/config/huntsman.js";
+
 export default {
   props: {},
   middleware: ["auth"],
   components: {
-    // MpmichPolarLight: () => import("@/libs/MpmichPolarLight.vue"),
-    // MpmLogoPolarLight: () => import("@/libs/MpmLogoPolarLight.vue"),
-    // Navbar: () => import("./TheNavbar.vue"),
-    // sideDrawer: () => import("@/components/navigation/sideDrawer.vue"),
   },
   data: () => ({
     drawerSelectedItem: 0,
@@ -92,27 +83,27 @@ export default {
       },
       {
         icon: "mdi-receipt",
-        title: "Guide",
-        to: "/guide",
-        aria: "Guide",
+        title: "Cuenta Ahorro",
+        to: "/savingAccount",
+        aria: "savingAccount",
       },
       {
         icon: "mdi-account-group",
-        title: "Employees",
-        to: "/employee",
-        aria: "Employees",
+        title: "Cuenta Credito",
+        to: "/creditAccount",
+        aria: "creditAccount",
       },
       {
         icon: "mdi-account-details",
-        title: "Customers",
-        to: "/customer",
-        aria: "Customers",
+        title: "History",
+        to: "/history",
+        aria: "history",
       },
       {
         icon: "mdi-cog",
-        title: "Setting",
-        to: "/setting",
-        aria: "Setting",
+        title: "Balance",
+        to: "/balance",
+        aria: "Balance",
       },
     ],
   }),

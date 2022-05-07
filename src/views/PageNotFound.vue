@@ -17,7 +17,6 @@ export default {
   metaInfo: {
     title: "Page not found",
   },
-  middleware: "",
   props: {},
   components: {},
   data: () => ({}),

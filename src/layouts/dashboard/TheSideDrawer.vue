@@ -1,38 +1,18 @@
 <template>
-  <v-navigation-drawer
-    id="side-drawer-si"
-    :mini-variant="miniVariant"
-    mini-variant-width="56"
-    permanent
-  >
+  <v-navigation-drawer id="side-drawer-si" :mini-variant="miniVariant" mini-variant-width="56" permanent>
     <v-list nav dense class="side-drawer__list" router>
-      <v-btn
-        id="side-btn-si"
-        rounded
-        elevation="0"
-        class="
+      <v-btn id="side-btn-si" rounded elevation="0" class="
           parcel-btn
           mpm-border-top-radius mpm-border-bottom-radius
           parcel-btn--w-40
           mb-2
-        "
-        color="bunker darken-5"
-        icon
-        @click.stop="miniVariant = !miniVariant"
-      >
+        " color="bunker darken-5" icon @click.stop="miniVariant = !miniVariant">
         <v-icon v-if="miniVariant">mdi mdi-arrow-expand-right</v-icon>
         <v-icon v-else>mdi mdi-arrow-expand-left</v-icon>
       </v-btn>
       <v-divider></v-divider>
-      <v-list-item
-        link
-        class="side-drawer__list-item scrolled"
-        v-for="menu in menuScope"
-        :to="menu.route"
-        :index="menu.route"
-        :key="menu.route"
-        :aria-label="menu.aria"
-      >
+      <v-list-item link class="side-drawer__list-item scrolled" v-for="menu in menuScope" :to="menu.route"
+        :index="menu.route" :key="menu.route" :aria-label="menu.aria">
         <v-list-item-icon class="side-drawer__list-item-icon">
           <v-icon class="sd-icon">{{ menu.icon }}</v-icon>
         </v-list-item-icon>
@@ -42,24 +22,10 @@
       </v-list-item>
     </v-list>
     <v-divider></v-divider>
-    <v-list
-      nav
-      dense
-      class="side-drawer__list"
-      :default-active="$route.path"
-      router
-    >
-      <v-list-item
-        link
-        class="side-drawer__list-item"
-        v-for="menu in menuScopeSettings"
-        :to="menu.route"
-        :index="menu.route"
-        :key="menu.route"
-        :aria-label="menu.aria"
-        :color="activeIndex ? 'primary' : 'bunker'"
-        @click="close"
-      >
+    <v-list nav dense class="side-drawer__list" :default-active="$route.path" router>
+      <v-list-item link class="side-drawer__list-item" v-for="menu in menuScopeSettings" :to="menu.route"
+        :index="menu.route" :key="menu.route" :aria-label="menu.aria" :color="activeIndex ? 'primary' : 'bunker'"
+        @click="close">
         <v-list-item-icon class="side-drawer__list-item-icon">
           <v-icon class="sd-icon">{{ menu.icon }}</v-icon>
         </v-list-item-icon>
@@ -93,16 +59,28 @@ export default {
         aria: "home",
       },
       {
-        route: "/employee",
-        name: "Empoyees",
+        route: "/savingAccount",
+        name: "Cuenta Ahorro",
         icon: "mdi-newspaper-plus",
-        aria: "Employees",
+        aria: "savingAccount",
       },
       {
-        route: "/customer",
-        name: "Customers",
+        route: "/creditAccount",
+        name: "Cuenta Credito",
+        icon: "mdi-newspaper-plus",
+        aria: "creditAccount",
+      },
+      {
+        route: "/history",
+        name: "History",
         icon: "mdi-clipboard-account-outline",
-        aria: "Customers",
+        aria: "History",
+      },
+      {
+        route: "/balance",
+        name: "Balance",
+        icon: "mdi-clipboard-account-outline",
+        aria: "Balance",
       },
     ],
     menuScopeSettings: [
@@ -126,9 +104,9 @@ export default {
   },
   watch: {},
   // Hooks
-  beforeCreate() {},
-  created() {},
-  beforeMount() {},
+  beforeCreate() { },
+  created() { },
+  beforeMount() { },
   mounted() {
     document.addEventListener("click", this.close);
     this.parcelCls.addClass(document.body, "page-the-mini-drawer");
@@ -137,12 +115,12 @@ export default {
     // if (compareRouter(this.$route, this.activeIndex))
     //   this.$router.push("/home");
   },
-  beforeUpdate() {},
-  updated() {},
+  beforeUpdate() { },
+  updated() { },
   beforeDestroy() {
     document.removeEventListener("click", this.close);
   },
-  destroyed() {},
+  destroyed() { },
   methods: {
     ...mapActions([]),
     /**

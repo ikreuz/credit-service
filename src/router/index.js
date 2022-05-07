@@ -1,10 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 //
-import multiguard from "vue-router-multiguard";
-import { guardian_1 } from "../guardian/guardians";
-import auth from "../middleware/auth";
-import isLoggedIn from "../middleware/is_logged";
+// import multiguard from "vue-router-multiguard";
+// import { guardian_1 } from "../guardian/guardians";
+// import auth from "../middleware/auth";
+// import isLoggedIn from "../middleware/is_logged";
 
 Vue.use(VueRouter);
 
@@ -17,8 +17,8 @@ const routes = [
       import(
         /* webpackChunkName: "Parcel" */ "@/layouts/dashboard/AppDashboard.vue"
       ),
-    beforeEnter: multiguard([isLoggedIn, guardian_1]),
-    meta: { requireAuth: true, middleware: auth },
+    // beforeEnter: multiguard([isLoggedIn, guardian_1]),
+    // meta: { requireAuth: true, middleware: auth },
     children: [
       {
         path: "/home",
@@ -26,41 +26,41 @@ const routes = [
         component: () =>
           import(/* webpackChunkName: "Home" */ "../views/Home.vue"),
         props: true,
-        meta: { requireAuth: true, middleware: auth },
+        // meta: { requireAuth: true, middleware: auth },
       },
       {
-        path: "/guide",
-        name: "Guide",
+        path: "/creditAccount",
+        name: "Cuenta credito",
         component: () =>
-          import(/* webpackChunkName: "Guide" */ "../views/Guide.vue"),
+          import(/* webpackChunkName: "CreditAccount" */ "../views/CreditAccount.vue"),
         props: true,
-        meta: { requireAuth: true, middleware: auth },
+        // meta: { requireAuth: true, middleware: auth },
       },
       {
-        path: "/employee",
-        name: "Employee",
+        path: "/savingAccount",
+        name: "Cuenta ahorro",
         component: () =>
-          import(/* webpackChunkName: "Employee" */ "../views/Employee.vue"),
+          import(/* webpackChunkName: "savingAccount" */ "../views/SavingAccount.vue"),
         props: true,
-        meta: { requireAuth: true, middleware: auth },
+        // meta: { requireAuth: true, middleware: auth },
       },
       {
-        path: "/customer",
-        name: "Customer",
+        path: "/history",
+        name: "Historial",
         component: () =>
-          import(/* webpackChunkName: "Customer" */ "../views/Customer.vue"),
+          import(/* webpackChunkName: "Historial" */ "../views/History.vue"),
         props: true,
-        meta: { requireAuth: true, middleware: auth },
+        // meta: { requireAuth: true, middleware: auth },
       },
       {
-        path: "/setting",
-        name: "Setting",
+        path: "/balance",
+        name: "Balance",
         component: () =>
           import(
-            /* webpackChunkName: "Setting" */ "../views/setting/index.vue"
+            /* webpackChunkName: "Balance" */ "../views/Balance.vue"
           ),
         props: true,
-        meta: { requireAuth: true, middleware: auth },
+        // meta: { requireAuth: true, middleware: auth },
       },
       {
         path: "/about",
@@ -68,7 +68,7 @@ const routes = [
         component: () =>
           import(/* webpackChunkName: "about" */ "../views/About.vue"),
         props: true,
-        meta: { requireAuth: true, middleware: auth },
+        // meta: { requireAuth: true, middleware: auth },
       },
     ],
   },
@@ -78,7 +78,7 @@ const routes = [
     redirect: "Login",
     component: () =>
       import(/* webpackChunkName: "" */ "@/layouts/portal/AppLogin.vue"),
-    meta: { requireAuth: false },
+    // meta: { requireAuth: false },
     children: [
       {
         path: "/login",
@@ -97,9 +97,9 @@ const routes = [
       import(
         /* webpackChunkName: "PageNotFound" */ "../views/PageNotFound.vue"
       ),
-    meta: {
-      requireAuth: false,
-    },
+    // meta: {
+    //   requireAuth: false,
+    // },
   },
 ];
 

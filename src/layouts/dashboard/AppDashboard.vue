@@ -36,57 +36,11 @@
     </v-app-bar>
     <v-main id="c-si" class="devmpm-main c-portal-main">
       <v-card background-color="white" class="devmpm-main__container noshadow">
-        <!-- <v-tabs
-          flex
-          permanent
-          style="margin-top: 48px"
-          next-icon="mdi-arrow-right-bold-box-outline"
-          prev-icon="mdi-arrow-left-bold-box-outline"
-          show-arrows
-          v-model="activeIndex"
-          class="devmpm-main__tabs mpm-border-bottom bg-tabs"
-        >
-          <v-tabs-slider color="primary"></v-tabs-slider>
-          <v-tab
-            v-for="(item, index) in options"
-            :key="index"
-            :label="item.name"
-            :name="item.route"
-            :to="item.route"
-            class="devmpm-main__tab parcel-transition"
-            transparent-body
-            @click="tabClick(item)"
-          >
-            <span class="devmpm-main__tab-title">
-              {{ item.name }}
-            </span>
-            <v-btn
-              icon
-              color="bunker darken-5"
-              class="
-                devmpm-main__tab-btn
-                outline-none
-                focus:outline-none
-                hover:outline-none
-              "
-              @click="tabRemove(item)"
-            >
-              <v-icon class="devmpm-main__tab-icon">mdi-close</v-icon>
-            </v-btn>
-          </v-tab>
-        </v-tabs> -->
+  
       </v-card>
       <TheSideDrawer class="c-cloud-drawer-mini parcel-transition" />
       <router-view> </router-view>
-      <!-- <template v-for="(child, index) in children">
-        <component
-          :is="child"
-          :key="index"
-          class="__cls"
-          v-bind:fields="fields"
-          v-if="guid.length > 0"
-        ></component>
-      </template> -->
+
     </v-main>
   </v-app>
 </template>

@@ -12,7 +12,6 @@ export default {
   metaInfo: {
     title: "Customers",
   },
-  middleware: "auth",
   props: {},
   components: {},
   data: () => ({}),

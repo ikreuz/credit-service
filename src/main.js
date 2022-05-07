@@ -40,19 +40,6 @@ Vue.use(Toast, {
   ],
 });
 //
-router.beforeEach((to, from, next) => {
-  let bit = false;
-  let logged_in = jsCookie.get("logged_in");
-  let access_token = jsCookie.get("access_token");
-
-  if (logged_in) bit = true;
-  if (access_token) bit = true;
-  if (to.name !== "Login" && !bit) next({ name: "Login" });
-  else next();
-});
-//
-router.afterEach(() => {});
-//
 new Vue({
   router,
   store,

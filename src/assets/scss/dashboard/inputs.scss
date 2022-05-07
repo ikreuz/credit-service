@@ -1,0 +1,173 @@
+/* ---------------------------- Inputs for Toolbar ---------------------------- */
+.devdevpmp-input--color {
+  border: 1.4px solid transparent !important;
+
+  &:hover,
+  &:focus {
+    background-color: #fff !important;
+    color: $geist-primary;
+
+    button [class*="mdi"],
+    button [class^="mdi"] {
+      color: $geist-primary !important;
+    }
+  }
+}
+
+.devdevpmp-input {
+  transition: border 0.3s ease, color 0.3s, background-color 0.3s;
+  height: 40px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: transparent;
+  color: $colors__ui_text !important;
+
+  &:hover {
+    background: #fff;
+    background-color: #fff;
+
+  }
+
+  .is-input-valid {
+
+    [class*="mdi"],
+    [class^="mdi"] {
+      color: $geist-primary !important;
+    }
+  }
+}
+
+.devdevpmp-input-data {
+  height: 100%;
+  width: 100%;
+  // border-style: solid;
+  // border-width: 2px;
+  // border-color: transparent;
+  font-size: 18px;
+
+  position: relative;
+  padding: 0 !important;
+  margin-bottom: 0;
+}
+
+.devdevpmp-input-autocomplate {
+  height: 100%;
+  width: 100%;
+  // border-style: solid;
+  // border-width: 2px;
+  // border-color: transparent;
+  font-size: 18px;
+
+  position: relative;
+  padding: 0 !important;
+  margin-bottom: 0;
+}
+
+.devdevpmp-input-masthead-0 {
+  flex: 1;
+  flex-basis: 1e-9px;
+  height: 42px;
+  line-height: 42px;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  margin: 0 !important;
+  border: none !important;
+  letter-spacing: 1.1px;
+  transition: all 0.6s ease, color 0.6s, background-color 0.6s;
+
+  @media (min-width: $break-sm) {
+    display: block !important;
+  }
+
+  @media (max-width: $break-md) {
+    padding: 0 20px 0 20px;
+  }
+
+  @media (min-width: $break-md) {
+    padding: 0 25px 0 25px;
+  }
+}
+
+/* ----------------- Inputs for commandStepper, in reception ---------------- */
+// section reception
+.devdevpmp-input-0 {
+  height: 100%;
+  width: 100%;
+  border: none;
+  font-size: 18px;
+  transition: all 0.6s ease, color 0.6s, background-color 0.6s;
+  position: relative;
+  padding: 0 !important;
+  margin-bottom: 0;
+}
+
+.devmpm-wrapper {
+  padding: 18px 0 !important;
+}
+
+.devmpm-wrapper-input-0 {
+  padding: 20px 20px 26px 0 !important;
+}
+
+.devmpm-wrapper-input-1 {
+  padding: 0 20px 0 20px !important;
+
+  .v-input__control {
+    max-width: 270px !important;
+    width: 270px !important;
+  }
+}
+
+.devmpm-wrapper-input-2 {
+  padding: 6px 13px 12px 0 !important;
+}
+
+.devmpm-wrapper-input-3 {
+  padding: 0px 30px 20px 20px !important
+}
+
+.devmpm-wrapper-input-4 {
+  padding: 20px 20px 26px 0 !important;
+}
+
+.devmpm-wrapper-input-5 {
+  padding: 0px 4% 0 4% !important;
+
+  .devmpm-wrapper {
+    padding: 2% 0 !important;
+  }
+}
+
+.devdevpmp-input-1 {
+  width: 340px;
+  height: 30px; // 40px
+  position: relative;
+  transition-duration: 0.6s;
+
+  [class*="mbi"],
+  [class^="mbi"] {
+    line-height: 2;
+  }
+
+  input {
+    height: 100%;
+    width: 100%;
+    border: none;
+    font-size: 18px;
+    transition: all 0.6s ease, color 0.6s, background-color 0.6s;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

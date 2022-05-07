@@ -1,16 +1,16 @@
 <template>
   <v-row class="mt-12 mx-4">
     <v-col>
-      <v-subheader>Guides</v-subheader>
+      <v-subheader>Apertura de cuenta de credito</v-subheader>
     </v-col>
   </v-row>
 </template>
 
 <script>
 export default {
-  name: "Guides",
+  name: "About",
   metaInfo: {
-    title: "Guides",
+    title: "About",
   },
   props: {},
   components: {},

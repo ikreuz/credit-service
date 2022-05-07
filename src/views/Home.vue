@@ -2,6 +2,7 @@
   <v-row class="mt-12 mx-4">
     <v-col>
       <v-subheader>Home</v-subheader>
+      <CardOne />
     </v-col>
   </v-row>
 </template>
@@ -12,9 +13,10 @@ export default {
   metaInfo: {
     title: "Home",
   },
-  middleware: "auth",
   props: {},
-  components: {},
+  components: {
+    CardOne: () => import('@/components/cards/CardOne.vue')
+  },
   data: () => ({}),
   computed: {},
   watch: {},
