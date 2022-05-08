@@ -52,5 +52,4 @@ work in progress
 - Website - [Victor Cruz](https://github.com/ikreuz/)
 - Frontend Mentor - [@ikreuz](https://www.frontendmentor.io/profile/ikreuz)
 - 
-### Error
-"vue-recaptcha-v3": "^2.0.1" =>  "vue-recaptcha-v3": "1.9.0",
+
