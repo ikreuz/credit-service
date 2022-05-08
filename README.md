@@ -1,5 +1,5 @@
 # parcelservice-frontend
-Frontend prototype: abstraction of a parcel service using Vue.js 2
+Frontend prototype: credit and savings abstraction
 
 ## Project setup
 ```
@@ -33,7 +33,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Links
 - Solution URL: [https://github.com/ikreuz](https://github.com/ikreuz/parcelservice-frontend)
-- Live Site URL: [https://vercel.com](https://parcelservice-frontend.vercel.app/login)
+- Live Site URL: [https://vercel.com](https://credit-service-1j8mov4kq-ikreuz.vercel.app)
 - 
 
 ## My process
@@ -50,6 +50,5 @@ work in progress
 ## Author
 
 - Website - [Victor Cruz](https://github.com/ikreuz/)
-- Frontend Mentor - [@ikreuz](https://www.frontendmentor.io/profile/ikreuz)
-- 
+
 
