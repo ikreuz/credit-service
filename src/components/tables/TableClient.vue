@@ -4,8 +4,8 @@
       <v-layout row wrap>
         <v-flex xs12 sm12 tag="div" id="card-section-x" v-resize="onResize">
           <!-- {{ windowSize }} -->
-          <v-data-table :headers="headers" :items="clientItems" class="mpm-data-table pa-3" loading="!loading"
-            loading-text="Buscando... Por favor espere">
+          <v-data-table dense :headers="headers" :items="clientItems" class="mpm-data-table pa-3"
+            loading-text="Buscando... Por favor espere" :loading="loading">
             <template v-slot:top>
               <v-toolbar flat>
                 <v-toolbar-title>Clientes</v-toolbar-title>
@@ -13,6 +13,7 @@
                 <v-spacer></v-spacer>
                 <v-dialog v-model="dialog" max-width="500px"> </v-dialog>
                 <v-dialog v-model="dialogDelete" max-width="500px"> </v-dialog>
+                <v-btn color="primary" dark class="mb-2" @click="updateData()">Update</v-btn>
               </v-toolbar>
             </template>
             <template v-slot:[`item.actions`]="{ item }">
@@ -88,8 +89,6 @@
 </template>
 
 <script>
-// import jsCookie from "js-cookie";
-import srvAxios from "@/services/srv_axios";
 
 export default {
   components: {},
@@ -97,17 +96,15 @@ export default {
     dialog: false,
     dialogDelete: false,
     headers: [
-      { text: "Id", align: "center", value: "Cliente_Id" },
+      { text: "Id", align: "center", value: "Numero_Cuenta", width: "30px" },
       { text: "Nombre", align: "center", value: "Nombre" },
       { text: "Apellidos", align: "center", value: "Apellidos" },
       { text: "Con Credito", align: "center", value: "C_Credito" },
       { text: "Con Ahorro", align: "center", value: "C_Ahorro" },
-      { text: "Email", align: "center", value: "Correo" },
+      // { text: "Email", align: "center", value: "Correo" },
       { text: "Acciones", align: "center", value: "actions", sortable: false },
     ],
     loading: false,
-    // guidesItems: [],
-    // guidesTotal: 0,
     clientItems: [],
     staffTotal: 0,
     editedIndex: -1,
@@ -151,135 +148,29 @@ export default {
   beforeMount() { },
   mounted() {
     this.onResize();
-    console.log(
-      "__[: tableInit/mounted :this.clientItems " +
-      JSON.stringify(this.clientItems)
-    );
   },
   beforeUpdate() { },
   updated() { },
   beforeDestroy() { },
   destroyed() { },
   methods: {
-    handleStories(ev) {
-      // this.$router.push({ path: "/reception" });
-      switch (ev.currentTarget.getAttribute("data-a-id")) {
-        case "card-reception":
-          console.log("__[: :: ", ev.currentTarget.getAttribute("data-a-id"));
-          // this.$router.push({ path: "/reception" });
-          break;
-        case "card-paying":
-          console.log("__[: :: ", ev.currentTarget.getAttribute("data-a-id"));
-          // this.$router.push({ path: "/paying" });
-          break;
-        case "card-catalog":
-          console.log("__[: :: ", ev.currentTarget.getAttribute("data-a-id"));
-          // this.$router.push({ path: "/catalog" });
-          break;
-        case "card-cloud":
-          console.log("__[: :: ", ev.currentTarget.getAttribute("data-a-id"));
-          // this.$router.push({ path: "/cloud" });
-          break;
-        case "card-record":
-          console.log("__[: :: ", ev.currentTarget.getAttribute("data-a-id"));
-          // this.$router.push({ path: "/record" });
-          break;
-        case "card-cash":
-          console.log("__[: :: ", ev.currentTarget.getAttribute("data-a-id"));
-          // this.$router.push({ path: "/cash" });
-          break;
-
-        default:
-          break;
-      }
-    },
     async initialize() {
-      // this.clientItems = this.$store.state.ep.apiClientes.entries;
 
-      this.balance = await srvAxios("http://localhost:5000/api/Customers/getall");
-      this.clientItems = this.balance.Data
-      console.log(this.clientItems);
-      /**
-       * Codigo que requiere de una api datos, y para acceder se necesita autorizacion Bearer TOKEN
-       * toma de una cookie el token, lo asigna a la configuracion de $axios, mediante el metodo $get
-       * solicita con un encabezado a la api, esta responde y son asignados los datos retornados a
-       * instancias locales para su utilizacionF
-       */
-      //   /** obtiene de la cookie el mpm_secure siendo el token que retorna la api JWTLogin */
-      //   /** es asignada a una  constante */
-      // const accessToken = jsCookie.get("mpm_secure");
-      //   /** llamado de $axios del paquete VueAxios, similar a axios solo que enfocado a vue */
-      //   /** la siguiente sintaxis hace uso del encabezado de autorizacion antes de llamar a una api con jwt */
-      //   /** configuracion antes de llamar */
-      //   this.$axios.interceptors.request.use(
-      //     (config) => {
-      //       config.headers.Authorization = `Bearer ${accessToken}`;
-      //       return config;
-      //     },
-      //     (error) => {
-      //       return Promise.reject(error);
-      //     }
-      //   );
-      //   /** se establece el tipo de metod y contenido */
-      //   this.$axios.setHeader("Content-Type", "application/json", ["get"]);
-      //   /** se llama con el metodo get, teniendo como parametro el endpoint jalandolo de la tienda/store directamente */
-      //   this.$axios
-      //     .$get(this.$store.getters["endpoint/getEpCoreGuide"], {
-      //       headers: {
-      //         Authorization: `token ${accessToken}`,
-      //       },
-      //     })
-      //     /** cacha la respuesta y asigna a constantes y a su vez a instancias locales*/
-      //     /** en funcion del resultado el cual se espera items y total son asignados los items son utilizados en la dataTable */
-      //     .then((res) => {
-      //       const { Total, Items } = res;
-      //       this.guidesItems = Items;
-      //       this.guidesTotal = Total;
-      //       this.loading = true;
-      //       console.log(
-      //         "__[ setionInit/initialize :guidesTotal " + JSON.stringify(this.guidesTotal)
-      //       );
-      //     })
-      //     /** cacha los errores, se implementa la notificacion $toast tipo error */
-      //     .catch((err) => {
-      //       this.$toast.error("Error: API Core Guide " + err, {
-      //         position: "top-right",
-      //         timeout: 3000,
-      //         closeOnClick: true,
-      //         pauseOnFocusLoss: true,
-      //         pauseOnHover: true,
-      //         draggable: true,
-      //         draggablePercent: 0.6,
-      //         showCloseButtonOnHover: false,
-      //         hideProgressBar: false,
-      //         closeButton: "button",
-      //         icon: {
-      //           iconClass: "mdi mdi-backspace-reverse-outline", // Optional
-      //           iconChildren: "", // Optional
-      //           iconTag: "span", // Optional
-      //         },
-      //         rtl: false,
-      //       });
-      //     })
-      //     /** */
-      //     .finally(() => {});
+      fetch(this.$store.getters['getEpCustomers'])
+        .then(response => response.json())
+        .then(data => {
+          console.log(data)
+          this.clientItems = data.Data
+        });
     },
     editItem() {
-      //   this.editedIndex = this.clientItems.indexOf(item);
-      //   this.editedItem = Object.assign({}, item);
-      //   this.dialog = true;
     },
     actDetailUser() { },
 
     deleteItem() {
-      //   this.editedIndex = this.clientItems.indexOf(item);
-      //   this.editedItem = Object.assign({}, item);
-      //   this.dialogDelete = true;
     },
 
     deleteItemConfirm() {
-      //   this.clientItems.splice(this.editedIndex, 1);
-      //   this.closeDelete();
     },
 
     close() {
@@ -299,7 +190,6 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-        // Object.assign(this.desserts[this.editedIndex], this.editedItem);
         Object.assign(this.clientItems[this.editedIndex], this.editedItem);
       } else {
         this.clientItems.push(this.editedItem);
@@ -309,6 +199,14 @@ export default {
     onResize() {
       this.windowSize = { x: window.innerWidth, y: window.innerHeight };
     },
+    updateData() {
+      fetch(this.$store.getters['getEpCustomers'])
+        .then(response => response.json())
+        .then(data => {
+          console.log(data)
+          this.clientItems = data.Data
+        });
+    }
   },
 
   // end Hooks

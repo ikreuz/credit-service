@@ -61,7 +61,7 @@ import { validationMixin } from "vuelidate";
 import { required, email } from "vuelidate/lib/validators";
 // import { isEmpty, isBlank } from "@/services/srv_utils.js";
 // import srvToasted from "@/services/srv_toasted.js";
-// import srvAxios from "../services/srv_axios";
+// import serviceAxiosGet from "../services/srv_axios";
 import ParcelUtils from "@/assets/js/parcel_utils.js";
 // import jsCrypto from "crypto-js";
 import jsCookie from "js-cookie";

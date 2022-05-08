@@ -1,25 +1,9 @@
 <template>
-  <v-menu
-    offset-y
-    left
-    nudge-top="-9"
-    origin="center center"
-    transition="scroll-y-transition"
-    :close-on-content-click="true"
-    max-width="300"
-    width="300"
-  >
+  <v-menu offset-y left nudge-top="-9" origin="center center" transition="scroll-y-transition"
+    :close-on-content-click="true" max-width="300" width="300">
     <template v-slot:activator="{ on, attrs }">
-      <v-btn
-        icon
-        dark
-        color="anderson"
-        v-bind="attrs"
-        v-on="on"
-        role="button"
-        aria-label="settings"
-        class="px-0 px-md-2"
-      >
+      <v-btn icon dark color="anderson" v-bind="attrs" v-on="on" role="button" aria-label="settings"
+        class="px-0 px-md-2">
         <v-icon>mdi-cog</v-icon>
       </v-btn>
     </template>
@@ -71,7 +55,7 @@
 
 <script>
 /** importacion de funcion para hacer llamadas a la api/json */
-// import srvAxios from "@/services/srv_axios.js";
+// import serviceAxiosGet from "@/services/srv_axios.js";
 import jsCookie from "js-cookie";
 export default {
   components: {},
@@ -95,36 +79,36 @@ export default {
       this.customerProfile = variable;
       console.log(
         "__[: ToolbarMenuAccount/watch :customerProfile " +
-          JSON.stringify(variable)
+        JSON.stringify(variable)
       );
     },
   },
   // Hooks
-  beforeCreate() {},
-  created() {},
-  beforeMount() {},
+  beforeCreate() { },
+  created() { },
+  beforeMount() { },
   async mounted() {
-    this.customerProfile = this.$store.state.customerProfile;
-    this.matchClient = this.$store.state.matchClient;
-    this.matchGuide = this.$store.state.matchGuide;
-    this.matchInvoice = this.$store.state.matchInvoice;
+    // this.customerProfile = this.$store.state.customerProfile;
+    // this.matchClient = this.$store.state.matchClient;
+    // this.matchGuide = this.$store.state.matchGuide;
+    // this.matchInvoice = this.$store.state.matchInvoice;
 
-    console.log(
-      "__[: toolbarMenuAccount/mounted :customerProfile " +
-        JSON.stringify(this.customerProfile)
-    );
+    // console.log(
+    //   "__[: toolbarMenuAccount/mounted :customerProfile " +
+    //     JSON.stringify(this.customerProfile)
+    // );
 
     document.addEventListener("click", this.close);
   },
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
+  beforeUpdate() { },
+  updated() { },
+  beforeDestroy() { },
+  destroyed() { },
   methods: {
     // ...mapActions(["drawerAccount", "actionAuthenticated"]),
     signOut() {
-      this.$store.dispatch("actAuthenticated", false);
-      this.$store.commit("SET_AUTH", null); // mutating to store for client rendering
+      // this.$store.dispatch("actAuthenticated", false);
+      // this.$store.commit("SET_AUTH", null); // mutating to store for client rendering
       jsCookie.remove("access_token");
       jsCookie.remove("mpm_session");
       localStorage.removeItem("_Secure");
@@ -132,9 +116,9 @@ export default {
       localStorage.removeItem("logged_in");
       localStorage.removeItem("vuex");
       localStorage.removeItem("_grecaptcha");
-      console.log(
-        "__[: toolbarMenuAccount/signOut() :auth " + this.$store.state.auth
-      );
+      // console.log(
+      //   "__[: toolbarMenuAccount/signOut() :auth " + this.$store.state.auth
+      // );
 
       this.$router.push("/login");
     },

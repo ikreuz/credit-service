@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import srvAxios from "../services/srv_axios";
 export default {
   name: "Home",
   metaInfo: {
@@ -31,8 +30,6 @@ export default {
   created() { },
   beforeMount() { },
   async mounted() {
-    this.clients = await srvAxios("http://localhost:5000/api/Customers/getall");
-    console.log(this.clients);
   },
   beforeUpdate() { },
   updated() { },

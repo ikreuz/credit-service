@@ -25,10 +25,10 @@
       "codigo_licencia": "Mercury",
       "domicilio": {
         "codigo_postal": "3214",
-        "calle": "Imperio Galactico",
+        "calle": "Independencia",
         "n_exterior": "1234",
         "n_interior": "532",
-        "colonia": "Imperio Galactico",
+        "colonia": "Independencia",
         "ciudad": "Guadalajara",
         "municipio": "Guadalajara",
         "entidad_id": 17,

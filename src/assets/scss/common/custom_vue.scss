@@ -4,8 +4,8 @@
 
     .primary--text {
 
-        color: $geist-text !important;
-        caret-color: $geist-text !important;
+        color: $geist-text  !important;
+        caret-color: $geist-text  !important;
     }
 
     .error--text {
@@ -15,11 +15,11 @@
 
 .theme--light.v-footer,
 .theme--light.v-application {
-    background: $geist-background !important;
+    background: $geist-background  !important;
 
     .primary--text {
-        color: $geist-text !important;
-        caret-color: $geist-text !important;
+        color: $geist-text  !important;
+        caret-color: $geist-text  !important;
     }
 }
 
@@ -64,7 +64,7 @@
     }
 
     .v-input--is-focused {
-        border: 2px solid $geist-primary !important;
+        border: 2px solid $geist-primary  !important;
         background: #FFFFFF !important;
         background-color: #FFFFFF !important;
 
@@ -87,14 +87,14 @@
     }
 
     .v-input--is-focused {
-        border: 2px solid $geist-primary !important;
+        border: 2px solid $geist-primary  !important;
         background: #FFFFFF !important;
         background-color: #FFFFFF !important;
 
     }
 
     .theme--light.v-text-field--solo {
-        color: $geist-text !important;
+        color: $geist-text  !important;
 
         &:hover {
             border-style: solid;
@@ -140,4 +140,14 @@
 
 .v-text-field.v-text-field--solo .v-input__control {
     min-height: 1rem !important;
+}
+
+
+/** select */
+
+.v-text-field.v-text-field--solo .v-input__control {
+    min-height: 36px !important;
+}
+.v-input__control{
+    flex-direction: row !important;
 }

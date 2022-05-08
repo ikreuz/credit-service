@@ -5,9 +5,10 @@
         <!-- {{ windowSize }} -->
         <v-card id="layout-invoice-c-si" class="stripe stripe--article">
           <v-card-text>Cuenta de ahorro</v-card-text>
+
           <v-layout row wrap pa-3 justify-center class="card-invoice">
             <v-flex v-for="card in cards" :key="card.title">
-              <v-card xs4 sm4 md4 class="card-invoice__container z-3 noshadow">
+              <v-card class="card-invoice__container z-3 noshadow">
                 <v-col cols="12" class="wrapper-input-5 z-3" color="bunker darken-5">
                   <v-list-item v-if="card.id == 1">
                     <v-list-item-content>
@@ -27,20 +28,28 @@
                 </v-col>
                 <v-col cols="12" class="wrapper-input-5 z-3" v-if="card.id == 1">
                   <div class="wrapper">
-                    <div class="mpm-input-data">
-                      <v-text-field v-model="contacto" id="" class="mpm-input" ref="contacto" solo dense label=""
-                        required value="contacto" type="text" prepend-icon="mdi-clipboard-account"
-                        @keydown="keyEvent($event)">
-                      </v-text-field>
+                    <div class="mpm-input-data" v-if="card.id == 1">
+                      <v-select v-model="clienteModel" :items="clienteEntries" item-text="Nombre"
+                        item-value="Cliente_Id" color="walkure" solo class="mpm-input skrull" @change="selectClient"
+                        label="Select" :hint="`${clienteEntries.Cliente_Id}, ${clienteEntries.Nombre}`">
+                      </v-select>
                     </div>
                   </div>
                 </v-col>
                 <v-col cols="12" class="wrapper-input-5 z-3" v-if="card.id == 2">
                   <div class="wrapper">
-                    <div class="mpm-input-data">
-                      <v-text-field v-model="clienteCount" id="" class="mpm-input" ref="clienteCount" solo dense
-                        label="" required value="clienteCount" type="text"
-                        prepend-icon="mdi-card-account-details-outline">
+                    <div class="mpm-input-data" v-if="card.id == 2">
+                      <v-text-field v-model="clienteAhorro.Numero_Cuenta" id="" class="mpm-input" ref="" solo dense
+                        label="" required value="" type="text" prepend-icon="mdi-account">
+                      </v-text-field>
+                    </div>
+                  </div>
+                </v-col>
+                <v-col cols="12" class="wrapper-input-5 z-3" v-if="card.id == 3">
+                  <div class="wrapper">
+                    <div class="mpm-input-data" v-if="card.id == 3">
+                      <v-text-field v-model="clienteCount" id="" class="mpm-input" ref="" solo dense label="" required
+                        value="" type="text" prepend-icon="mdi-card-account-details-outline">
                       </v-text-field>
                     </div>
                   </div>
@@ -66,10 +75,16 @@ export default {
   },
   data: () => ({
     cards: [
-      { id: 1, title: "Numero cuenta", content: "" },
-      { id: 2, title: "Saldo actual", content: "" },
+      { id: 1, title: "Cliente", content: "" },
+      { id: 2, title: "Numero cuenta", content: "" },
+      { id: 3, title: "Saldo actual", content: "" },
 
     ],
+    txnItems: [],
+    txn: [],
+    selectTxn: 0,
+    selectTxnItem: 0,
+    selectTotales: 0,
     /** contact */
     clienteLimite: 60,
     clienteEntries: [],
@@ -84,13 +99,7 @@ export default {
     },
     activateBit: true,
     /** */
-    contacto: null,
-    contactoRfc: null,
-    contactoTel: null,
-    contactoFechaCracion: "",
-    contactoFechaPago: "",
-    contactoFechaVencimiento: "",
-    matchFromGuide: {},
+    clienteAhorro: {}
   }),
   computed: {
   },
@@ -103,20 +112,24 @@ export default {
   beforeMount() { },
   mounted() {
     this.onResize();
-    this.matchFromGuide = this.$store.state.matchUser;
-    this.matchFromInvoice = this.$store.state.profile;
-    this.contacto = this.matchFromInvoice.cliente;
-    this.contactoTel = this.matchFromInvoice.cliente_tel;
-    this.contactoRfc = this.matchFromInvoice.cliente_rfc;
-    this.contactoFechaCracion = this.matchFromInvoice.creacion;
-    this.contactoFechaVencimiento = this.matchFromInvoice.vencimiento;
-    this.contactoFechaPago = this.matchFromInvoice.pago;
-    console.log(
-      "__[view] matchFromGuide: " + JSON.stringify(this.matchFromGuide)
-    );
-    console.log(
-      "__[view] matchFromInvoice: " + JSON.stringify(this.matchFromInvoice)
-    );
+    fetch(this.$store.getters['getEpCustomers'])
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        this.clienteEntries = data.Data
+      });
+    fetch(this.$store.getters['getEpTransactionSaving'])
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        this.txnItems = data.Data
+      });
+    fetch(this.$store.getters['getEpTransaction'])
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        this.txn = data.Data
+      });
   },
   beforeUpdate() { },
   updated() { },
@@ -133,9 +146,23 @@ export default {
       console.log(this.clienteCount);
     },
     alta() {
-
       srvToasted("Test", this.toasted.CUSTOM, "mdi mdi-alert-box-outline");
-    }
+    },
+    selectClient(value) {
+      if (value != null) {
+        console.log("__[::] selectClient: " + typeof (this.clienteEntries));
+        this.$store.dispatch("axnCustomerProfile", value);
+      }
+      for (var i = 0; i < this.clienteEntries.length; i++) {
+        if (value == this.clienteEntries[i].Cliente_Id) {
+          this.clienteAhorro = this.clienteEntries[i]
+        }
+        if (this.txn.Cliente_Id == this.clienteEntries[i].Cliente_Id) {
+          this.txn.Txn_id = this.clienteEntries[i]
+        }
+
+      }
+    },
   },
   /** end Hooks */
 };

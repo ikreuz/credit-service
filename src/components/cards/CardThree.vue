@@ -58,7 +58,7 @@
 <script>
 import { v4 as uuidv4 } from 'uuid';
 import srvToasted from "@/services/srv_toasted.js";
-import srvAxios from "@/services/srv_axios";
+import serviceAxiosGet from "@/services/srv_axios";
 
 export default {
   name: "",
@@ -113,16 +113,16 @@ export default {
     this.contactoFechaCracion = this.matchFromInvoice.creacion;
     this.contactoFechaVencimiento = this.matchFromInvoice.vencimiento;
     this.contactoFechaPago = this.matchFromInvoice.pago;
-    console.log(
-      "__[view] matchFromGuide: " + JSON.stringify(this.matchFromGuide)
-    );
-    console.log(
-      "__[view] matchFromInvoice: " + JSON.stringify(this.matchFromInvoice)
-    );
+    // console.log(
+    //   "__[view] matchFromGuide: " + JSON.stringify(this.matchFromGuide)
+    // );
+    // console.log(
+    //   "__[view] matchFromInvoice: " + JSON.stringify(this.matchFromInvoice)
+    // );
 
 
 
-    this.balance = await srvAxios("http://localhost:5000/api/TransactionCredit/getall");
+    this.balance = await serviceAxiosGet("http://localhost:5000/api/TransactionCredit/getall", 'GET');
     console.log(this.balance);
   },
   beforeUpdate() { },

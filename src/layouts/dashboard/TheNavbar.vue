@@ -112,7 +112,7 @@ export default {
 
     window.addEventListener("resize", this.onResize, { passive: true });
 
-    console.log("mobile " + this.$vuetify.breakpoint.mobile);
+    // console.log("mobile " + this.$vuetify.breakpoint.mobile);
   },
   beforeUpdate() {},
   updated() {},

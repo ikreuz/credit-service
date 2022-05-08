@@ -28,13 +28,13 @@ Vue.use(VueReCaptcha, {
 });
 Vue.use(Toast, {
   // Can be either a string or an array of strings
-  containerClassName: "parcel-toast__container",
+  containerClassName: "credit-toast__container",
   // For the actual toast, including different toast types:
-  toastClassName: ["parcel-toast"],
+  toastClassName: ["credit-toast"],
   // For the toast body when using strings or a custom component as content
   bodyClassName: [
-    "parcel-toast__body",
-    "parcel-toast__component-body",
+    "credit-toast__body",
+    "credit-toast__component-body",
     "text-truncate",
     "text-no-wrap",
   ],

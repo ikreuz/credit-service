@@ -49,47 +49,23 @@
             </v-flex>
           </v-layout>
           <v-btn color="primary" class="w-full " @click="alta">Dar de alta</v-btn>
-          <!-- <v-dialog v-model="dialog" max-width="290">
-            <v-card>
-              <v-card-title class="text-h5">
-                Nuevo cliente
-              </v-card-title>
-
-              <v-card-text>
-                Agregar el siguiente cliente al sistema
-              </v-card-text>
-
-              <v-card-actions>
-                <v-spacer></v-spacer>
-
-                <v-btn color="green darken-1" text @click="dialog = false">
-                  Cancelar
-                </v-btn>
-
-                <v-btn color="green darken-1" text @click="dialog = false" click.stop="save">
-                  Continuar
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog> -->
         </v-card>
       </v-flex>
     </v-layout>
-    <!-- <DialogClient /> -->
 
   </v-container>
 </template>
 
 <script>
+import moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 // import srvToasted from "@/services/srv_toasted.js";
-import {srvAxiosInsert} from "@/services/srv_axios";
+// import { serviceAxiosDelete, serviceAxiosPost } from "@/services/srv_axios";
 
 export default {
   name: "",
   props: {},
   components: {
-    // DialogClient: () => import('@/components/dialog/DialogClient.vue')
 
   },
   data: () => ({
@@ -140,14 +116,14 @@ export default {
     }
   }),
   computed: {
-    // dialogClient: {
-    //   get() {
-    //     return this.$store.getters["getDialogClient"];
-    //   },
-    //   set(params) {
-    //     this.$store.dispatch("axnDialogClient", params);
-    //   },
-    // },
+    updateTable: {
+      get() {
+        return this.$store.state.updateTable;
+      },
+      set(value) {
+        this.$store.dispatch("axnUpdateTable", value)
+      }
+    }
   },
   watch: {
     windowSize() { },
@@ -158,20 +134,6 @@ export default {
   beforeMount() { },
   mounted() {
     this.onResize();
-    this.matchFromGuide = this.$store.state.matchUser;
-    this.matchFromInvoice = this.$store.state.profile;
-    this.contacto = this.matchFromInvoice.cliente;
-    this.contactoTel = this.matchFromInvoice.cliente_tel;
-    this.contactoRfc = this.matchFromInvoice.cliente_rfc;
-    this.contactoFechaCracion = this.matchFromInvoice.creacion;
-    this.contactoFechaVencimiento = this.matchFromInvoice.vencimiento;
-    this.contactoFechaPago = this.matchFromInvoice.pago;
-    console.log(
-      "__[view] matchFromGuide: " + JSON.stringify(this.matchFromGuide)
-    );
-    console.log(
-      "__[view] matchFromInvoice: " + JSON.stringify(this.matchFromInvoice)
-    );
   },
   beforeUpdate() { },
   updated() { },
@@ -181,43 +143,49 @@ export default {
     onResize() {
       this.windowSize = { x: window.innerWidth, y: window.innerHeight };
     },
-    keyEvent(event) {
-      console.log('Key pressed:', event);
-      console.log(this.contacto);
+    keyEvent() {
+      // console.log('Key pressed:', event);
+      // console.log(this.contacto);
       this.clienteCount = uuidv4();
       let arr = [];
       arr = this.contacto.split(" ");
-      console.log(arr[0]);
-      console.log(arr[1]);
-      console.log(this.clienteCount);
+      // console.log(arr[0]);
+      // console.log(arr[1]);
+      // console.log(this.clienteCount);
       this.addCustomer.nombre = arr[0];
       this.addCustomer.apellidos = arr[1];
 
     },
     async alta() {
-      let json = {
-        "cliente_Id": 0,
-        "user_Access_Id": 0,
-        "sucursal_Id": 1,
-        "nombre": this.addCustomer.nombre,
-        "apellidos": this.addCustomer.apellidos,
-        "correo": "string",
-        "tel_1": "string",
-        "c_Credito": false,
-        "c_Ahorro": false,
-        "fh_Registro": "2022-05-07T10:18:38.373Z",
-        "fh_Modificacion": "2022-05-07T10:18:38.373Z",
-        "fh_Autorizacion": "2022-05-07T10:18:38.373Z",
-        "usr_Registra_Id": 0,
-        "usr_Modifica_Id": 0,
-        "usr_Autoriza_Id": 0
-      }
-      this.balance = await srvAxiosInsert("http://localhost:5000/api/Customers/insert", json);
-      this.txnItems = this.balance.Data
-      console.log(this.txnItems);
+      fetch(this.$store.getters['postEpCustomers'], {
+        method: 'POST',
+        body: JSON.stringify({
+          Sucursal_Id: 1,
+          Nombre: this.addCustomer.nombre,
+          Apellidos: this.addCustomer.apellidos,
+          Numero_Cuenta: this.clienteCount,
+          Correo: this.addCustomer.nombre.toLowerCase() + '@credit.com',
+          Tel_1: 12341234,
+          C_Credito: false,
+          C_Ahorro: false,
+          Fh_Registro: moment(),
+          Fh_Autoirzacion: moment(),
+          Usr_Registra_Id: 1,
+          Usr_Modifica_Id: 0,
+          Usr_Autoriza_Id: 0
+        }),
+        headers: { 'Content-type': "application/json; charset=UTF-8" }
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data)
+          this.txn = data.Data
+        });
+
+        this.updateTable != this.updateTable
     },
     async save() {
-
+      // serviceAxiosDelete('', id)
     }
   },
   /** end Hooks */

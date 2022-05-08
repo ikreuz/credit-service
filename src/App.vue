@@ -16,14 +16,16 @@ export default {
   computed: {},
   watch: {},
   // Hooks
-  beforeCreate() {},
-  created() {},
-  beforeMount() {},
-  mounted() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
+  beforeCreate() { this.$store.dispatch("axnApi"); },
+  created() {
+
+  },
+  beforeMount() { },
+  mounted() { },
+  beforeUpdate() { },
+  updated() { },
+  beforeDestroy() { },
+  destroyed() { },
   methods: {},
 
   // end Hooks

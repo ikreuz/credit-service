@@ -80,9 +80,6 @@
 </template>
 
 <script>
-// import _ from "lodash";
-import srvAxios from "@/services/srv_axios";
-
 export default {
   components: {},
   data: () => ({
@@ -99,8 +96,6 @@ export default {
       { text: "Acciones", align: "center", value: "actions", sortable: false },
     ],
     loading: false,
-    // guidesItems: [],
-    // guidesTotal: 0,
     txnItems: [],
     filterTxnItems: [],
     txnTotal: 0,
@@ -152,51 +147,13 @@ export default {
   beforeDestroy() { },
   destroyed() { },
   methods: {
-    handleStories(ev) {
-      // this.$router.push({ path: "/reception" });
-      switch (ev.currentTarget.getAttribute("data-a-id")) {
-        case "card-reception":
-          console.log("__[: :: ", ev.currentTarget.getAttribute("data-a-id"));
-          // this.$router.push({ path: "/reception" });
-          break;
-        case "card-paying":
-          console.log("__[: :: ", ev.currentTarget.getAttribute("data-a-id"));
-          // this.$router.push({ path: "/paying" });
-          break;
-        case "card-catalog":
-          console.log("__[: :: ", ev.currentTarget.getAttribute("data-a-id"));
-          // this.$router.push({ path: "/catalog" });
-          break;
-        case "card-cloud":
-          console.log("__[: :: ", ev.currentTarget.getAttribute("data-a-id"));
-          // this.$router.push({ path: "/cloud" });
-          break;
-        case "card-record":
-          console.log("__[: :: ", ev.currentTarget.getAttribute("data-a-id"));
-          // this.$router.push({ path: "/record" });
-          break;
-        case "card-cash":
-          console.log("__[: :: ", ev.currentTarget.getAttribute("data-a-id"));
-          // this.$router.push({ path: "/cash" });
-          break;
-
-        default:
-          break;
-      }
-    },
-    async initialize() {
-      // Object.filter = (obj, predicate) =>
-      //   Object.fromEntries(Object.entries(obj).filter(predicate));
-
-      // this.txnItems = this.$store.state.ep.apiTransacciones.entries;
-      this.balance = await srvAxios("http://localhost:5000/api/TransactionCredit/getall");
-      this.txnItems = this.balance.Data
-      console.log(this.txnItems);
-      // /** al implementar los items filtrados donde txn_folio sea mayor que 0 genera errores */
-      // let entries = this.$store.state.ep.apiTransacciones.entries;
-
-      // this.filterTxnItems = Object.filter(entries, ([name, item]) => item.txn_folio > 0);
-      // console.log("__[: filterTxnItems:: " + JSON.stringify(this.filterTxnItems));
+    initialize() {
+      fetch(this.$store.getters['getEpTransactionCredit'])
+        .then(response => response.json())
+        .then(data => {
+          console.log(data)
+          this.txnItems = data.Data
+        });
     },
     editItem() {
       //   this.editedIndex = this.txnItems.indexOf(item);

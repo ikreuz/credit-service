@@ -4,7 +4,7 @@ import Vuex from "vuex";
 import jsCookie from "js-cookie";
 import jsCrypt from "crypto-js";
 import createPersistedState from "vuex-persistedstate";
-import endpoints from "./endpoints";
+import ep from "./endpoints";
 
 const auth = { accessToken: "tokenWithAjax" };
 
@@ -32,7 +32,8 @@ export default new Vuex.Store({
     guardianCustomers: [],
     guardianRoles: [],
     //
-    dialogClient: false
+    dialogClient: false,
+    updateTable: false
   },
   mutations: {
     SET_MAIN_DRAWER(state, payload) {
@@ -68,6 +69,12 @@ export default new Vuex.Store({
     // 
     SET_DIALOG_CLIENT(state,payload){
       state.dialogClient = payload;
+    },
+    SET_CUSTOMER_PROFILE(state,payload){
+      state.customerProfile = payload
+    },
+    SET_UPDATE_TABLE_(state, payload){
+      state.updateTable = payload
     }
   },
   actions: {
@@ -122,6 +129,12 @@ export default new Vuex.Store({
     //
     axnDialogClient({commit}, payload){
       commit('SET_DIALOG_CLIENT', payload)
+    },
+    axnCustomerProfile({commit}, payload){
+      commit('SET_CUSTOMER_PROFILE', payload)
+    },
+    axnUpdateTable({commit}, payload){
+      commit('SET_UPDATE_TABLE', payload)
     }
   },
   getters: {
@@ -148,5 +161,5 @@ export default new Vuex.Store({
       return state.dialogClient
     }
   },
-  modules: { endpoints },
+  modules: { ep: ep },
 });
