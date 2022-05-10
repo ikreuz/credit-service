@@ -11,21 +11,21 @@
           </v-card>
           <form ref="form" lazy-validation scrollable class="auth-lock-form" @submit.prevent="postLogin">
             <div data-input-type="text-field" data-layout="layout-item-input">
-              <v-col cols="12" class="wrapper-input-5">
+              <v-col cols="12" class="wrapper-input-5 pt-5 pb-5">
                 <div class="wrapper">
-                  <div class="parcel-input-data">
-                    <v-text-field id="" class="parcel-input" ref="" solo dense persistent-hint
-                      placeholder="drummer@fake.com" type="email" v-model="user.email" value="drummer@fake.com"
+                  <div class="diana-input-data">
+                    <v-text-field id="" class="diana-input" ref="" solo dense persistent-hint
+                      placeholder="jennifer@fake.com" type="email" v-model="user.email" value="jennifer@fake.com"
                       @focus.prevent="focusedPassword = true" @blur.prevent="focusedPassword = false"
                       :rules="[rules.required, rules.email]"></v-text-field>
                   </div>
                 </div>
               </v-col>
-              <v-col cols="12" class="wrapper-input-5">
+              <v-col cols="12" class="wrapper-input-5 pb-8">
                 <div class="wrapper">
-                  <div class="parcel-input-data">
-                    <v-text-field id="" class="parcel-input" ref="" solo dense persistent-hint placeholder="p4Rc3!1234"
-                      v-model="user.password" value="p4Rc3!1234" :append-icon="showEye ? 'mdi-eye' : 'mdi-eye-off'"
+                  <div class="diana-input-data">
+                    <v-text-field id="" class="diana-input" ref="" solo dense persistent-hint placeholder="123456789"
+                      v-model="user.password" value="123456789" :append-icon="showEye ? 'mdi-eye' : 'mdi-eye-off'"
                       :type="showEye ? 'text' : 'password'" @click:append="showEye = !showEye"
                       @focus.prevent="focusedPassword = true" @blur.prevent="focusedPassword = false"
                       :rules="[rules.password, rules.counter]"></v-text-field>
@@ -35,9 +35,9 @@
             </div>
             <div class="wrapper-input-5">
               <div class="wrapper">
-                <v-btn type="submit" class="parcel-btn parcel-btn--bg w-full" elevation="1" :loading="loading"
+                <v-btn type="submit" class="diana-btn diana-btn--bg w-full" elevation="1" :loading="loading"
                   :disabled="loading">
-                  <span class="parcel-btn--title">Next</span>
+                  <span class="diana-btn--title">Next</span>
                 </v-btn>
               </div>
             </div>
@@ -71,7 +71,7 @@ export default {
   mixins: [validationMixin],
   name: "Login",
   metaInfo: {
-    title: "Login",
+    title: "SignIn",
   },
   validations: {
     user: {
@@ -220,8 +220,9 @@ export default {
 
       this.getLastTime();
 
-
-      this.$router.push("/");
+      setTimeout(() => {
+        this.$router.push("/");
+      }, 2000);
 
     },
   },
@@ -230,6 +231,3 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import "@/assets/scss/common/variables.scss";
-</style>

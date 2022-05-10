@@ -8,7 +8,7 @@
 export default {
   name: "App",
   metaInfo: {
-    title: "Parcel Service",
+    title: "Project Diana",
   },
   props: {},
   components: {},
@@ -31,7 +31,3 @@ export default {
   // end Hooks
 };
 </script>
-
-<style lang="scss" scoped>
-@import "@/assets/scss/common/variables.scss";
-</style>

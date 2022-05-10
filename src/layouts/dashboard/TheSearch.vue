@@ -6,11 +6,11 @@
   >
     <v-container fluid align-self-center class="card-search__container z-50">
       <div class="wrapper card-search__wrapper" id="card-search-wrapper-si">
-        <div class="parcel-input-data skrull card-search__input-data">
+        <div class="diana-input-data scrolled card-search__input-data">
           <v-autocomplete
             solo
             color="primary"
-            class="parcel-input"
+            class="diana-input"
             flat
             hide-no-data
             hide-details
@@ -102,6 +102,3 @@ export default {
   // end Hooks
 };
 </script>
-
-<style lang="scss">
-</style>

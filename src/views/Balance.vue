@@ -1,30 +1,49 @@
 <template>
     <v-row class="mt-12 mx-4">
         <v-col>
-            <v-subheader>Operaciones</v-subheader>
-            <CardThree />
+            <v-card-title class="justify-center">Operaciones</v-card-title>
+            <CardRegistrationOperation />
+            <TableTransactionOperation />
         </v-col>
     </v-row>
 </template>
 
 <script>
+import srvToasted from "@/services/srv_toasted.js";
+
 export default {
-    name: "About",
+    name: "Balance",
     metaInfo: {
-        title: "About",
+        title: "Deposito/Retiro",
     },
     props: {},
     components: {
-        CardThree: () => import('@/components/cards/CardThree.vue')
+        CardRegistrationOperation: () => import('@/components/cards/CardRegistrationOperation.vue'),
+        TableTransactionOperation: () => import('@/components/tables/TableTransactionOperation.vue')
     },
-    data: () => ({}),
+    data: () => ({
+        toasted: {
+            CUSTOM: "custom",
+            DEFAULT: "default",
+            INFO: "info",
+            ERROR: "error",
+            SUCCESS: "success",
+            WARNING: "warning",
+        },
+    }),
     computed: {},
     watch: {},
     // Hooks
     beforeCreate() { },
     created() { },
     beforeMount() { },
-    mounted() { },
+    mounted() {
+        try {
+            srvToasted("Deposito/Retiro", this.toasted.SUCCESS, "mdi mdi-check");
+        } catch (error) {
+            console.log('dianaprj@: ' + error);
+        }
+    },
     beforeUpdate() { },
     updated() { },
     beforeDestroy() { },
@@ -34,7 +53,3 @@ export default {
     // end Hooks
 };
 </script>
-
-<style lang="scss" scoped>
-@import "@/assets/scss/common/variables.scss";
-</style>

@@ -18,7 +18,7 @@ const netRolesGetAll = 'http://localhost:5000/api/Roles/getall'
 // const netTowerGet = 'http://localhost:5000/api/Tower/get/';
 const netTowerGetAll = 'http://localhost:5000/api/Tower/getall'
 // Transaction
-// const netTransactionPost = 'http://localhost:5000/api/Transaction/insert'
+const netTransactionPost = 'http://localhost:5000/api/Transaction/insert'
 // const netTransactionPut = 'http://localhost:5000/api/Transaction/update'
 // const netTransactionDelete = 'http://localhost:5000/api/Transaction/delete/'
 // const netTransactionGet = 'http://localhost:5000/api/Transaction/get/';
@@ -78,6 +78,9 @@ export default {
     },
     postEpCustomers(){
       return netCustomersPost;
+    },
+    postEpTranasction(){
+      return netTransactionPost;
     },
     getEpCustomers(){
       return netCustumersGetAll;

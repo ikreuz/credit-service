@@ -7,31 +7,44 @@
 </template>
 
 <script>
+import srvToasted from "@/services/srv_toasted.js";
+
 export default {
-  name: "About",
+  name: "CreditAccount",
   metaInfo: {
-    title: "About",
+    title: "Cuenta Credito",
   },
   props: {},
   components: {},
-  data: () => ({}),
+  data: () => ({
+    toasted: {
+      CUSTOM: "custom",
+      DEFAULT: "default",
+      INFO: "info",
+      ERROR: "error",
+      SUCCESS: "success",
+      WARNING: "warning",
+    },
+  }),
   computed: {},
   watch: {},
   // Hooks
-  beforeCreate() {},
-  created() {},
-  beforeMount() {},
-  mounted() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
+  beforeCreate() { },
+  created() { },
+  beforeMount() { },
+  mounted() {
+    try {
+      srvToasted("Cuenta de Credito", this.toasted.SUCCESS, "mdi mdi-check");
+    } catch (error) {
+      console.log('dianaprj@: ' + error);
+    }
+  },
+  beforeUpdate() { },
+  updated() { },
+  beforeDestroy() { },
+  destroyed() { },
   methods: {},
 
   // end Hooks
 };
 </script>
-
-<style lang="scss" scoped>
-@import "@/assets/scss/common/variables.scss";
-</style>

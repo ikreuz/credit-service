@@ -1,22 +1,27 @@
 #main-drawer-si {
     // @extend .scrolled;
     background: grey;
-    z-index: $zindex__drawer !important;
+    z-index: $zindex__drawer  !important;
+
+    .router-link-active {
+        width: 55px;
+    }
 
     .global-nav__row {
-        left: 15px !important;
+        width: 55px;
     }
 
     .global-nav {
         &__inner {
             display: flex;
             height: 48px !important;
-            padding-left: 78px;
+            padding-left: 55px;
             padding-right: 2%;
             justify-content: flex-start;
             transform: translate(0px, 0px);
-            transition: all 500ms cubic-bezier(1, 0, 0, 1) 0ms,
-                all 500ms cubic-bezier(1, 0, 0, 1) 0ms;
+            // transition-property: border-color,background,color,transform,box-shadow;
+            // transition-duration: .15s;
+            // transition-timing-function: ease;
         }
 
         &__content {
@@ -40,7 +45,7 @@
             text-decoration: none;
             display: flex;
             flex-direction: column;
-            width: 56px;
+            width: 48px;
             padding: 5px;
             border-bottom: none !important;
             transition-duration: 0.6s;
@@ -62,12 +67,13 @@
         &__row {
             left: 0;
             top: 0;
-            width: 80px;
+            width: 48px;
             height: 48px !important;
             display: block;
             z-index: 1040;
-            transition: all 500ms cubic-bezier(1, 0, 0, 1) 0ms,
-                all 500ms cubic-bezier(1, 0, 0, 1) 0ms;
+            transition-property: border-color,background,color,transform,box-shadow;
+            transition-duration: .15s;
+            transition-timing-function: ease;
             margin-top: 0px;
             transform: translateY(0px);
             left: 0;
@@ -76,7 +82,10 @@
         }
 
         &__title {
-            width: 90px;
+            width: 140px !important;
+            margin: 0 auto !important;
+            margin-left: 0 !important;
+            line-height: 2.2 !important;
         }
 
         &__link {
@@ -101,15 +110,15 @@
 
             :hover {
                 >a {
-                    color: $geist-text !important;
+                    color: $geist-text  !important;
                     border-bottom: 2px solid $geist-text;
                 }
             }
         }
 
         .activated {
-            color: $geist-text !important;
-            border-bottom: 2px solid $geist-text !important;
+            color: $geist-text  !important;
+            border-bottom: 2px solid $geist-text  !important;
         }
     }
 }

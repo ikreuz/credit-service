@@ -1,16 +1,16 @@
 <template>
-  <v-navigation-drawer id="side-drawer-si" :mini-variant="miniVariant" mini-variant-width="56" permanent>
+  <v-navigation-drawer id="side-drawer-si" :mini-variant="miniVariant" mini-variant-width="56" permanent color="white" class="diana-transition">
     <v-list nav dense class="side-drawer__list" router>
-      <v-btn id="side-btn-si" rounded elevation="0" class="
-          parcel-btn
-          mpm-border-top-radius mpm-border-bottom-radius
-          parcel-btn--w-40
+      <v-btn id="side-btn-si" icon elevation="0" class="
+          diana-btn
+          diana-border-top-radius diana-border-bottom-radius
+          diana-btn--w-40
           mb-2
-        " color="bunker darken-5" icon @click.stop="miniVariant = !miniVariant">
+        " color="bunker darken-5"  @click.stop="miniVariant = !miniVariant">
         <v-icon v-if="miniVariant">mdi mdi-arrow-expand-right</v-icon>
         <v-icon v-else>mdi mdi-arrow-expand-left</v-icon>
       </v-btn>
-      <v-divider></v-divider>
+      <v-divider class="pb-2"></v-divider>
       <v-list-item link class="side-drawer__list-item scrolled" v-for="menu in menuScope" :to="menu.route"
         :index="menu.route" :key="menu.route" :aria-label="menu.aria">
         <v-list-item-icon class="side-drawer__list-item-icon">
@@ -21,11 +21,10 @@
         </v-list-item-title>
       </v-list-item>
     </v-list>
-    <v-divider></v-divider>
+    <v-divider class=""></v-divider>
     <v-list nav dense class="side-drawer__list" :default-active="$route.path" router>
       <v-list-item link class="side-drawer__list-item" v-for="menu in menuScopeSettings" :to="menu.route"
-        :index="menu.route" :key="menu.route" :aria-label="menu.aria" 
-        @click="close">
+        :index="menu.route" :key="menu.route" :aria-label="menu.aria" @click="close">
         <v-list-item-icon class="side-drawer__list-item-icon">
           <v-icon class="sd-icon">{{ menu.icon }}</v-icon>
         </v-list-item-icon>
@@ -61,26 +60,20 @@ export default {
       {
         route: "/savingAccount",
         name: "Cuenta Ahorro",
-        icon: "mdi-newspaper-plus",
+        icon: "mdi-archive-arrow-down",
         aria: "savingAccount",
-      },
-      // {
-      //   route: "/creditAccount",
-      //   name: "Cuenta Credito",
-      //   icon: "mdi-newspaper-plus",
-      //   aria: "creditAccount",
-      // },
-      {
-        route: "/history",
-        name: "History",
-        icon: "mdi-clipboard-account-outline",
-        aria: "History",
       },
       {
         route: "/balance",
         name: "Balance",
-        icon: "mdi-clipboard-account-outline",
+        icon: "mdi-bank",
         aria: "Balance",
+      },
+      {
+        route: "/history",
+        name: "History",
+        icon: "mdi-history",
+        aria: "History",
       },
     ],
     menuScopeSettings: [
@@ -109,11 +102,6 @@ export default {
   beforeMount() { },
   mounted() {
     document.addEventListener("click", this.close);
-    this.parcelCls.addClass(document.body, "page-the-mini-drawer");
-    // this.$store.dispatch("axnJaegerAddTab", { route: "/home", name: "Home" });
-    // this.$store.dispatch("axnJaegerActiveIndex", "/home");
-    // if (compareRouter(this.$route, this.activeIndex))
-    //   this.$router.push("/home");
   },
   beforeUpdate() { },
   updated() { },
@@ -123,13 +111,6 @@ export default {
   destroyed() { },
   methods: {
     ...mapActions([]),
-    /**
-     * Error: NavigationDuplicated Navigating to current location
-     * https://stackoverflow.com/questions/57837758/navigationduplicated-navigating-to-current-location-search-is-not-allowed
-     */
-    // compareRouter(path) {
-    //   return this.$route.path !== path ? true : false;
-    // },
     close(e) {
       if (!this.$el.contains(e.target)) {
         // this.drawer = !this.drawer;
@@ -140,6 +121,3 @@ export default {
   // end Hooks
 };
 </script>
-
-<style lang="scss" >
-</style>

@@ -33,9 +33,8 @@ export default new Vuetify({
         accent: "#8c9eff",
         white: "#fff",
 
-        clara: "#01B283",
-        josefine: "#1064FE",
-        anderson: "#34495E",
+
+        di: "#34495E",
         ember: "#232f3e",
         bunker: "#292D33",
         background: "#f5f5f7",

@@ -77,9 +77,10 @@
 }
 
 .global-nav__title {
-    width: 100px !important;
+    width: 140px !important;
     margin: 0 auto !important;
     margin-left: 0 !important;
+    line-height: 2.2 !important;
 }
 
 .global-nav__brand-title {
@@ -115,7 +116,7 @@
             all 500ms cubic-bezier(1, 0, 0, 1) 0ms;
     }
 
-    [data-link="nav-mpm"] {
+    [data-link="nav-diana"] {
         transform: translate(0px, 0px);
         transition: all 500ms cubic-bezier(1, 0, 0, 1) 0ms,
             all 500ms cubic-bezier(1, 0, 0, 1) 0ms;
@@ -133,7 +134,7 @@
     &__row {
         left: 0;
         top: 0;
-        width: 80px;
+        width: 55px;
         display: block;
         z-index: 1040;
         transition: all 500ms cubic-bezier(1, 0, 0, 1) 0ms,
@@ -215,7 +216,6 @@
 }
 
 .folio-count {
-    font-family: $font-primary !important;
     height: 30px !important;
     padding: 0 9px !important;
     margin: 0 9px;

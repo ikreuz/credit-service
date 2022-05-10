@@ -1,28 +1,49 @@
 <template>
     <v-row class="mt-12 mx-4">
         <v-col>
-            <v-subheader>Apertura de cuenta de ahorro</v-subheader>
-            <CardTwo />
+            <v-card-title class="justify-center">Apertura de cuenta de ahorro</v-card-title>
+            <CardRegistrationSaving />
+            <TableTransactionSaving />
         </v-col>
     </v-row>
 </template>
 
 <script>
+import srvToasted from "@/services/srv_toasted.js";
+
 export default {
-    name: "About",
+    name: "SavingAccount",
     metaInfo: {
-        title: "About",
+        title: "Cuenta Ahorro",
     },
     props: {},
-    components: { CardTwo: () => import('@/components/cards/CardTwo.vue') },
-    data: () => ({}),
+    components: {
+        CardRegistrationSaving: () => import('@/components/cards/CardRegistrationSaving.vue'),
+        TableTransactionSaving: () => import('@/components/tables/TableTransactionSaving.vue')
+    },
+    data: () => ({
+        toasted: {
+            CUSTOM: "custom",
+            DEFAULT: "default",
+            INFO: "info",
+            ERROR: "error",
+            SUCCESS: "success",
+            WARNING: "warning",
+        },
+    }),
     computed: {},
     watch: {},
     // Hooks
     beforeCreate() { },
     created() { },
     beforeMount() { },
-    mounted() { },
+    mounted() {
+        try {
+            srvToasted("Cuenta de Ahorro", this.toasted.SUCCESS, "mdi mdi-check");
+        } catch (error) {
+            console.log('dianaprj@: ' + error);
+        }
+    },
     beforeUpdate() { },
     updated() { },
     beforeDestroy() { },
@@ -32,7 +53,3 @@ export default {
     // end Hooks
 };
 </script>
-
-<style lang="scss" scoped>
-@import "@/assets/scss/common/variables.scss";
-</style>

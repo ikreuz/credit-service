@@ -25,7 +25,7 @@
 }
 
 .noborder {
-    border-radius: 0 !important;
+    border: none !important;
 }
 
 .nobordercolor {
@@ -33,9 +33,9 @@
 }
 
 .disflex {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 .nobackground {
@@ -60,8 +60,7 @@
     }
 
     &--article {
-        padding-top: 12px !important;
-        padding-bottom: 12px !important;
+        padding: 1rem 1rem 1rem 1rem !important;
     }
 
     &--article-top {
@@ -114,39 +113,85 @@
     min-width: 100% !important;
 }
 
+.w-200 {
+    width: 200px !important;
+    min-width: 200px !important;
+}
+
 .h-full {
     height: 100% !important;
     min-height: 100% !important;
 }
 
-.parcel-border-0 {
-    border-top: 1px solid $geist-border !important;
-    border-bottom: 1px solid $geist-border !important;
+.diana-border-0 {
+    border-top: 1px solid $geist-border  !important;
+    border-bottom: 1px solid $geist-border  !important;
 }
 
-.parcel-border-1 {
-    border: 1px solid $geist-border !important;
+.diana-border-1 {
+    border: 1px solid $geist-border  !important;
 }
 
-.parcel-border-top {
-    border-top: 1px solid $geist-border !important;
+.diana-border-top {
+    border-top: 1px solid $geist-border  !important;
 }
 
-.parcel-border-left {
-    border-left: 1px solid $geist-border !important;
+.diana-border-left {
+    border-left: 1px solid $geist-border  !important;
 }
 
-.parcel-border-right {
-    border-right: 1px solid $geist-border !important;
+.diana-border-right {
+    border-right: 1px solid $geist-border  !important;
 }
 
-.parcel-border-bottom {
-    border-bottom: 1px solid $geist-border !important;
+.diana-border-bottom {
+    border-bottom: 1px solid $geist-border  !important;
 }
 
-.parcel-border {
-    border-left: 1px solid $geist-border !important;
-    border-right: 1px solid $geist-border !important;
-    border-top: 1px solid $geist-border !important;
-    border-bottom: 1px solid $geist-border !important;
+
+.diana-border {
+    border-left: 1px solid $geist-border  !important;
+    border-right: 1px solid $geist-border  !important;
+    border-top: 1px solid $geist-border  !important;
+    border-bottom: 1px solid $geist-border  !important;
+}
+
+.diana-noborder-left-radius {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+.diana-noborder-right-radius {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.diana-noborder-top-radius {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+.diana-noborder-bottom-radius {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.diana-border-left-radius {
+    border-top-left-radius: 4px !important;
+    border-bottom-left-radius: 4px !important;
+}
+
+.diana-border-right-radius {
+    border-top-right-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+}
+
+.diana-border-top-radius {
+    border-top-left-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+}
+
+.diana-border-bottom-radius {
+    border-bottom-right-radius: 4px !important;
+    border-bottom-left-radius: 4px !important;
 }

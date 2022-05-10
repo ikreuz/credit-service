@@ -26,5 +26,3 @@ export default {
   // end Hooks
 };
 </script>
-
-<style lang="scss" scoped></style>

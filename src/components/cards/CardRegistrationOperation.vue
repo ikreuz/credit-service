@@ -1,0 +1,212 @@
+<template>
+  <v-container grid-list-xl text-xs-center class="pt-10">
+    <v-layout row wrap ref="form">
+      <v-flex xs12 sm12 tag="div" v-resize="onResize">
+        <!-- {{ windowSize }} -->
+        <v-card class="stripe stripe--article shadow-smallest">
+          <v-layout row wrap pa-3 justify-center class="card-operation">
+            <v-flex xs10 sm6 md4>
+              <v-card class="card-operations__container z-3 noshadow">
+                <v-col cols="12" class="wrapper-input-5 z-3" color="bunker darken-5">
+                  <v-list-item color="bunker darken-5">
+                    <v-list-item-content>
+                      <v-list-item-title>Cliente</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-col>
+                <v-col cols="12" class="wrapper-input-5 z-3">
+                  <div class="wrapper">
+                    <div class="diana-input-data">
+                      <v-select label="Seleccion .." item-text="concepto" item-value="concepto_id" color="primary" solo
+                        class="diana-input scrolled"></v-select>
+                    </div>
+                  </div>
+                </v-col>
+              </v-card>
+            </v-flex>
+            <v-flex xs10 sm6 md4>
+              <v-card class="card-operation__container z-3 noshadow">
+                <v-col cols="12" class="wrapper-input-5 z-3">
+                  <v-list-item color="bunker darken-5">
+                    <v-list-item-content>
+                      <v-list-item-title>Operacion</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-col>
+                <v-col cols="12" class="wrapper-input-5 z-3">
+                  <div class="wrapper">
+                    <div class="diana-input-data" data-input-type="switch">
+                      <v-card-actions class="nopadding nobordercolor">
+                        <v-switch v-model="toDepositWithdraw" :disabled="isDepositWithdraw"
+                          class="mt-0 nobordercolor nopadding noborder" color="info" hide-details label="Deposito/Retiro">
+                        </v-switch>
+                      </v-card-actions>
+                    </div>
+                  </div>
+                </v-col>
+              </v-card>
+            </v-flex>
+          </v-layout>
+          <v-layout row wrap pa-3 justify-center class="card-operation">
+            <v-flex xs10 sm6 md4 v-for="card in cards" :key="card.title">
+              <v-card class="card-operations__container z-3 noshadow">
+                <v-col cols="12" class="wrapper-input-5 z-3" color="bunker darken-5">
+                  <v-list-item v-if="card.id == 1">
+                    <v-list-item-content>
+                      <v-list-item-title :class="toDepositWithdraw ? 'text--ember' : 'text--diana'">{{ card.title }}
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                  <v-list-item v-if="card.id == 2">
+                    <v-list-item-content>
+                      <v-list-item-title :class="!toDepositWithdraw ? 'text--ember' : 'text--diana'">{{ card.title }}
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-col>
+                <v-col cols="12" class="wrapper-input-5 z-3" v-if="card.id == 1">
+                  <div class="wrapper">
+                    <div class="diana-input-data">
+                      <v-text-field v-model="contacto" id="" class="diana-input" ref="contacto" solo dense required
+                        focus :disabled="toDepositWithdraw" :loading="isDepositWithdraw" value="contacto" type="number"
+                        prepend-icon="mdi-clipboard-account" @keydown="keyEvent($event)">
+                      </v-text-field>
+                    </div>
+                  </div>
+                </v-col>
+                <v-col cols="12" class="wrapper-input-5 z-3" v-if="card.id == 2">
+                  <div class="wrapper">
+                    <div class="diana-input-data">
+                      <v-text-field v-model="clienteCount" id="" class="diana-input" ref="clienteCount" solo dense focus
+                        :disabled="!toDepositWithdraw" :loading="isDepositWithdraw" required value="clienteCount"
+                        type="number" prepend-icon="mdi-card-account-details-outline">
+                      </v-text-field>
+                    </div>
+                  </div>
+                </v-col>
+              </v-card>
+            </v-flex>
+          </v-layout>
+          <v-card class="disflex noshadow">
+            <v-btn color="primary" class="w-200 " @click="alta()">
+              <div v-if="toDepositWithdraw">
+                Depositar
+              </div>
+              <div v-else>
+                Retirar
+              </div>
+            </v-btn>
+          </v-card>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
+</template>
+
+<script>
+import { v4 as uuidv4 } from 'uuid';
+import srvToasted from "@/services/srv_toasted.js";
+import serviceAxiosGet from "@/services/srv_axios";
+
+export default {
+  name: "",
+  props: {},
+  components: {
+  },
+  data: () => ({
+    cards: [
+      { id: 1, title: "Deposito", content: "" },
+      { id: 2, title: "Retiro", content: "" },
+
+    ],
+    clients: [], toasted: {
+      CUSTOM: "custom",
+      DEFAULT: "default",
+      INFO: "info",
+      ERROR: "error",
+      SUCCESS: "success",
+      WARNING: "warning",
+    },
+    /** contact */
+    clienteLimite: 60,
+    clienteEntries: [],
+    clienteCount: null,
+    clienteModel: null,
+    clienteSearch: null,
+    isClientLoading: false,
+    // isClienteEditing: false,
+    windowSize: {
+      x: 0,
+      y: 0,
+    },
+    activateBit: true,
+    /** */
+    contacto: null,
+    contactoRfc: null,
+    contactoTel: null,
+    contactoFechaCracion: "",
+    contactoFechaPago: "",
+    contactoFechaVencimiento: "",
+    matchFromGuide: {},
+    balance: [],
+    toDepositWithdraw: false,
+    isDepositWithdraw: false,
+    inputDisabled: 0,
+  }),
+  computed: {
+  },
+  watch: {
+    windowSize() { },
+    toDepositWithdraw(value) {
+      console.log('---- toDepositWithdraw: ' + value);
+    },
+    isDepositWithdraw(value) {
+      console.log("---- isDepositWithdraw: " + value);
+      if (value) {
+        setTimeout(() => (this.isDepositWithdraw = false), 3000);
+      }
+    },
+  },
+  /** Hooks */
+  beforeCreate() { },
+  created() { },
+  beforeMount() { },
+  async mounted() {
+    this.onResize();
+    try {
+      this.balance = await serviceAxiosGet("http://localhost:5000/api/TransactionCredit/getall", 'GET');
+      console.log(this.balance);
+    } catch (error) {
+      console.log('dianaprj@: ' + error);
+    }
+  },
+  beforeUpdate() { },
+  updated() { },
+  beforeDestroy() { },
+  destroyed() { },
+  methods: {
+    onResize() {
+      this.windowSize = { x: window.innerWidth, y: window.innerHeight };
+    },
+    keyEvent(event) {
+      console.log('Key pressed:', event);
+      console.log(this.contacto);
+      this.clienteCount = uuidv4();
+      console.log(this.clienteCount);
+    },
+    alta() {
+
+      srvToasted("Operacion " + (this.toDepositWithdraw ? "Retiro" : "Deposito"), this.toasted.CUSTOM, "mdi mdi-card-bulleted");
+
+
+      this.contacto = '';
+      this.clienteCount = '';
+    },
+    reloadTheClientData() {
+      this.$refs.form.reset();
+      // this.matchClient = this.$store.state.matchClient;
+    },
+  },
+  /** end Hooks */
+};
+</script>

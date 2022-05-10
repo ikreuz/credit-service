@@ -1,26 +1,38 @@
 <template>
   <v-row class="mt-12 mx-4">
     <v-col>
-      <v-subheader>Home</v-subheader>
-      <CardOne />
-      <TableClient />
+      <v-card-title class="justify-center">Alta de clientes</v-card-title>
+
+      <CardRegistrationClients />
+      <TableHistoryClients />
     </v-col>
 
   </v-row>
 </template>
 
 <script>
+import srvToasted from "@/services/srv_toasted.js";
+
 export default {
   name: "Home",
   metaInfo: {
-    title: "Home",
+    title: "Alta de Clientes",
   },
   props: {},
   components: {
-    CardOne: () => import('@/components/cards/CardOne.vue'),
-    TableClient: () => import('@/components/tables/TableClient.vue'),
+    CardRegistrationClients: () => import('@/components/cards/CardRegistrationClients.vue'),
+    TableHistoryClients: () => import('@/components/tables/TableHistoryClients.vue'),
   },
-  data: () => ({ clients: [] }),
+  data: () => ({
+    clients: [], toasted: {
+      CUSTOM: "custom",
+      DEFAULT: "default",
+      INFO: "info",
+      ERROR: "error",
+      SUCCESS: "success",
+      WARNING: "warning",
+    },
+  }),
   computed: {
 
   },
@@ -30,6 +42,11 @@ export default {
   created() { },
   beforeMount() { },
   async mounted() {
+    try {
+      srvToasted("Usuario permitido", this.toasted.SUCCESS, "mdi mdi-account-check-outline");
+    } catch (error) {
+      console.log('dianaprj@: ' + error);
+    }
   },
   beforeUpdate() { },
   updated() { },
@@ -41,6 +58,3 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import "@/assets/scss/common/variables.scss";
-</style>

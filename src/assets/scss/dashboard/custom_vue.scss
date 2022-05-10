@@ -1,28 +1,28 @@
 /** Vuetify drawer */
 /* ---------------- Customizacion del Drawer --------------- */
-// .v-navigation-drawer__content {
-//   @extend .skrull;
-// }
+.v-navigation-drawer__content {
+  @extend .scrolled;
+}
 
 /* ----------------------------------- // ----------------------------------- */
 /** Vuetify menu */
 /* ---------------- Customizacion del Menu --------------- */
-// .v-menu__content {
-//   @extend .skrull;
-// }
+.v-menu__content {
+  @extend .scrolled;
+}
 
 /* ----------------------------------- // ----------------------------------- */
 /** Vueitfy virtual scroll */
 /* ---------------- Customizacion del Virtual Scroll --------------- */
-// .v-virtual-scroll {
-//   @extend .skrull;
-// }
+.v-virtual-scroll {
+  @extend .scrolled;
+}
 
 /* ----------------------------------- // ----------------------------------- */
 /** Vue-Toastefication */
 /* ---------------- Customizacion de las notificaciones Toast --------------- */
-.Vue-Toastification__toast.mpm-toast,
-.Vue-Toastification__toast--default.mpm-toast {
+.Vue-Toastification__toast.diana-toast,
+.Vue-Toastification__toast--default.diana-toast {
   font-size: 24px !important;
 
   &--custom,
@@ -39,11 +39,11 @@
   }
 
   &--custom {
-    background-color: var(--v-walkure-darken1);
+    background-color: var(--v-primary-darken1);
   }
 
   &--default {
-    background-color: var(--v-walkure-base);
+    background-color: var(--v-primary-base);
   }
 
   &--info {
@@ -64,12 +64,12 @@
 }
 
 /* Applied to the toast body when using regular strings as content */
-.Vue-Toastification__toast-body.mpm-toast__body {
+.Vue-Toastification__toast-body.diana-toast__body {
   font-size: 14px;
 }
 
 /* Applied to a wrapper div when using a custom component as content */
-.Vue-Toastification__toast-component-body.mpm-toast__component-body {
+.Vue-Toastification__toast-component-body.diana-toast__component-body {
   width: 100%;
 }
 
@@ -151,7 +151,7 @@
 }
 
 .v-navigation-drawer__content {
-  // @extend .skrull;
+  @extend .scrolled;
 }
 
 .v-application .error--text {
@@ -159,7 +159,7 @@
 }
 
 .v-menu__content {
-  // @extend .skrull;
+  @extend .scrolled;
 }
 
 /* ----------------------------- Sign in / login ---------------------------- */
@@ -184,13 +184,15 @@
 
   .v-input__control .v-select__selections,
   .passp-content .v-input__control .v-select__selections,
-  .mpm-data-table .v-input__control .v-select__selections,
+  .diana-data-table .v-input__control .v-select__selections,
   .card-search .v-input__control .v-select__selections,
   .card-config .v-input__control .v-select__selections,
-  .card-invoice-aditional .v-input__control .v-select__selections,
+  .card-clients-aditional .v-input__control .v-select__selections,
   .card-guide .v-input__control .v-select__selections,
   .card-client .v-input__control .v-select__selections,
-  .card-invoice .v-input__control .v-select__selections {
+  .card-operation .v-input__control .v-select__selections,
+  .card-saving-account .v-input__control .v-select__selections,
+  .card-clients .v-input__control .v-select__selections {
     margin-left: 4px !important;
   }
 }
@@ -198,15 +200,17 @@
 /** */
 [ data-input-type="text-field"],
 .passp-content,
-.mpm-data-table,
+.diana-data-table,
 .card-search,
 .card-config,
-.card-invoice-aditional,
+.card-clients-aditional,
 .card-guide,
 .card-client,
-.card-invoice {
+.card-operation,
+.card-saving-account,
+.card-clients {
 
-  .devmpm-input,
+  .diana-input,
   .v-input {
     border-style: solid;
     border-width: 2px;
@@ -214,7 +218,7 @@
     border-color: #CCCCCC;
   }
 
-  .devmpm-input,
+  .diana-input,
   .v-input:focus {
     background: #FFFFFF !important;
     background-color: #FFFFFF !important;
@@ -256,7 +260,7 @@
       display: none;
     }
 
-    // .auth0-lock-panel .devmpm-input:hover {
+    // .auth0-lock-panel .diana-input:hover {
     //   border-style: solid;
     //   border-width: 2px;
     //   border-color: transparent;
@@ -352,14 +356,14 @@
 
 [ data-input-type="date-picker"] {
 
-  .devmpm-input,
+  .diana-input,
   .v-input {
     border-style: solid !important;
     border-width: 2px !important;
     border-color: transparent !important;
   }
 
-  .devmpm-input,
+  .diana-input,
   .v-input:focus {
     background: #FFFFFF !important;
     background-color: #FFFFFF !important;
@@ -400,7 +404,7 @@
       display: none;
     }
 
-    // .auth0-lock-panel .devmpm-input:hover {
+    // .auth0-lock-panel .diana-input:hover {
     //   border-style: solid;
     //   border-width: 2px;
     //   border-color: transparent;
@@ -477,6 +481,8 @@
   }
 }
 
-.card-invoice .v-input--dense > .v-input__control > .v-input__slot {
+.card-saving-account .v-input--dense > .v-input__control > .v-input__slot,
+.card-operation .v-input--dense > .v-input__control > .v-input__slot,
+.card-clients .v-input--dense > .v-input__control > .v-input__slot {
   margin-bottom: 0 !important;
 }

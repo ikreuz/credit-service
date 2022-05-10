@@ -30,7 +30,7 @@ export default function srvToasted(
         iconTag: "span",
       },
       rtl: false,
-      toastClassNaem: [`parcel-toast--${CUSTOM}`],
+      toastClassNaem: [`diana-toast--${CUSTOM}`],
     });
   }
   if (type == "default") {
@@ -51,7 +51,7 @@ export default function srvToasted(
         iconTag: "span",
       },
       rtl: false,
-      toastClassNaem: [`parcel-toast--${DEFAULT}`],
+      toastClassNaem: [`diana-toast--${DEFAULT}`],
     });
   }
   if (type == "info") {
@@ -72,7 +72,7 @@ export default function srvToasted(
         iconTag: "span",
       },
       rtl: false,
-      toastClassNaem: [`parcel-toast--${INFO}`],
+      toastClassNaem: [`diana-toast--${INFO}`],
     });
   }
   if (type == "success") {
@@ -93,7 +93,7 @@ export default function srvToasted(
         iconTag: "span",
       },
       rtl: false,
-      toastClassNaem: [`parcel-toast--${SUCCESS}`],
+      toastClassNaem: [`diana-toast--${SUCCESS}`],
     });
   }
   if (type == "warning") {
@@ -114,7 +114,7 @@ export default function srvToasted(
         iconTag: "span",
       },
       rtl: false,
-      toastClassNaem: [`parcel-toast--${WARNING}`],
+      toastClassNaem: [`diana-toast--${WARNING}`],
     });
   }
   if (type == "error") {
@@ -135,7 +135,7 @@ export default function srvToasted(
         iconTag: "span",
       },
       rtl: false,
-      toastClassNaem: [`parcel-toast--${ERROR}`],
+      toastClassNaem: [`diana-toast--${ERROR}`],
     });
   }
 }

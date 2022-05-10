@@ -1,11 +1,11 @@
 <template>
   <v-container class="page-not-found">
     <div class="fof">
-      <h1>404 - Page not found.</h1>
-      <p>This page no longer exist or has been moved to another location.</p>
+      <h1>404 - Pagina no encontrada.</h1>
+      <p>Esta pagina no existe mas o ha sido movida a otra locacion.</p>
       <v-btn text to="/" color="primary">
         <v-icon color="amber darken-3">mdi-keyboard-return</v-icon>
-        <span class="ml-2">Return home</span>
+        <span class="ml-2">Regresar a Principal</span>
       </v-btn>
     </div>
   </v-container>
@@ -15,7 +15,7 @@
 export default {
   name: "PageNotFound",
   metaInfo: {
-    title: "Page not found",
+    title: "Error 400",
   },
   props: {},
   components: {},

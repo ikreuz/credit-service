@@ -4,7 +4,7 @@ $geist-text: #34495E;
 $geist-white: #FFFF;
 
 $geist-login-background: #FAFAFA;
-$geist-background: #FAFAFA;
+$geist-background: #fafafafe;
 $geist-border: #BFBFC0;
 $geist-grey-light: #e5e5e5;
 $geist-grey: #94a8b6;
@@ -13,13 +13,8 @@ $geist-scroll: $geist-grey-light;
 $geist-input: $geist-grey-light;
 $geist-border: $geist-grey-light;
 
-
-
-
 // https://material.io/design/color/the-color-system.html#tools-for-picking-colors
 /* Vuetify */
-$vondoom: #01B283;
-
 $ember: #232f3e !default;
 $ember_bg: #232f3ec5;
 // $ember_light: #eff2f6;
@@ -33,30 +28,6 @@ $ember_400: #798ca5;
 $ember_300: #8fa0b7;
 $ember_200: #aebcce;
 $ember_100: #cbd7e5;
-
-$shamrock_900: #00803e;
-$shamrock_800: #00a255;
-$shamrock_700: #00b461;
-$shamrock_600: #00c76f;
-$shamrock_500: #00d87b;
-$shamrock_400: #00e18f;
-$shamrock_300: #47e8a5; // primary, complementary:#e8478a
-$shamrock_200: #8ceec0;
-$shamrock_100: #bcf5d8;
-$shamrock_50: #e4fbf0;
-
-/** robins egg blue */
-$robin: #00C9B6;
-$robin_900: #006146;
-$robin_800: #007e64;
-$robin_700: #008e73;
-$robin_600: #009f84;
-$robin_500: #00ad92;
-$robin_400: #00bca4;
-$robin_300: #00c9b5; // primary, complementary:#e8478a
-$robin_200: #70d9cb;
-$robin_100: #ace8df;
-$robin_50: #def6f3;
 
 // https://www.htmlcsscolor.com/hex/71C9F8
 
@@ -74,20 +45,6 @@ $white: #fff !default;
 $black: #000 !default;
 $google: #ea4335 !default;
 $facebook: #3b5998 !default;
-
-$navy: #0048fe;
-$navy_light: #015eff;
-$navy_secondary: #feb600;
-$navy_900: #0000cb;
-$navy_800: #0025da;
-$navy_700: #0033e5;
-$navy_600: #003ff2;
-$navy_500: #0048fe; // primary, complementary: #feb600
-$navy_400: #4967ff;
-$navy_300: #7184ff;
-$navy_200: #9fa7ff;
-$navy_100: #c7caff;
-$navy_50: #e9eaff;
 
 $colors__ember: #232f3e;
 $colors__ember_900: #232f3e; // primary, complementary:#3e3223
@@ -152,13 +109,11 @@ $walkure: #06a180;
 $colors__walkure: #06a180;
 
 
-$colors__ui_primary:$colors__walkure;
-$colors__ui_secondary: $shamrock_600;
-$colors__ui_button: $colors__walkure;
-$colors__ui_navigation: $colors__walkure;
-$colors__ui_topbar: $colors__walkure;
-$colors__ui_icon_1: $colors__walkure;
-$colors__ui_icon_2: $colors__ui_secondary;
+$colors__ui_primary: $geist-primary;
+$colors__ui_button: $geist-primary;
+$colors__ui_navigation: $geist-primary;
+$colors__ui_topbar: $geist-primary;
+$colors__ui_icon_1: $geist-primary;
 $colors__ui_drawer: $colors__bunker;
 $colors__ui_border: #BFBFC0;
 $colors__ui_background_1: #E8EAE3;
@@ -180,29 +135,16 @@ $colors__ui_text: $colors__ember;
 $colors__ui_text_light: $colors__ember_100;
 $colors__ui_text_heading: $colors__ember;
 
-// primary color navy_500
-// $primary: $colors__alizarin;
-// $colors__primary: $colors__alizarin; // #0b31ae
-// $colors__secondary: $shamrock_300; // #47e8a5
-// $colors__icon: $colors__ui_secondary;
-// $colors__heading: $colors__ember_900; //#dadfea;
 $colors__background: #f5f5f7;
 $colors__background_2: #ebeef3;
 $colors__grey-light: #e5e5e5 !default;
 $colors__grey: #94a8b6 !default;
-// $colors__font: #232f3e !default; //#131921
-// $colors__ember: $ember !default;
-// $colors__ember-light: $ember_100 !default; //#232f3ecf;
 
 /** */
-$colors__in: $shamrock_600;
-$colors__out: #e94334;
-
 $colors__scroll: #e5e5e5;
 $colors__input: #e5e5e5;
 $colors__border: #e5e5e5;
 $colors__desk: $colors__ui_background_1;
-// $colors__desk: #E9E9E9;
 $colors__aside: #f7f7f8;
 
 .bg-tabs {
@@ -216,13 +158,13 @@ $colors__aside: #f7f7f8;
 }
 
 .bg-desk-2 {
-  background-color: $colors__background_2 !important;
-  background: $colors__background_2 !important;
+  background-color: $colors__background_2  !important;
+  background: $colors__background_2  !important;
 }
 
 .bg-aside {
-  background-color: $colors__aside !important;
-  background: $colors__aside !important;
+  background-color: $colors__aside  !important;
+  background: $colors__aside  !important;
 }
 
 .bg-desk--white {
@@ -237,15 +179,15 @@ $colors__aside: #f7f7f8;
 
 .text--navy-light,
 .color--navy-light {
-  color: $colors__ui_primary !important;
+  color: $colors__ui_primary  !important;
 }
 
 .text--ember,
 .color--ember {
-  color: $ember !important;
+  color: $ember  !important;
 }
 
-.text--navy,
-.color--navy {
-  color: $colors__ui_text_heading !important;
+.text--diana,
+.color--diana {
+  color: $geist-primary  !important;
 }

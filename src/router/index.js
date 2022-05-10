@@ -63,10 +63,12 @@ const routes = [
         // meta: { requireAuth: true, middleware: auth },
       },
       {
-        path: "/about",
-        name: "About",
+        path: "/setting",
+        name: "Setting",
         component: () =>
-          import(/* webpackChunkName: "about" */ "../views/About.vue"),
+          import(
+            /* webpackChunkName: "Setting" */ "../views/setting/index.vue"
+          ),
         props: true,
         // meta: { requireAuth: true, middleware: auth },
       },

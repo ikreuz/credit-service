@@ -1,23 +1,34 @@
 <template>
     <v-row class="mt-12 mx-4">
         <v-col>
-            <v-subheader>Historial</v-subheader>
-            <TableInvoiceBreakdown />
+            <v-card-title class="justify-center">Historial</v-card-title>
+            <TableTransactions />
         </v-col>
     </v-row>
 </template>
 
 <script>
+import srvToasted from "@/services/srv_toasted.js";
+
 export default {
-    name: "About",
+    name: "History",
     metaInfo: {
-        title: "About",
+        title: "Historial",
     },
     props: {},
     components: {
-        TableInvoiceBreakdown: () => import('@/components/tables/TableInvoiceBreakdown.vue')
+        TableTransactions: () => import('@/components/tables/TableTransactions.vue')
     },
-    data: () => ({ balance: [] }),
+    data: () => ({
+        balance: [], toasted: {
+            CUSTOM: "custom",
+            DEFAULT: "default",
+            INFO: "info",
+            ERROR: "error",
+            SUCCESS: "success",
+            WARNING: "warning",
+        },
+    }),
     computed: {},
     watch: {},
     // Hooks
@@ -25,7 +36,11 @@ export default {
     created() { },
     beforeMount() { },
     async mounted() {
-
+        try {
+            srvToasted("Historial", this.toasted.SUCCESS, "mdi mdi-check");
+        } catch (error) {
+            console.log('dianaprj@: ' + error);
+        }
     },
     beforeUpdate() { },
     updated() { },
@@ -37,6 +52,3 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import "@/assets/scss/common/variables.scss";
-</style>

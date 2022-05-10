@@ -1,54 +1,25 @@
 <template>
-  <v-toolbar dense class="nopadding global-nav noshadow" color="background">
-    <nav
-      class="global-nav__menu"
-      role="navigation"
-      id="global-nav-si"
-      color="background"
-    >
-      <div class="global-nav__inner" color="background">
+  <v-toolbar dense class="nopadding global-nav noshadow">
+    <nav class="global-nav__menu" role="navigation" id="global-nav-si">
+      <div class="global-nav__inner">
         <router-link to="/">
-          <div class="global-nav__row" data-link="nav-mpm">
+          <div class="global-nav__row" data-link="nav-diana">
             <div class="global-nav__content">
               <div class="global-nav__brand">
-                <img
-                  width="36rem"
-                  height="36rem"
-                  src="@/assets/img/logo.svg"
-                  alt="Parcel logo"
-                  id="nav-logo-si"
-                  class="global-nav__logo"
-                />
+                <img width="36rem" height="36rem" src="@/assets/img/logo.svg" alt="Diana logo" id="nav-logo-si"
+                  class="global-nav__logo" />
               </div>
             </div>
           </div>
         </router-link>
 
-        <v-divider></v-divider>
+        <v-toolbar-title class="global-nav__title">Project Diana</v-toolbar-title>
 
-        <TheSearch id="global-nav-search-si" />
-
-        <v-divider></v-divider>
         <ul class="global-nav__container menu" id="menu-si">
-          <li class="global-nav__link-wrapper d-flex mx-4 menu-folio">
-            <v-badge content="6" color="anderson" dark overlap>
-              <v-list-item>
-                <v-list-item-content>
-                  <v-list-item-title data-view-name="view-folio-count"
-                    >Folios restantes</v-list-item-title
-                  >
-                </v-list-item-content>
-              </v-list-item>
-            </v-badge>
-          </li>
-          <li
-            class="global-nav__link-wrapper login-container d-flex menu-notif"
-          >
+          <li class="global-nav__link-wrapper login-container d-flex menu-notif">
             <TheMenuNotification />
           </li>
-          <li
-            class="global-nav__link-wrapper login-container d-flex menu-account"
-          >
+          <li class="global-nav__link-wrapper login-container d-flex menu-account">
             <TheMenuAccount />
           </li>
         </ul>
@@ -58,16 +29,12 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+// import { mapActions } from "vuex";
 import ParcelUtils from "@/assets/js/parcel_utils.js";
 export default {
   components: {
-    // MpmichPolarLight: () => import("@/libs/MpmichPolarLight.vue"),
-    // MpmLogoPolarLight: () => import("@/libs/MpmLogoPolarLight.vue"),
-    // ----- Menu cuenta
     TheMenuAccount: () => import("./TheMenuAccount.vue"),
     TheMenuNotification: () => import("./TheMenuNotification.vue"),
-    TheSearch: () => import("./TheSearch.vue"),
   },
   data: () => ({
     parcelCls: new ParcelUtils(),
@@ -104,9 +71,9 @@ export default {
   },
   watch: {},
   // Hooks
-  beforeCreate() {},
-  created() {},
-  beforeMount() {},
+  beforeCreate() { },
+  created() { },
+  beforeMount() { },
   mounted() {
     this.onResize();
 
@@ -114,24 +81,24 @@ export default {
 
     // console.log("mobile " + this.$vuetify.breakpoint.mobile);
   },
-  beforeUpdate() {},
-  updated() {},
+  beforeUpdate() { },
+  updated() { },
   beforeDestroy() {
     if (typeof window === "undefined") return;
 
     window.removeEventListener("resize", this.onResize, { passive: true });
   },
-  destroyed() {},
+  destroyed() { },
   methods: {
-    ...mapActions([
-      "jaeger",
-      [
-        "axnJaegerAddTab",
-        "axnJaegerDeleteTab",
-        "axnJaegerActiveIndex",
-        "axnJaegerRemoveTab",
-      ],
-    ]),
+    // ...mapActions([
+    //   "jaeger",
+    //   [
+    //     "axnJaegerAddTab",
+    //     "axnJaegerDeleteTab",
+    //     "axnJaegerActiveIndex",
+    //     "axnJaegerRemoveTab",
+    //   ],
+    // ]),
     navClickHandler(ev) {
       // console.log(ev.target);
       this.navRemoveAttActivated(ev);
@@ -147,5 +114,3 @@ export default {
 };
 </script>
 
-<style lang="scss" >
-</style>

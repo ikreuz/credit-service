@@ -1,4 +1,4 @@
-#mpm-app-si {
+#diana-app-si {
     display: grid;
     grid-template-rows: 48px 1fr;
     min-height: 100%;
@@ -33,6 +33,7 @@
     background: #fff;
     height: 56px;
     position: fixed !important;
+    left: 0 !important;
     z-index: $zindex__navigation !important;
 }
 

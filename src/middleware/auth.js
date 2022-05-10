@@ -1,6 +1,8 @@
 // import jsCookie from "js-cookie";
 
-// src/middleware/auth.js
+
+// this section was commented out for testing
+
 export default function auth({ next, router }) {
   // if (!localStorage.getItem('jwt')) {
   // if (!jsCookie.get("access_token")) {
