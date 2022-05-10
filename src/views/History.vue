@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import srvToasted from "@/services/srv_toasted.js";
+// import srvToasted from "@/services/srv_toasted.js";
 
 export default {
     name: "History",
@@ -36,11 +36,11 @@ export default {
     created() { },
     beforeMount() { },
     async mounted() {
-        try {
-            srvToasted("Historial", this.toasted.SUCCESS, "mdi mdi-check");
-        } catch (error) {
-            console.log('dianaprj@: ' + error);
-        }
+        // try {
+        //     srvToasted("Historial", this.toasted.SUCCESS, "mdi mdi-check");
+        // } catch (error) {
+        //     console.log('dianaprj@: ' + error);
+        // }
     },
     beforeUpdate() { },
     updated() { },

@@ -13,7 +13,7 @@
                 <v-spacer></v-spacer>
                 <v-dialog v-model="dialog" max-width="500px"> </v-dialog>
                 <v-dialog v-model="dialogDelete" max-width="500px"> </v-dialog>
-                <v-btn color="primary" dark class="mb-2" @click="updateData()">
+                <v-btn color="primary" dark class="mb-2" @click="initialize()">
                   <v-icon>mdi-reload</v-icon>
                 </v-btn>
               </v-toolbar>

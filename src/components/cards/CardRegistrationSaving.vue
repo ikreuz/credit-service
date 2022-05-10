@@ -224,7 +224,7 @@ export default {
         .then(response => response.json())
         .then(data => {
           console.log('post ' + data)
-          if (data != null) this.actualizarCliente()
+          // if (data != null) this.actualizarCliente()
           // this.statusHTTP = 200;
           // this.txnEntries = data.Data
         });

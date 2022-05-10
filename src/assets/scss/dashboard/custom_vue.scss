@@ -63,6 +63,13 @@
   }
 }
 
+@media only screen and (min-width: 600px) {
+
+  .Vue-Toastification__container.top-right {
+    top: 3em !important;
+  }
+}
+
 /* Applied to the toast body when using regular strings as content */
 .Vue-Toastification__toast-body.diana-toast__body {
   font-size: 14px;
@@ -102,8 +109,8 @@
     /** color predefinido por vuetify */
     // color: #1976d2 !important;
     // caret-color: #1976d2 !important;
-    color: $colors__ui_text !important;
-    caret-color: $colors__ui_text !important;
+    color: $colors__ui_text  !important;
+    caret-color: $colors__ui_text  !important;
   }
 }
 
@@ -121,8 +128,8 @@
   // background-color: #f7f7f8;
 
   .primary--text {
-    color: $colors__ui_text !important;
-    caret-color: $colors__ui_text !important;
+    color: $colors__ui_text  !important;
+    caret-color: $colors__ui_text  !important;
   }
 }
 
@@ -147,7 +154,7 @@
 
 .v-dialog__content {
   overflow: hidden !important;
-  z-index: $zindex__modal !important;
+  z-index: $zindex__modal  !important;
 }
 
 .v-navigation-drawer__content {
@@ -268,7 +275,7 @@
   }
 
   .v-input--is-focused {
-    border: 2px solid $geist-primary !important;
+    border: 2px solid $geist-primary  !important;
     background: #FFFFFF !important;
     background-color: #FFFFFF !important;
 
@@ -292,7 +299,7 @@
   }
 
   .theme--light.v-text-field--solo {
-    color: $colors__ui_text !important;
+    color: $colors__ui_text  !important;
 
     // background: #E5E5E5 !important;
     // background-color: #E5E5E5 !important;
@@ -436,7 +443,7 @@
   }
 
   .theme--light.v-text-field--solo {
-    color: $colors__ui_text !important;
+    color: $colors__ui_text  !important;
 
     // background: #E5E5E5 !important;
     // background-color: #E5E5E5 !important;
@@ -481,8 +488,8 @@
   }
 }
 
-.card-saving-account .v-input--dense > .v-input__control > .v-input__slot,
-.card-operation .v-input--dense > .v-input__control > .v-input__slot,
-.card-clients .v-input--dense > .v-input__control > .v-input__slot {
+.card-saving-account .v-input--dense>.v-input__control>.v-input__slot,
+.card-operation .v-input--dense>.v-input__control>.v-input__slot,
+.card-clients .v-input--dense>.v-input__control>.v-input__slot {
   margin-bottom: 0 !important;
 }

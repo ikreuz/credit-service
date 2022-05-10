@@ -79,8 +79,8 @@
                 <v-col cols="12" class="wrapper-input-5 z-3" v-if="card.id == 1">
                   <div class="wrapper">
                     <div class="diana-input-data">
-                      <v-text-field v-model="contacto" id="" class="diana-input" ref="contacto" solo dense required
-                        focus :disabled="toDepositWithdraw" :loading="isDepositWithdraw" value="contacto" type="number"
+                      <v-text-field v-model="cantidadDeposito" id="" class="diana-input di-deposito" solo dense required
+                        focus :disabled="toDepositWithdraw" :loading="isDepositWithdraw" value="cantidad" type="number"
                         prepend-icon="mdi-clipboard-account" @keydown="keyEvent($event)">
                       </v-text-field>
                     </div>
@@ -89,8 +89,8 @@
                 <v-col cols="12" class="wrapper-input-5 z-3" v-if="card.id == 2">
                   <div class="wrapper">
                     <div class="diana-input-data">
-                      <v-text-field v-model="clienteCount" id="" class="diana-input" ref="clienteCount" solo dense focus
-                        :disabled="!toDepositWithdraw" :loading="isDepositWithdraw" required value="clienteCount"
+                      <v-text-field v-model="cantidadRetiro" id="" class="diana-input di-retiro" solo dense focus
+                        :disabled="!toDepositWithdraw" :loading="isDepositWithdraw" required value="cantidad"
                         type="number" prepend-icon="mdi-card-account-details-outline">
                       </v-text-field>
                     </div>
@@ -103,10 +103,10 @@
           <v-card class="disflex noshadow">
             <v-btn color="primary" class="w-200 " @click="alta()">
               <div v-if="toDepositWithdraw">
-                Depositar
+                Retirar
               </div>
               <div v-else>
-                Retirar
+                Depositar
               </div>
             </v-btn>
           </v-card>
@@ -119,7 +119,6 @@
 <script>
 import { v4 as uuidv4 } from 'uuid';
 import srvToasted from "@/services/srv_toasted.js";
-// import serviceAxiosGet from "@/services/srv_axios";
 
 export default {
   name: "",
@@ -152,6 +151,7 @@ export default {
     txnSavingEntries: [],
     txnCreditEntries: [],
     txnEntries: [],
+    txnResponse: {},
     /** contact */
     clienteLimite: 60,
     clienteEntries: [],
@@ -177,10 +177,14 @@ export default {
     contactoFechaPago: "",
     contactoFechaVencimiento: "",
     matchFromGuide: {},
-    balance: [],
+    balance: {},
     toDepositWithdraw: false,
     isDepositWithdraw: false,
     inputDisabled: 0,
+    cantidadDeposito: 0.00,
+    cantidadRetiro: 0.00,
+    cantidad: 0.00,
+    operacion: 0
   }),
   computed: {
   },
@@ -203,13 +207,23 @@ export default {
   async mounted() {
     this.onResize();
     try {
-      // this.balance = await serviceAxiosGet("http://localhost:5000/api/TransactionCredit/getall", 'GET');
-      // console.log(this.balance);
       fetch(this.$store.getters['getEpCustomers'])
         .then(response => response.json())
         .then(data => {
           console.log('getEpCustomers ' + JSON.stringify(data))
           this.clienteEntries = data.Data
+        });
+      fetch(this.$store.getters['getEpTransactionSaving'])
+        .then(response => response.json())
+        .then(data => {
+          console.log('getEpTransactionSaving ' + JSON.stringify(data))
+          this.txnSavingEntries = data.Data
+        });
+      fetch(this.$store.getters['getEpTransactionCredit'])
+        .then(response => response.json())
+        .then(data => {
+          console.log('getEpTransactionCredit ' + JSON.stringify(data))
+          this.txnCreditEntries = data.Data
         });
     } catch (error) {
       console.log('dianaprj@: ' + error);
@@ -223,19 +237,69 @@ export default {
     onResize() {
       this.windowSize = { x: window.innerWidth, y: window.innerHeight };
     },
-    keyEvent(event) {
-      console.log('Key pressed:', event);
-      console.log(this.contacto);
+    keyEvent() {
+      // console.log('Key pressed:', event);
+      // console.log(this.contacto);
       this.clienteCount = uuidv4();
-      console.log(this.clienteCount);
+      // console.log(this.clienteCount);
     },
     alta() {
+      /**
+       * documento: 52 cierre, 53 apertura, 54 deposito, 55 retiro
+       * status: 47 borrador, 48 por cobrar, 49 cobrado, 50 cancelada
+       * tipo de cuenta: 36 credito, 37 ahorro
+       * *****************************************************************
+       * saving_id, tipo_cuenta, apertura, numero_cuenta, documento_id, cantidad, total
+       *  x           37          x           x             54           x          x
+       * 
+       */
+      if (this.toDepositWithdraw) {
+        this.operacion = (this.savingTarget.Total) -= (this.cantidadRetiro)
+        fetch(this.$store.getters['postEpTranasctionSaving'], {
+          method: 'POST',
+          body: JSON.stringify({
+            Saving_Id: 1,
+            Tipo_Cuenta: 37,
+            Apertura: this.savingTarget.Apertura,
+            Numero_Cuenta: this.savingTarget.Numero_Cuenta,
+            Documento_Id: this.toDepositWithdraw ? 55 : 54,
+            Cantidad: parseFloat(this.cantidadRetiro),
+            Total: this.operacion
+          }),
+          headers: { 'Content-type': "application/json; charset=UTF-8" }
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data)
+            this.txnResponse = data.Data
+          });
 
-      srvToasted("Operacion " + (this.toDepositWithdraw ? "Retiro" : "Deposito"), this.toasted.CUSTOM, "mdi mdi-card-bulleted");
+      } else {
+        fetch(this.$store.getters['postEpTranasctionSaving'], {
+          method: 'POST',
+          body: JSON.stringify({
+            Saving_Id: 1,
+            Tipo_Cuenta: 37,
+            Apertura: this.savingTarget.Apertura,
+            Numero_Cuenta: this.savingTarget.Numero_Cuenta,
+            Documento_Id: this.toDepositWithdraw ? 55 : 54,
+            Cantidad: parseFloat(this.cantidadDeposito),
+            Total: parseFloat(this.cantidadDeposito) + parseFloat(this.savingTarget.Total)
+          }),
+          headers: { 'Content-type': "application/json; charset=UTF-8" }
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data)
+            this.txnResponse = data.Data
+          });
+
+      }
 
 
       this.contacto = '';
       this.clienteCount = '';
+      srvToasted("Operacion " + (this.toDepositWithdraw ? "Retiro" : "Deposito"), this.toasted.CUSTOM, "mdi mdi-card-bulleted");
     },
     reloadTheClientData() {
       this.$refs.form.reset();

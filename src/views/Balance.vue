@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import srvToasted from "@/services/srv_toasted.js";
+// import srvToasted from "@/services/srv_toasted.js";
 
 export default {
     name: "Balance",
@@ -38,11 +38,11 @@ export default {
     created() { },
     beforeMount() { },
     mounted() {
-        try {
-            srvToasted("Deposito/Retiro", this.toasted.SUCCESS, "mdi mdi-check");
-        } catch (error) {
-            console.log('dianaprj@: ' + error);
-        }
+        // try {
+        //     srvToasted("Deposito/Retiro", this.toasted.SUCCESS, "mdi mdi-check");
+        // } catch (error) {
+        //     console.log('dianaprj@: ' + error);
+        // }
     },
     beforeUpdate() { },
     updated() { },
