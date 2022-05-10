@@ -15,7 +15,7 @@ pids
 .DS_Store
 node_modules
 /dist
-
+.zip
 
 # local env files
 .env.local
