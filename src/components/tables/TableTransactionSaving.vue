@@ -96,11 +96,11 @@ export default {
     dialog: false,
     dialogDelete: false,
     headers: [
-      { text: "Id", align: "center", value: "Credit_Id" },
-      { text: "Transaccion", align: "center", value: "Transaction_Id" },
+      { text: "Numero Cuenta", align: "center", value: "Numero_Cuenta" },
+      { text: "Tipo", align: "center", value: "Tipo_Cuenta" },
+      { text: "Aperturas", align: "center", value: "Apertura" },
       { text: "Documento", align: "center", value: "Documento_Id" },
-      { text: "Cobrado", align: "center", value: "Cobrado" },
-      { text: "Por Cobrar", align: "center", value: "Por_Cobrar" },
+      { text: "Cantidad", align: "center", value: "Cantidad" },
       { text: "Total", align: "center", value: "Total" },
       { text: "Acciones", align: "center", value: "actions", sortable: false },
     ],
@@ -157,10 +157,10 @@ export default {
   destroyed() { },
   methods: {
     initialize() {
-      fetch(this.$store.getters['getEpTransactionCredit'])
+      fetch(this.$store.getters['getEpTransactionSaving'])
         .then(response => response.json())
         .then(data => {
-          console.log(data)
+          console.log('----- tableSaving: '+JSON.stringify(data))
           this.txnItems = data.Data
         });
     },
@@ -210,11 +210,11 @@ export default {
       this.windowSize = { x: window.innerWidth, y: window.innerHeight };
     },
     updateData() {
-      fetch(this.$store.getters['getEpCustomers'])
+      fetch(this.$store.getters['getEpTransactionSaving'])
         .then(response => response.json())
         .then(data => {
           console.log(data)
-          this.clientItems = data.Data
+          this.txnItems = data.Data
         });
     }
   },

@@ -33,7 +33,10 @@ export default new Vuex.Store({
     guardianRoles: [],
     //
     dialogClient: false,
-    updateTable: false
+    updateTable: false,
+    txnEntries: [],
+    txnCreditEntries: [],
+    txnSavingEntries: []
   },
   mutations: {
     SET_MAIN_DRAWER(state, payload) {
@@ -67,14 +70,23 @@ export default new Vuex.Store({
       state.guardianRoles = payload;
     },
     // 
-    SET_DIALOG_CLIENT(state,payload){
+    SET_DIALOG_CLIENT(state, payload) {
       state.dialogClient = payload;
     },
-    SET_CUSTOMER_PROFILE(state,payload){
+    SET_CUSTOMER_PROFILE(state, payload) {
       state.customerProfile = payload
     },
-    SET_UPDATE_TABLE_(state, payload){
+    SET_UPDATE_TABLE(state, payload) {
       state.updateTable = payload
+    },
+    SET_TXN_ENTRIES(state, payload) {
+      state.txnEntries = payload
+    },
+    SET_TXN_CREDIT_ENTRIES(state, payload) {
+      state.txnCreditEntries = payload
+    },
+    SET_TXN_SAVING_ENTRIES(state, payload) {
+      state.txnSavingEntries = payload
     }
   },
   actions: {
@@ -127,14 +139,23 @@ export default new Vuex.Store({
       commit("SET_GUARDIAN_CUSTOMERS", payload);
     },
     //
-    axnDialogClient({commit}, payload){
+    axnDialogClient({ commit }, payload) {
       commit('SET_DIALOG_CLIENT', payload)
     },
-    axnCustomerProfile({commit}, payload){
+    axnCustomerProfile({ commit }, payload) {
       commit('SET_CUSTOMER_PROFILE', payload)
     },
-    axnUpdateTable({commit}, payload){
+    axnUpdateTable({ commit }, payload) {
       commit('SET_UPDATE_TABLE', payload)
+    },
+    axnTxnEntries({ commit }, payload) {
+      commit('SET_TXN_ENTRIES', payload)
+    },
+    axnTxnCreditEntries({ commit }, payload) {
+      commit('SET_TXN_CREDIT_ENTRIES', payload)
+    },
+    axnTxnSavingEntries({ commit }, payload) {
+      commit('SET_TXN_SAVING_ENTRIES', payload)
     }
   },
   getters: {
@@ -157,8 +178,17 @@ export default new Vuex.Store({
       return state.profile;
     },
     //
-    getDialogClient(state){
+    getDialogClient(state) {
       return state.dialogClient
+    },
+    getTxnEntries(state) {
+      return state.txnEntries
+    },
+    getTxnCreditEntries(state) {
+      return state.txnCreditEntries
+    },
+    getTxnSavingEntries(state) {
+      return state.txnSavingEntries
     }
   },
   modules: { ep: ep },

@@ -24,6 +24,16 @@
                       <v-list-item-title>{{ card.title }}</v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
+                  <v-list-item v-if="card.id == 4">
+                    <v-list-item-content>
+                      <v-list-item-title>{{ card.title }}</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                  <v-list-item v-if="card.id == 5">
+                    <v-list-item-content>
+                      <v-list-item-title>{{ card.title }}</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
                 </v-col>
                 <v-col cols="12" class="wrapper-input-5 z-3" v-if="card.id == 1">
                   <div class="wrapper">
@@ -38,8 +48,8 @@
                 <v-col cols="12" class="wrapper-input-5 z-3" v-if="card.id == 2">
                   <div class="wrapper">
                     <div class="diana-input-data" v-if="card.id == 2">
-                      <v-text-field v-model="clienteAhorro.Numero_Cuenta" id="" class="diana-input" ref="" solo dense
-                        label="" required value="" type="text" prepend-icon="mdi-account">
+                      <v-text-field v-model="clienteAhorro.Numero_Cuenta" class="diana-input" solo dense value=""
+                        type="text" prepend-icon="mdi-account">
                       </v-text-field>
                     </div>
                   </div>
@@ -47,8 +57,26 @@
                 <v-col cols="12" class="wrapper-input-5 z-3" v-if="card.id == 3">
                   <div class="wrapper">
                     <div class="diana-input-data" v-if="card.id == 3">
-                      <v-text-field v-model="clienteAhorro.Saldo_Actual" id="" class="diana-input" ref="" solo dense
-                        label="" required value="0.00" type="number" prepend-icon="mdi-card-account-details-outline">
+                      <v-text-field v-model="saldo" class="diana-input" solo dense type="number"
+                        :value="savingTarget.Total" prepend-icon="mdi-card-account-details-outline">
+                      </v-text-field>
+                    </div>
+                  </div>
+                </v-col>
+                <v-col cols="12" class="wrapper-input-5 z-3" v-if="card.id == 4">
+                  <div class="wrapper">
+                    <div class="diana-input-data" v-if="card.id == 4">
+                      <v-text-field v-model="conCredito" class="diana-input" solo dense type="text"
+                        prepend-icon="mdi-card-account-details-outline">
+                      </v-text-field>
+                    </div>
+                  </div>
+                </v-col>
+                <v-col cols="12" class="wrapper-input-5 z-3" v-if="card.id == 5">
+                  <div class="wrapper">
+                    <div class="diana-input-data" v-if="card.id == 5">
+                      <v-text-field v-model="conAhorro" class="diana-input" solo dense type="text"
+                        prepend-icon="mdi-card-account-details-outline">
                       </v-text-field>
                     </div>
                   </div>
@@ -70,6 +98,7 @@
 <script>
 import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
+import srvToasted from "@/services/srv_toasted.js";
 
 export default {
   name: "",
@@ -81,11 +110,32 @@ export default {
       { id: 1, title: "Cliente", content: "" },
       { id: 2, title: "Numero cuenta", content: "" },
       { id: 3, title: "Saldo actual", content: "" },
-
+      { id: 4, title: "Tiene cuenta de credito", content: "" },
+      { id: 5, title: "Tiene cuenta de ahorro", content: "" },
     ],
-    txnItems: [],
-    txn: [],
-    selectTxn: 0,
+    statusHTTP: {
+      OK: 200,
+      ERROR: 400,
+    },
+     toasted: {
+      CUSTOM: "custom",
+      DEFAULT: "default",
+      INFO: "info",
+      ERROR: "error",
+      SUCCESS: "success",
+      WARNING: "warning",
+    },
+    saldo: 0.00,
+    conCredito: "...",
+    conAhorro: "...",
+    clientTarget: {},
+    creditTarget: {},
+    savingTarget: {},
+    txnSavingEntries: [],
+    txnCreditEntries: [],
+    txnEntries: [],
+    selectClientId: 0,
+    selectTxnId: 0,
     selectTxnItem: 0,
     selectTotales: 0,
     /** contact */
@@ -121,21 +171,27 @@ export default {
     fetch(this.$store.getters['getEpCustomers'])
       .then(response => response.json())
       .then(data => {
-        console.log(data)
+        console.log('getEpCustomers ' + JSON.stringify(data))
         this.clienteEntries = data.Data
       });
     fetch(this.$store.getters['getEpTransactionSaving'])
       .then(response => response.json())
       .then(data => {
-        console.log(data)
-        this.txnItems = data.Data
+        console.log('getEpTransactionSaving ' + JSON.stringify(data))
+        this.txnSavingEntries = data.Data
       });
-    fetch(this.$store.getters['getEpTransaction'])
+    fetch(this.$store.getters['getEpTransactionCredit'])
       .then(response => response.json())
       .then(data => {
-        console.log(data)
-        this.txn = data.Data
+        console.log('getEpTransactionCredit ' + JSON.stringify(data))
+        this.txnCreditEntries = data.Data
       });
+    // fetch(this.$store.getters['getEpTransaction'])
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     console.log('getEpTransaction ' + JSON.stringify(data))
+    //     this.txnEntries = data.Data
+    //   });
   },
   beforeUpdate() { },
   updated() { },
@@ -152,8 +208,50 @@ export default {
       console.log(this.clienteCount);
     },
     async alta() {
-      fetch(this.$store.getters['postEpTranasction'], {
+      fetch(this.$store.getters['postEpTranasctionSaving'], {
         method: 'POST',
+        body: JSON.stringify({
+          Saving_Id: 1,
+          Tipo_Cuenta: 37,
+          Apertura: (this.savingTarget.Apertura + 1),
+          Numero_Cuenta: this.clienteAhorro.Numero_Cuenta,
+          Documento_Id: 53, // apertura
+          Cantidad: this.saldo,
+          Total: 0,
+        }),
+        headers: { 'Content-type': "application/json; charset=UTF-8" }
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('post ' + data)
+          if (data != null) this.actualizarCliente()
+          // this.statusHTTP = 200;
+          // this.txnEntries = data.Data
+        });
+      srvToasted("Apertura de nueva cuenta", this.toasted.SUCCESS, "mdi mdi-check");
+      this.saldo = 0.00
+      this.conAhorro = "...";
+      this.conCredito = "..."
+    },
+    async actualizarCliente() {
+      fetch(this.$store.getters['putEpCustomers'], {
+        method: 'PUT',
+        body: JSON.stringify({
+          Numero_Cuenta: this.clienteAhorro.Numero_Cuenta,
+          C_Ahorro: true,
+        }),
+        headers: { 'Content-type': "application/json; charset=UTF-8" }
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('put ' + data)
+          // this.statusHTTP = 200;
+          // this.txnEntries = data.Data
+        });
+    },
+    async findAccount() {
+      fetch(this.$store.getters['getEpSavingAccount'], {
+        method: 'GET',
         body: JSON.stringify({
           Transaction_Id: 1,
           Folio: 1,
@@ -168,25 +266,35 @@ export default {
       })
         .then(response => response.json())
         .then(data => {
-          console.log('post ' + data)
-          // this.txn = data.Data
+          console.log('get ' + data)
+          // this.txnEntries = data.Data
         });
     },
     selectClient(value) {
       if (value != null) {
-        console.log("__[::] selectClient: " + typeof (this.clienteEntries));
         this.$store.dispatch("axnCustomerProfile", value);
       }
       for (var i = 0; i < this.clienteEntries.length; i++) {
         if (value == this.clienteEntries[i].Cliente_Id) {
           this.clienteAhorro = this.clienteEntries[i]
+          this.savingTarget = this.txnSavingEntries[i]
+          this.creditTarget = this.txnCreditEntries[i]
+          console.log('----- clienteEntries: ' + JSON.stringify(this.clienteAhorro));
+          console.log('----- txnSavingEntries: ' + JSON.stringify(this.savingTarget));
+          console.log('----- txnCreditEntries: ' + JSON.stringify(this.creditTarget));
         }
-        if (this.txn.Cliente_Id == this.clienteEntries[i].Cliente_Id) {
-          this.txn.Txn_id = this.clienteEntries[i]
-        }
-
-        console.log('asdf ' + this.txn.Cliente_Id);
       }
+      if (this.savingTarget.Numero_Cuenta) {
+        this.conAhorro = "Con ahorro";
+      } else {
+        this.conAhorro = "Sin ahorro";
+      }
+      if (this.creditTarget.Numero_Cuenta) {
+        this.conCredito = "Con credito";
+      } else {
+        this.conCredito = "Sin credito";
+      }
+      this.saldo = this.savingTarget.Total
     },
   },
   /** end Hooks */

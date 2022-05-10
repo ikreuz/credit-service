@@ -1,7 +1,7 @@
 import axios from "axios";
 // Customer
 const netCustomersPost = 'http://localhost:5000/api/Customers/insert'
-// const netCustomersPut = 'http://localhost:5000/api/Customers/update'
+const netCustomersPut = 'http://localhost:5000/api/Customers/update'
 // const netCustomersDelete = 'http://localhost:5000/api/Customers/delete/'
 // const netCustomersGet = 'http://localhost:5000/api/Customers/get/';
 const netCustumersGetAll = 'http://localhost:5000/api/Customers/getall'
@@ -18,11 +18,11 @@ const netRolesGetAll = 'http://localhost:5000/api/Roles/getall'
 // const netTowerGet = 'http://localhost:5000/api/Tower/get/';
 const netTowerGetAll = 'http://localhost:5000/api/Tower/getall'
 // Transaction
-const netTransactionPost = 'http://localhost:5000/api/Transaction/insert'
+// const netTransactionPost = 'http://localhost:5000/api/Transaction/insert'
 // const netTransactionPut = 'http://localhost:5000/api/Transaction/update'
 // const netTransactionDelete = 'http://localhost:5000/api/Transaction/delete/'
 // const netTransactionGet = 'http://localhost:5000/api/Transaction/get/';
-const netTransactionGetAll = 'http://localhost:5000/api/Transaction/getall'
+// const netTransactionGetAll = 'http://localhost:5000/api/Transaction/getall'
 // Transaction Credit
 // const netTransactionCreditPost = 'http://localhost:5000/api/TransactionCredit/insert'
 // const netTransactionCreditPut = 'http://localhost:5000/api/TransactionCredit/update'
@@ -30,7 +30,7 @@ const netTransactionGetAll = 'http://localhost:5000/api/Transaction/getall'
 // const netTransactionCreditGet = 'http://localhost:5000/api/TransactionCredit/get/';
 const netTransactionCreditGetAll = 'http://localhost:5000/api/TransactionCredit/getall'
 // Transaction Saving
-// const netTransactionSavingPost = 'http://localhost:5000/api/TransactionSaving/insert'
+const netTransactionSavingPost = 'http://localhost:5000/api/TransactionSaving/insert'
 // const netTransactionSavingPut = 'http://localhost:5000/api/TransactionSaving/update'
 // const netTransactionSavingDelete = 'http://localhost:5000/api/TransactionSaving/delete/'
 // const netTransactionSavingGet = 'http://localhost:5000/api/TransactionSaving/get/';
@@ -41,8 +41,11 @@ const netTransactionSavingGetAll = 'http://localhost:5000/api/TransactionSaving/
 // const netUsersDelete = 'http://localhost:5000/api/Users/delete/'
 // const netUsersGet = 'http://localhost:5000/api/Users/get/';
 const netUsersGetAll = 'http://localhost:5000/api/Users/getall'
+// Credit Account
+// const netCreditAccountGet = 'http://localhost:5000/api/CreditAccount/get/';
+// Saving Account
+// const netSavingAccountGet = 'http://localhost:5000/api/SavingAccount/get/';
 //
-
 export default {
   state: {
     apiTowerGetAll: [],
@@ -76,24 +79,33 @@ export default {
     getEpApiUsersTrasnsactionSavingAll(state) {
       return state.apiTransactionSavingGetAll;
     },
-    postEpCustomers(){
+    postEpCustomers() {
       return netCustomersPost;
     },
-    postEpTranasction(){
-      return netTransactionPost;
+    putEpCustomers(){
+      return netCustomersPut;
     },
-    getEpCustomers(){
+    postEpTranasctionSaving() {
+      return netTransactionSavingPost;
+    },
+    getEpCustomers() {
       return netCustumersGetAll;
     },
-    getEpTransactionCredit(){
+    getEpTransactionCredit() {
       return netTransactionCreditGetAll;
     },
-    getEpTransactionSaving(){
+    getEpTransactionSaving() {
       return netTransactionSavingGetAll;
     },
-    getEpTransaction(){
-      return netTransactionGetAll;
-    }
+    // getEpTransaction() {
+    //   return netTransactionGetAll;
+    // },
+    // getEpCreditAccount() {
+    //   return netCreditAccountGet;
+    // },
+    // getEpSavingAccount() {
+    //   return netSavingAccountGet;
+    // }
   },
   mutations: {
     SET_API_TOWER_GET_ALL(state, payload) {
@@ -130,18 +142,18 @@ export default {
             axios.get(netRolesGetAll),
             axios.get(netUsersGetAll),
             axios.get(netCustumersGetAll),
-            axios.get(netTransactionGetAll),
+            // axios.get(netTransactionGetAll),
             axios.get(netTransactionCreditGetAll),
             axios.get(netTransactionSavingGetAll),
           ])
           .then(
             axios.spread(function (
-              part1, part2, part3, part4, part5, part6, part7) {
+              part1, part2, part3, part4, part6, part7) {
               dispatch("axnTowerGetAll", part1.data);
               dispatch("axnRolesGetAll", part2.data);
               dispatch("axnUsersGetAll", part3.data);
               dispatch("axnCustomersGetAll", part4.data);
-              dispatch("axnTransactionGetAll", part5.data);
+              // dispatch("axnTransactionGetAll", part5.data);
               dispatch("axnTransactionCreditGetAll", part6.data);
               dispatch("axnTransactionSavingGetAll", part7.data);
             })
@@ -162,9 +174,9 @@ export default {
     async axnCustomersGetAll({ commit }, payload) {
       commit("SET_API_CUSTOMERS_GET_ALL", JSON.stringify(payload));
     },
-    async axnTransactionGetAll({ commit }, payload) {
-      commit('SET_API_TRANSACTION_GET_ALL', payload)
-    },
+    // async axnTransactionGetAll({ commit }, payload) {
+    //   commit('SET_API_TRANSACTION_GET_ALL', payload)
+    // },
     async axnTransactionCreditGetAll({ commit }, payload) {
       commit('SET_API_TRANSACTION_CREDIT_GET_ALL', payload)
     },

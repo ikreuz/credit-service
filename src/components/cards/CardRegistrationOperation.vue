@@ -17,8 +17,19 @@
                 <v-col cols="12" class="wrapper-input-5 z-3">
                   <div class="wrapper">
                     <div class="diana-input-data">
-                      <v-select label="Seleccion .." item-text="concepto" item-value="concepto_id" color="primary" solo
-                        class="diana-input scrolled"></v-select>
+                      <v-select v-model="clienteModel" :items="clienteEntries" item-text="Nombre" menu-props="auto"
+                        item-value="Cliente_Id" color="primary" solo class="diana-input scrolled" @change="selectClient"
+                        label="Select">
+                      </v-select>
+                    </div>
+                  </div>
+                </v-col>
+                <v-col cols="12" class="wrapper-input-5 z-3">
+                  <div class="wrapper">
+                    <div class="diana-input-data">
+                      <v-text-field v-model="clienteAhorro.Numero_Cuenta" class="diana-input" solo dense value=""
+                        type="text" prepend-icon="mdi-account">
+                      </v-text-field>
                     </div>
                   </div>
                 </v-col>
@@ -38,7 +49,8 @@
                     <div class="diana-input-data" data-input-type="switch">
                       <v-card-actions class="nopadding nobordercolor">
                         <v-switch v-model="toDepositWithdraw" :disabled="isDepositWithdraw"
-                          class="mt-0 nobordercolor nopadding noborder" color="info" hide-details label="Deposito/Retiro">
+                          class="mt-0 nobordercolor nopadding noborder" color="info" hide-details
+                          label="Deposito/Retiro">
                         </v-switch>
                       </v-card-actions>
                     </div>
@@ -84,6 +96,7 @@
                     </div>
                   </div>
                 </v-col>
+
               </v-card>
             </v-flex>
           </v-layout>
@@ -106,7 +119,7 @@
 <script>
 import { v4 as uuidv4 } from 'uuid';
 import srvToasted from "@/services/srv_toasted.js";
-import serviceAxiosGet from "@/services/srv_axios";
+// import serviceAxiosGet from "@/services/srv_axios";
 
 export default {
   name: "",
@@ -117,9 +130,12 @@ export default {
     cards: [
       { id: 1, title: "Deposito", content: "" },
       { id: 2, title: "Retiro", content: "" },
-
     ],
-    clients: [], toasted: {
+    statusHTTP: {
+      OK: 200,
+      ERROR: 400,
+    },
+    toasted: {
       CUSTOM: "custom",
       DEFAULT: "default",
       INFO: "info",
@@ -127,6 +143,15 @@ export default {
       SUCCESS: "success",
       WARNING: "warning",
     },
+    saldo: 0.00,
+    conCredito: "...",
+    conAhorro: "...",
+    clientTarget: {},
+    creditTarget: {},
+    savingTarget: {},
+    txnSavingEntries: [],
+    txnCreditEntries: [],
+    txnEntries: [],
     /** contact */
     clienteLimite: 60,
     clienteEntries: [],
@@ -138,6 +163,10 @@ export default {
     windowSize: {
       x: 0,
       y: 0,
+    },
+    clienteAhorro: {
+      Saldo_Actual: 0.00,
+      Numero_Cuenta: ''
     },
     activateBit: true,
     /** */
@@ -174,8 +203,14 @@ export default {
   async mounted() {
     this.onResize();
     try {
-      this.balance = await serviceAxiosGet("http://localhost:5000/api/TransactionCredit/getall", 'GET');
-      console.log(this.balance);
+      // this.balance = await serviceAxiosGet("http://localhost:5000/api/TransactionCredit/getall", 'GET');
+      // console.log(this.balance);
+      fetch(this.$store.getters['getEpCustomers'])
+        .then(response => response.json())
+        .then(data => {
+          console.log('getEpCustomers ' + JSON.stringify(data))
+          this.clienteEntries = data.Data
+        });
     } catch (error) {
       console.log('dianaprj@: ' + error);
     }
@@ -205,6 +240,32 @@ export default {
     reloadTheClientData() {
       this.$refs.form.reset();
       // this.matchClient = this.$store.state.matchClient;
+    },
+    selectClient(value) {
+      if (value != null) {
+        this.$store.dispatch("axnCustomerProfile", value);
+      }
+      for (var i = 0; i < this.clienteEntries.length; i++) {
+        if (value == this.clienteEntries[i].Cliente_Id) {
+          this.clienteAhorro = this.clienteEntries[i]
+          this.savingTarget = this.txnSavingEntries[i]
+          this.creditTarget = this.txnCreditEntries[i]
+          console.log('----- clienteEntries: ' + JSON.stringify(this.clienteAhorro));
+          console.log('----- txnSavingEntries: ' + JSON.stringify(this.savingTarget));
+          console.log('----- txnCreditEntries: ' + JSON.stringify(this.creditTarget));
+        }
+      }
+      if (this.savingTarget.Numero_Cuenta) {
+        this.conAhorro = "Con ahorro";
+      } else {
+        this.conAhorro = "Sin ahorro";
+      }
+      if (this.creditTarget.Numero_Cuenta) {
+        this.conCredito = "Con credito";
+      } else {
+        this.conCredito = "Sin credito";
+      }
+      this.saldo = this.savingTarget.Total
     },
   },
   /** end Hooks */
