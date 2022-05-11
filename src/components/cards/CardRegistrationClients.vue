@@ -6,9 +6,23 @@
         <v-card id="" class="stripe stripe--article shadow-smallest">
 
           <v-card-text>Dar de alta a un cliente</v-card-text>
+
           <v-layout row wrap pa-3 justify-center class="card-clients">
+            <v-container fluid class="flex justify-center">
+              <v-row>
+                <v-col cols="12" class="disflex">
+                  <v-checkbox color="info" v-model="checkboxConCredito" class="noborder mx-4 my-0"
+                    :label="`Con Credito`">
+                  </v-checkbox>
+                  <v-checkbox color="info" v-model="checkboxConAhorro" class="noborder mx-4 my-0" :label="`Con Ahorro`">
+                  </v-checkbox>
+                </v-col>
+              </v-row>
+            </v-container>
             <v-flex xs10 sm6 md4 v-for="card in cards" :key="card.title">
               <v-card class="card-clients__container z-3 noshadow">
+
+
                 <v-col cols="12" class="wrapper-input-5 z-3" color="bunker darken-5">
                   <v-list-item v-if="card.id == 1">
                     <v-list-item-content>
@@ -41,12 +55,15 @@
                     </div>
                   </div>
                 </v-col>
+
+
               </v-card>
+
             </v-flex>
           </v-layout>
           <v-card class="disflex noshadow">
             <v-btn color="primary" class="w-200 " @click="alta()">
-                Dar de alta
+              Dar de alta
             </v-btn>
           </v-card>
         </v-card>
@@ -73,7 +90,9 @@ export default {
     cards: [
       { id: 1, title: "Nombre", content: "" },
       { id: 2, title: "ID", content: "" },
-    ],
+    ], 
+    checkboxConCredito: true,
+    checkboxConAhorro: false,
     /** contact */
     clienteLimite: 60,
     clienteEntries: [],
@@ -155,16 +174,19 @@ export default {
       // console.log('Key pressed:', event);
       // console.log(this.contacto);
       this.clienteCount = uuidv4();
-      let arr = [];
-      arr = this.contacto.split(" ");
+
       // console.log(arr[0]);
       // console.log(arr[1]);
       // console.log(this.clienteCount);
-      this.addCustomer.nombre = arr[0];
-      this.addCustomer.apellidos = arr[1];
+
 
     },
     async alta() {
+      let arr = [];
+      arr = this.contacto.split(" ");
+      this.addCustomer.nombre = arr[0];
+      this.addCustomer.apellidos = arr[1];
+
       fetch(this.$store.getters['postEpCustomers'], {
         method: 'POST',
         body: JSON.stringify({
@@ -174,8 +196,8 @@ export default {
           Numero_Cuenta: this.clienteCount,
           Correo: this.addCustomer.nombre.toLowerCase() + '@credit.com',
           Tel_1: 12341234,
-          C_Credito: true,
-          C_Ahorro: false,
+          C_Credito: this.checkboxConCredito,
+          C_Ahorro: this.checkboxConAhorro,
           Fh_Registro: moment(),
           Fh_Autoirzacion: moment(),
           Usr_Registra_Id: 1,

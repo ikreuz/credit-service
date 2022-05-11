@@ -5,7 +5,19 @@
         <!-- {{ windowSize }} -->
         <v-card id="" class="stripe stripe--article shadow-smallest">
           <v-card-text>Aperturar una cuenta</v-card-text>
+
           <v-layout row wrap pa-3 justify-center class="card-saving-account">
+            <v-container fluid class="flex justify-center">
+              <v-row>
+                <v-col cols="12" class="disflex">
+                  <v-checkbox color="info" v-model="checkboxConCredito" class="noborder mx-4 my-0"
+                    :label="`Con Credito`">
+                  </v-checkbox>
+                  <v-checkbox color="info" v-model="checkboxConAhorro" class="noborder mx-4 my-0" :label="`Con Ahorro`">
+                  </v-checkbox>
+                </v-col>
+              </v-row>
+            </v-container>
             <v-flex xs10 sm6 md4 v-for="card in cards" :key="card.title">
               <v-card class="card-saving-account__container z-3 noshadow">
                 <v-col cols="12" class="wrapper-input-5 z-3" color="bunker darken-5">
@@ -63,7 +75,7 @@
                     </div>
                   </div>
                 </v-col>
-                <v-col cols="12" class="wrapper-input-5 z-3" v-if="card.id == 4">
+                <!-- <v-col cols="12" class="wrapper-input-5 z-3" v-if="card.id == 4">
                   <div class="wrapper">
                     <div class="diana-input-data" v-if="card.id == 4">
                       <v-text-field v-model="conCredito" class="diana-input" solo dense type="text"
@@ -80,7 +92,8 @@
                       </v-text-field>
                     </div>
                   </div>
-                </v-col>
+                </v-col> -->
+
               </v-card>
             </v-flex>
           </v-layout>
@@ -110,14 +123,16 @@ export default {
       { id: 1, title: "Cliente", content: "" },
       { id: 2, title: "Numero cuenta", content: "" },
       { id: 3, title: "Saldo actual", content: "" },
-      { id: 4, title: "Tiene cuenta de credito", content: "" },
-      { id: 5, title: "Tiene cuenta de ahorro", content: "" },
+      // { id: 4, title: "Tiene cuenta de credito", content: "" },
+      // { id: 5, title: "Tiene cuenta de ahorro", content: "" },
     ],
+    checkboxConCredito: true,
+    checkboxConAhorro: false,
     statusHTTP: {
       OK: 200,
       ERROR: 400,
     },
-     toasted: {
+    toasted: {
       CUSTOM: "custom",
       DEFAULT: "default",
       INFO: "info",
@@ -171,27 +186,22 @@ export default {
     fetch(this.$store.getters['getEpCustomers'])
       .then(response => response.json())
       .then(data => {
-        console.log('getEpCustomers ' + JSON.stringify(data))
+        console.log('** getEpCustomers ' + JSON.stringify(data))
         this.clienteEntries = data.Data
+
       });
-    fetch(this.$store.getters['getEpTransactionSaving'])
+    fetch(this.$store.getters['getEpTransactionSavingCmp'])
       .then(response => response.json())
       .then(data => {
-        console.log('getEpTransactionSaving ' + JSON.stringify(data))
+        console.log('** getEpTransactionSavingCmp ' + JSON.stringify(data))
         this.txnSavingEntries = data.Data
       });
-    fetch(this.$store.getters['getEpTransactionCredit'])
+    fetch(this.$store.getters['getEpTransactionCreditCmp'])
       .then(response => response.json())
       .then(data => {
-        console.log('getEpTransactionCredit ' + JSON.stringify(data))
+        console.log('** getEpTransactionCreditCmp ' + JSON.stringify(data))
         this.txnCreditEntries = data.Data
       });
-    // fetch(this.$store.getters['getEpTransaction'])
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     console.log('getEpTransaction ' + JSON.stringify(data))
-    //     this.txnEntries = data.Data
-    //   });
   },
   beforeUpdate() { },
   updated() { },
@@ -208,16 +218,17 @@ export default {
       console.log(this.clienteCount);
     },
     async alta() {
+      let total = this.dosDecimales(this.savingTarget.Total)
       fetch(this.$store.getters['postEpTranasctionSaving'], {
         method: 'POST',
         body: JSON.stringify({
           Saving_Id: 1,
           Tipo_Cuenta: 37,
-          Apertura: (this.savingTarget.Apertura + 1),
+          Apertura: (this.savingTarget.Apertura ? this.savingTarget.Apertura + 1 : this.savingTarget.Apertura),
           Numero_Cuenta: this.clienteAhorro.Numero_Cuenta,
           Documento_Id: 53, // apertura
-          Cantidad: this.saldo,
-          Total: 0,
+          Cantidad: this.dosDecimales(this.saldo),
+          Total: this.doOperation(true, this.saldo, total)
         }),
         headers: { 'Content-type': "application/json; charset=UTF-8" }
       })
@@ -282,20 +293,44 @@ export default {
           console.log('----- clienteEntries: ' + JSON.stringify(this.clienteAhorro));
           console.log('----- txnSavingEntries: ' + JSON.stringify(this.savingTarget));
           console.log('----- txnCreditEntries: ' + JSON.stringify(this.creditTarget));
+          this.checkboxConCredito = this.clienteEntries[i].C_Credito
+          this.checkboxConAhorro = this.clienteEntries[i].C_Ahorro
         }
       }
-      if (this.savingTarget.Numero_Cuenta) {
-        this.conAhorro = "Con ahorro";
-      } else {
-        this.conAhorro = "Sin ahorro";
-      }
-      if (this.creditTarget.Numero_Cuenta) {
-        this.conCredito = "Con credito";
-      } else {
-        this.conCredito = "Sin credito";
-      }
+
+      // if (this.savingTarget.Numero_Cuenta) {
+      //   this.conAhorro = "Con ahorro";
+      // } else {
+      //   this.conAhorro = "Sin ahorro";
+      // }
+      // if (this.creditTarget.Numero_Cuenta) {
+      //   this.conCredito = "Con credito";
+      // } else {
+      //   this.conCredito = "Sin credito";
+      // }
+
+
       this.saldo = this.savingTarget.Total
     },
+    dosDecimales(n) {
+      let t = n.toString();
+      let regex = /(\d*.\d{0,2})/;
+      return t.match(regex)[0];
+    },
+    doOperation(isDeposit, amount, total) {
+      let result
+      if (isDeposit) {
+        result = total + amount
+      } else {
+        result = total - amount
+      }
+      console.log('doOperation: ' + isDeposit);
+      console.log('doOperation: ' + amount);
+      console.log('doOperation: ' + total);
+      console.log('doOperation: ' + result);
+      console.log('doOperation: ' + this.dosDecimales(result));
+      return this.dosDecimales(result)
+    }
   },
   /** end Hooks */
 };

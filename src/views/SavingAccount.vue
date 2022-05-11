@@ -3,7 +3,7 @@
         <v-col>
             <v-card-title class="justify-center">Apertura de cuenta de ahorro</v-card-title>
             <CardRegistrationSaving />
-            <TableTransactionSaving />
+            <TableHistorySaving />
         </v-col>
     </v-row>
 </template>
@@ -19,7 +19,7 @@ export default {
     props: {},
     components: {
         CardRegistrationSaving: () => import('@/components/cards/CardRegistrationSaving.vue'),
-        TableTransactionSaving: () => import('@/components/tables/TableTransactionSaving.vue')
+        TableHistorySaving: () => import('@/components/tables/TableHistorySaving.vue')
     },
     data: () => ({
         toasted: {

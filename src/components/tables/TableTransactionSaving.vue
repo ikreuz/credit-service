@@ -96,10 +96,11 @@ export default {
     dialog: false,
     dialogDelete: false,
     headers: [
-      { text: "Numero Cuenta", align: "center", value: "Numero_Cuenta" },
-      { text: "Tipo", align: "center", value: "Tipo_Cuenta" },
+      { text: "Numero cuenta", align: "center", value: "Numero_Cuenta" , width: '100px'},
+      { text: "Tipo cuenta", align: "center", value: "Tipo_Cuenta_Txt" },
       { text: "Aperturas", align: "center", value: "Apertura" },
-      { text: "Documento", align: "center", value: "Documento_Id" },
+      { text: "Documento", align: "center", value: "Documento_Txt" },
+      { text: "Cliente", align: "center", value: "Cliente" },
       { text: "Cantidad", align: "center", value: "Cantidad" },
       { text: "Total", align: "center", value: "Total" },
       { text: "Acciones", align: "center", value: "actions", sortable: false },
@@ -157,7 +158,7 @@ export default {
   destroyed() { },
   methods: {
     initialize() {
-      fetch(this.$store.getters['getEpTransactionSaving'])
+      fetch(this.$store.getters['getEpTransactionSavingCmp'])
         .then(response => response.json())
         .then(data => {
           console.log('----- tableSaving: '+JSON.stringify(data))
@@ -210,7 +211,7 @@ export default {
       this.windowSize = { x: window.innerWidth, y: window.innerHeight };
     },
     updateData() {
-      fetch(this.$store.getters['getEpTransactionSaving'])
+      fetch(this.$store.getters['getEpTransactionSavingCmp'])
         .then(response => response.json())
         .then(data => {
           console.log(data)

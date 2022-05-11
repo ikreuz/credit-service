@@ -178,13 +178,17 @@ export default {
     contactoFechaVencimiento: "",
     matchFromGuide: {},
     balance: {},
+    opBalance: {},
     toDepositWithdraw: false,
     isDepositWithdraw: false,
     inputDisabled: 0,
     cantidadDeposito: 0.00,
     cantidadRetiro: 0.00,
     cantidad: 0.00,
-    operacion: 0
+    operacion: 0,
+    targetTotal: 0,
+    op: false,
+    postTransaction: 0
   }),
   computed: {
   },
@@ -192,6 +196,17 @@ export default {
     windowSize() { },
     toDepositWithdraw(value) {
       console.log('---- toDepositWithdraw: ' + value);
+      // if (value) {
+      //   this.operacion = 1 // retirar
+      //   this.cantidad = this.cantidadRetiro
+      // }
+      // else {
+      //   this.operacion = 2 // deposito
+      //   this.cantidad = this.cantidadDeposito
+      // }
+      this.op = value
+      // console.log('---- operacion: ' + this.operacion);
+      // console.log('---- cantidad: ' + this.cantidad);
     },
     isDepositWithdraw(value) {
       console.log("---- isDepositWithdraw: " + value);
@@ -206,6 +221,8 @@ export default {
   beforeMount() { },
   async mounted() {
     this.onResize();
+
+
     try {
       fetch(this.$store.getters['getEpCustomers'])
         .then(response => response.json())
@@ -213,16 +230,16 @@ export default {
           console.log('getEpCustomers ' + JSON.stringify(data))
           this.clienteEntries = data.Data
         });
-      fetch(this.$store.getters['getEpTransactionSaving'])
+      fetch(this.$store.getters['getEpTransactionSavingCmp'])
         .then(response => response.json())
         .then(data => {
-          console.log('getEpTransactionSaving ' + JSON.stringify(data))
+          console.log('getEpTransactionSavingCmp ' + JSON.stringify(data))
           this.txnSavingEntries = data.Data
         });
-      fetch(this.$store.getters['getEpTransactionCredit'])
+      fetch(this.$store.getters['getEpTransactionCreditCmp'])
         .then(response => response.json())
         .then(data => {
-          console.log('getEpTransactionCredit ' + JSON.stringify(data))
+          console.log('getEpTransactionCreditCmp ' + JSON.stringify(data))
           this.txnCreditEntries = data.Data
         });
     } catch (error) {
@@ -234,6 +251,7 @@ export default {
   beforeDestroy() { },
   destroyed() { },
   methods: {
+
     onResize() {
       this.windowSize = { x: window.innerWidth, y: window.innerHeight };
     },
@@ -244,6 +262,38 @@ export default {
       // console.log(this.clienteCount);
     },
     alta() {
+
+
+      if (this.cantidadRetiro > 0) {
+        this.operacion = 1 // retirar
+        this.cantidad = this.cantidadRetiro
+        // console.log(this.deposit(this.cantidad, this.balance.total));
+        this.opBalance = {
+          operacion: this.operacion,
+          cantidad: this.cantidad,
+          op: this.deposit(this.cantidad, this.balance.total),
+        }
+      }
+      else {
+        this.operacion = 2 // deposito
+        this.cantidad = this.cantidadDeposito
+        // console.log(this.withdraw(this.cantidad, this.balance.total));
+        this.opBalance = {
+          operacion: this.operacion,
+          cantidad: this.cantidad,
+          op: this.withdraw(this.cantidad, this.balance.total)
+        }
+      }
+
+      // let sum = this.doOperation(this.operacion, this.cantidad, this.balance.total)
+
+
+
+      // let y = 1000.22;
+      // let result = parseFloat(this.cantidadDeposito) + parseFloat(y);
+      // console.log(this.dosDecimales(result));
+
+
       /**
        * documento: 52 cierre, 53 apertura, 54 deposito, 55 retiro
        * status: 47 borrador, 48 por cobrar, 49 cobrado, 50 cancelada
@@ -253,49 +303,25 @@ export default {
        *  x           37          x           x             54           x          x
        * 
        */
-      if (this.toDepositWithdraw) {
-        this.operacion = (this.savingTarget.Total) -= (this.cantidadRetiro)
-        fetch(this.$store.getters['postEpTranasctionSaving'], {
-          method: 'POST',
-          body: JSON.stringify({
-            Saving_Id: 1,
-            Tipo_Cuenta: 37,
-            Apertura: this.savingTarget.Apertura,
-            Numero_Cuenta: this.savingTarget.Numero_Cuenta,
-            Documento_Id: this.toDepositWithdraw ? 55 : 54,
-            Cantidad: parseFloat(this.cantidadRetiro),
-            Total: this.operacion
-          }),
-          headers: { 'Content-type': "application/json; charset=UTF-8" }
-        })
-          .then(response => response.json())
-          .then(data => {
-            console.log(data)
-            this.txnResponse = data.Data
-          });
 
-      } else {
-        fetch(this.$store.getters['postEpTranasctionSaving'], {
-          method: 'POST',
-          body: JSON.stringify({
-            Saving_Id: 1,
-            Tipo_Cuenta: 37,
-            Apertura: this.savingTarget.Apertura,
-            Numero_Cuenta: this.savingTarget.Numero_Cuenta,
-            Documento_Id: this.toDepositWithdraw ? 55 : 54,
-            Cantidad: parseFloat(this.cantidadDeposito),
-            Total: parseFloat(this.cantidadDeposito) + parseFloat(this.savingTarget.Total)
-          }),
-          headers: { 'Content-type': "application/json; charset=UTF-8" }
-        })
-          .then(response => response.json())
-          .then(data => {
-            console.log(data)
-            this.txnResponse = data.Data
-          });
-
-      }
-
+      fetch(this.$store.getters['postEpTranasctionSaving'], {
+        method: 'POST',
+        body: JSON.stringify({
+          Saving_Id: 1,
+          Tipo_Cuenta: 37,
+          Apertura: this.savingTarget.Apertura,
+          Numero_Cuenta: this.savingTarget.Numero_Cuenta,
+          Documento_Id: this.toDepositWithdraw ? 55 : 54,
+          Cantidad: this.opBalance.cantidad,
+          Total: this.opBalance.op
+        }),
+        headers: { 'Content-type': "application/json; charset=UTF-8" }
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data)
+          this.txnResponse = data.Data
+        });
 
       this.contacto = '';
       this.clienteCount = '';
@@ -319,18 +345,53 @@ export default {
           console.log('----- txnCreditEntries: ' + JSON.stringify(this.creditTarget));
         }
       }
-      if (this.savingTarget.Numero_Cuenta) {
-        this.conAhorro = "Con ahorro";
-      } else {
-        this.conAhorro = "Sin ahorro";
+      this.balance = {
+        cliente_id: this.savingTarget.Cliente_Id,
+        numero_cuenta: this.savingTarget.Numero_Cuenta,
+        cantidad: this.savingTarget.Cantidad,
+        total: this.savingTarget.Total,
       }
-      if (this.creditTarget.Numero_Cuenta) {
-        this.conCredito = "Con credito";
-      } else {
-        this.conCredito = "Sin credito";
-      }
+      console.log(this.balance);
+
+
+
+      // if (this.savingTarget.Numero_Cuenta) {
+      //   this.conAhorro = "Con ahorro";
+      // } else {
+      //   this.conAhorro = "Sin ahorro";
+      // }
+      // if (this.creditTarget.Numero_Cuenta) {
+      //   this.conCredito = "Con credito";
+      // } else {
+      //   this.conCredito = "Sin credito";
+      // }
       this.saldo = this.savingTarget.Total
     },
+    dosDecimales(n) {
+      let t = n.toString();
+      let regex = /(\d*.\d{0,2})/;
+      return t.match(regex)[0];
+    },
+    doOperation(operation, amount, total) {
+      let result
+      if (operation == 1) {
+        result = total - amount
+      } else {
+        result = total + amount
+      }
+      console.log('isDeposit: ' + operation);
+      console.log('amount: ' + amount);
+      console.log('total: ' + total);
+      console.log('result: ' + result);
+      console.log('dosDecimales: ' + result);
+      return result
+    },
+    deposit(a, b) {
+      return parseInt(a) + parseInt(b)
+    },
+    withdraw(a, b) {
+      return parseInt(a) - parseInt(b)
+    }
   },
   /** end Hooks */
 };

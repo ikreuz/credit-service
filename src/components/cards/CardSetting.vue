@@ -13,7 +13,7 @@
                             label="Editable"></v-switch>
                         <v-spacer></v-spacer>
                         <v-btn :disabled="autoUpdate" :loading="isUpdating" color="walkure" depressed
-                            @click="isUpdating = true">
+                           >
                             <v-icon left> mdi-update </v-icon>
                             Actualizar ahora
                         </v-btn>
@@ -56,7 +56,7 @@
                                     <div class="devmpm-wrapper">
                                         <div id="devmpm-input-data-rfc-si" class="devmpm-input-data"
                                             data-devmpm-input-address="item-rfc">
-                                            <v-text-field v-model="matchClient.rfc" id="profile-rfc-si"
+                                            <v-text-field  id="profile-rfc-si"
                                                 value="matchClient.rfc" class="devmpm-input" ref="" solo dense label=""
                                                 persistent-hint type="text" :readonly="!autoUpdateRfc">
                                                 <template v-slot:append-outer>
@@ -97,7 +97,7 @@
                                     <div class="devmpm-wrapper">
                                         <div id="devmpm-input-data-nombre-si" class="devmpm-input-data"
                                             data-devmpm-input-address="item-nombre">
-                                            <v-text-field v-model="matchClient.cliente" value="matchClient.cliente"
+                                            <v-text-field value="matchClient.cliente"
                                                 id="profile-cliente-si" class="devmpm-input" ref="" solo dense label=""
                                                 persistent-hint type="text" data-item-address="item-nombre"
                                                 :readonly="!autoUpdateNombre">
@@ -139,7 +139,7 @@
                                     <div class="devmpm-wrapper">
                                         <div id="devmpm-input-data-calle-si" class="devmpm-input-data"
                                             data-devmpm-input-address="item-calle">
-                                            <v-text-field v-model="matchClient.domicilio.calle"
+                                            <v-text-field 
                                                 value="matchClient.domicilio.calle" id="" class="devmpm-input" ref=""
                                                 solo dense label="" persistent-hint type="text"
                                                 :readonly="!autoUpdateCalle">
@@ -181,7 +181,7 @@
                                     <div class="devmpm-wrapper">
                                         <div id="devmpm-input-data-num-exterior-si" class="devmpm-input-data"
                                             data-devmpm-input-address="item-num-exterior">
-                                            <v-text-field v-model="matchClient.domicilio.n_exterior"
+                                            <v-text-field 
                                                 value="matchClient.domicilio.n_exterior" id="" class="devmpm-input"
                                                 ref="" solo dense label="" persistent-hint type="text"
                                                 :readonly="!autoUpdateNumExterior">
@@ -226,7 +226,7 @@
                                     <div class="devmpm-wrapper">
                                         <div id="devmpm-input-data-num-interior-si" class="devmpm-input-data"
                                             data-devmpm-input-address="item-num-interior">
-                                            <v-text-field v-model="matchClient.domicilio.n_interior"
+                                            <v-text-field 
                                                 value="matchClient.domicilio.n_interior" id="" class="devmpm-input"
                                                 ref="" solo dense label="" persistent-hint type="text"
                                                 :readonly="!autoUpdateNumInterior">
@@ -271,7 +271,7 @@
                                     <div class="devmpm-wrapper">
                                         <div id="devmpm-input-data-colonia-si" class="devmpm-input-data"
                                             data-devmpm-input-address="item-colonia">
-                                            <v-text-field v-model="matchClient.domicilio.colonia"
+                                            <v-text-field 
                                                 value="matchClient.domicilio.colonia" id="" class="devmpm-input" ref=""
                                                 solo dense label="" persistent-hint type="text"
                                                 :readonly="!autoUpdateColonia">
@@ -313,7 +313,7 @@
                                     <div class="devmpm-wrapper">
                                         <div id="devmpm-input-data-ciudad-si" class="devmpm-input-data"
                                             data-devmpm-input-address="item-ciudad">
-                                            <v-text-field v-model="matchClient.domicilio.ciudad"
+                                            <v-text-field 
                                                 value="matchClient.domicilio.ciudad" id="" class="devmpm-input" ref=""
                                                 solo dense label="" persistent-hint type="text"
                                                 :readonly="!autoUpdateCiudad">
@@ -355,7 +355,7 @@
                                     <div class="devmpm-wrapper">
                                         <div id="devmpm-input-data-municipio-si" class="devmpm-input-data"
                                             data-devmpm-input-address="item-municipio">
-                                            <v-text-field v-model="matchClient.domicilio.municipio"
+                                            <v-text-field 
                                                 value="matchClient.domicilio.municipio" id="" class="devmpm-input"
                                                 ref="" solo dense label="" persistent-hint type="text"
                                                 :readonly="!autoUpdateMunicipio">
@@ -401,7 +401,7 @@
                                     <div class="devmpm-wrapper">
                                         <div id="devmpm-input-data-cp-si" class="devmpm-input-data"
                                             data-devmpm-input-address="item-cp">
-                                            <v-text-field v-model="matchClient.domicilio.codigo_postal"
+                                            <v-text-field 
                                                 value="matchClient.domicilio.codigo_postal" id="" class="devmpm-input"
                                                 ref="" solo dense label="" persistent-hint type="text"
                                                 :readonly="!autoUpdateCp">
@@ -443,7 +443,7 @@
                                     <div class="devmpm-wrapper">
                                         <div id="devmpm-input-data-estado-si" class="devmpm-input-data"
                                             data-devmpm-input-address="item-estado">
-                                            <v-text-field v-model="matchClient.domicilio.entidad"
+                                            <v-text-field 
                                                 value="matchClient.domicilio.entidad" id="" class="devmpm-input" ref=""
                                                 solo dense label="" persistent-hint type="text"
                                                 :readonly="!autoUpdateEstado">
@@ -485,7 +485,7 @@
                                     <div class="devmpm-wrapper">
                                         <div id="devmpm-input-data-pais-si" class="devmpm-input-data"
                                             data-devmpm-input-address="item-pais">
-                                            <v-text-field v-model="matchClient.domicilio.pais"
+                                            <v-text-field 
                                                 value="matchClient.domicilio.pais" id="" class="devmpm-input" ref=""
                                                 solo dense label="" persistent-hint type="text"
                                                 :readonly="!autoUpdatePais">
@@ -527,7 +527,7 @@
                                     <div class="devmpm-wrapper">
                                         <div id="devmpm-input-data-email-si" class="devmpm-input-data"
                                             data-devmpm-input-address="item-email">
-                                            <v-text-field v-model="matchClient.email" value="matchClient.email" id=""
+                                            <v-text-field 
                                                 class="devmpm-input" ref="" solo dense label="" persistent-hint
                                                 type="text" :readonly="!autoUpdateEmail">
                                                 <template v-slot:append-outer>
@@ -895,7 +895,7 @@ export default {
          */
         reloadTheClientData() {
             this.$refs.form.reset();
-            this.matchClient = this.$store.state.matchClient;
+            // this.matchClient = this.$store.state.matchClient;
         },
         handlerItemClick(event) {
             // console.log(event);

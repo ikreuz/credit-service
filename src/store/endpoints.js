@@ -1,50 +1,54 @@
 import axios from "axios";
+const local = 'http://localhost:5000/api'
+// const azure = 'http://creditandsaving.azurewebsites.net/api'
+const service = local;
 // Customer
-const netCustomersPost = 'http://localhost:5000/api/Customers/insert'
-const netCustomersPut = 'http://localhost:5000/api/Customers/update'
-// const netCustomersDelete = 'http://localhost:5000/api/Customers/delete/'
-// const netCustomersGet = 'http://localhost:5000/api/Customers/get/';
-const netCustumersGetAll = 'http://localhost:5000/api/Customers/getall'
+const netCustomersPost = service + '/Customers/insert'
+const netCustomersPut = service + '/Customers/update'
+// const netCustomersDelete = service+'/Customers/delete/'
+// const netCustomersGet = service+'/Customers/get/';
+const netCustumersGetAll = service + '/Customers/getall'
 // Roles
-// const netRolesPost = 'http://localhost:5000/api/Roles/insert'
-// const netRolesPut = 'http://localhost:5000/api/Roles/update'
-// const netRolesDelete = 'http://localhost:5000/api/Roles/delete/'
-// const netRolesGet = 'http://localhost:5000/api/Roles/get/';
-const netRolesGetAll = 'http://localhost:5000/api/Roles/getall'
+// const netRolesPost = service+'/Roles/insert'
+// const netRolesPut = service+'/Roles/update'
+// const netRolesDelete = service+'/Roles/delete/'
+// const netRolesGet = service+'/Roles/get/';
+const netRolesGetAll = service + '/Roles/getall'
 // Tower => Master ID, Auth
-// const netTowerPost = 'http://localhost:5000/api/Tower/insert'
-// const netTowerPut = 'http://localhost:5000/api/Tower/update'
-// const netTowerDelete = 'http://localhost:5000/api/Tower/delete/'
-// const netTowerGet = 'http://localhost:5000/api/Tower/get/';
-const netTowerGetAll = 'http://localhost:5000/api/Tower/getall'
+// const netTowerPost = service+'/Tower/insert'
+// const netTowerPut = service+'/Tower/update'
+// const netTowerDelete = service+'/Tower/delete/'
+// const netTowerGet = service+'/Tower/get/';
+const netTowerGetAll = service + '/Tower/getall'
 // Transaction
-// const netTransactionPost = 'http://localhost:5000/api/Transaction/insert'
-// const netTransactionPut = 'http://localhost:5000/api/Transaction/update'
-// const netTransactionDelete = 'http://localhost:5000/api/Transaction/delete/'
-// const netTransactionGet = 'http://localhost:5000/api/Transaction/get/';
-// const netTransactionGetAll = 'http://localhost:5000/api/Transaction/getall'
+// const netTransactionPost = service+'/Transaction/insert'
+// const netTransactionPut = service+'/Transaction/update'
+// const netTransactionDelete = service+'/Transaction/delete/'
+// const netTransactionGet = service+'/Transaction/get/';
+// const netTransactionGetAll = service+'/Transaction/getall'
 // Transaction Credit
-// const netTransactionCreditPost = 'http://localhost:5000/api/TransactionCredit/insert'
-// const netTransactionCreditPut = 'http://localhost:5000/api/TransactionCredit/update'
-// const netTransactionCreditDelete = 'http://localhost:5000/api/TransactionCredit/delete/'
-// const netTransactionCreditGet = 'http://localhost:5000/api/TransactionCredit/get/';
-const netTransactionCreditGetAll = 'http://localhost:5000/api/TransactionCredit/getall'
+// const netTransactionCreditPost = service+'/TransactionCredit/insert'
+// const netTransactionCreditPut = service+'/TransactionCredit/update'
+// const netTransactionCreditDelete = service+'/TransactionCredit/delete/'
+// const netTransactionCreditGet = service+'/TransactionCredit/get/';
+// const netTransactionCreditGetAllCmp = service + '/TransactionCredit/getall'
+const netTransactionCreditGetAllCmp = service + '/TransactionCredit/getallCmp'
 // Transaction Saving
-const netTransactionSavingPost = 'http://localhost:5000/api/TransactionSaving/insert'
-// const netTransactionSavingPut = 'http://localhost:5000/api/TransactionSaving/update'
-// const netTransactionSavingDelete = 'http://localhost:5000/api/TransactionSaving/delete/'
-// const netTransactionSavingGet = 'http://localhost:5000/api/TransactionSaving/get/';
-const netTransactionSavingGetAll = 'http://localhost:5000/api/TransactionSaving/getall'
+const netTransactionSavingPost = service + '/TransactionSaving/insert'
+// const netTransactionSavingPut = service+'/TransactionSaving/update'
+// const netTransactionSavingDelete = service+'/TransactionSaving/delete/'
+// const netTransactionSavingGet = service+'/TransactionSaving/get/';
+const netTransactionSavingGetAllCmp = service + '/TransactionSaving/getallCmp'
 // Users
-// const netUsersPost = 'http://localhost:5000/api/Users/insert'
-// const netUsersPut = 'http://localhost:5000/api/Users/update'
-// const netUsersDelete = 'http://localhost:5000/api/Users/delete/'
-// const netUsersGet = 'http://localhost:5000/api/Users/get/';
-const netUsersGetAll = 'http://localhost:5000/api/Users/getall'
+// const netUsersPost = service+'/Users/insert'
+// const netUsersPut = service+'/Users/update'
+// const netUsersDelete = service+'/Users/delete/'
+// const netUsersGet = service+'/Users/get/';
+const netUsersGetAll = service + '/Users/getall'
 // Credit Account
-// const netCreditAccountGet = 'http://localhost:5000/api/CreditAccount/get/';
+// const netCreditAccountGet = service+'/CreditAccount/get/';
 // Saving Account
-// const netSavingAccountGet = 'http://localhost:5000/api/SavingAccount/get/';
+// const netSavingAccountGet = service+'/SavingAccount/get/';
 //
 export default {
   state: {
@@ -82,7 +86,7 @@ export default {
     postEpCustomers() {
       return netCustomersPost;
     },
-    putEpCustomers(){
+    putEpCustomers() {
       return netCustomersPut;
     },
     postEpTranasctionSaving() {
@@ -91,11 +95,11 @@ export default {
     getEpCustomers() {
       return netCustumersGetAll;
     },
-    getEpTransactionCredit() {
-      return netTransactionCreditGetAll;
+    getEpTransactionCreditCmp() {
+      return netTransactionCreditGetAllCmp;
     },
-    getEpTransactionSaving() {
-      return netTransactionSavingGetAll;
+    getEpTransactionSavingCmp() {
+      return netTransactionSavingGetAllCmp;
     },
     // getEpTransaction() {
     //   return netTransactionGetAll;
@@ -143,8 +147,8 @@ export default {
             axios.get(netUsersGetAll),
             axios.get(netCustumersGetAll),
             // axios.get(netTransactionGetAll),
-            axios.get(netTransactionCreditGetAll),
-            axios.get(netTransactionSavingGetAll),
+            axios.get(netTransactionCreditGetAllCmp),
+            axios.get(netTransactionSavingGetAllCmp),
           ])
           .then(
             axios.spread(function (

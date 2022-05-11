@@ -2,7 +2,8 @@
     <v-row class="mt-12 mx-4">
         <v-col>
             <v-card-title class="justify-center">Historial</v-card-title>
-            <TableTransactions />
+            <TableHistorySaving />
+            <TableHistoryCredit />
         </v-col>
     </v-row>
 </template>
@@ -17,7 +18,8 @@ export default {
     },
     props: {},
     components: {
-        TableTransactions: () => import('@/components/tables/TableTransactions.vue')
+        TableHistorySaving: () => import('@/components/tables/TableHistorySaving.vue'),
+        TableHistoryCredit: () => import('@/components/tables/TableHistoryCredit.vue')
     },
     data: () => ({
         balance: [], toasted: {
