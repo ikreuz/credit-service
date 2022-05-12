@@ -33,7 +33,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Links
 - Solution URL: [https://github.com/ikreuz](https://github.com/ikreuz/parcelservice-frontend)
-- Live Site URL: [https://vercel.com](https://credit-service-1j8mov4kq-ikreuz.vercel.app)
+- Live Site URL: [https://vercel.com](https://credit-service.vercel.app)
 - 
 
 ## My process
